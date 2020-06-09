@@ -1,0 +1,26 @@
+include "includes/vec2.bzz"
+Pushed_obj_pos = {}
+Target = {.x=1,.y=0}
+function init() { 
+
+}
+  
+
+function step()
+{
+
+    log("[",id,"] Obj pos X:", Pushed_obj_pos.x," Y: ", Pushed_obj_pos.y)
+    var move_vec = obtain_local_vec_to_target(Target,pose.position,pose.orientation.yaw)
+    goto(move_vec.x,move_vec.y)
+
+    
+
+}
+
+function obtain_local_vec_to_target(coord1,coord2,yaw){
+    m_target = math.vec2.new(coord1.x,coord1.y)
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_target = math.vec2.sub(m_target,m_pos)
+    m_target = math.vec2.rotate(m_target,-yaw)
+    return m_target
+}
