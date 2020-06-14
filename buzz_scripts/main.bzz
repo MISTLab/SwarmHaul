@@ -1,0 +1,112 @@
+include "includes/vec2.bzz"
+include "includes/LCA.bzz"
+
+
+Pushed_obj_pos = {}
+
+function init() { 
+TASK = 0
+POS_DES={.x=0,.y=0}
+s = swarm.create(1)
+s.join()
+pushers=swarm.create(2)
+pushers.leave()
+v = stigmergy.create(3)
+v.put(1,{.id=id,.pos={.x = -0.15,.y=0},.bid=100000})
+k = 10
+bidding_time = 50
+bidding_timer={.1=0,.2=0,.3=0,.4=0,.5=0,.6=0}
+bidding_timer[1] = 0
+v.onconflict(function (k,local,remote) {	
+		if(remote.bid <=local.bid)
+	    {return remote}
+		else {return local}})
+}
+  
+
+function step()
+{
+    #log(id,": size ",v.size(),TASK," : pos",POS_DES.x,":",POS_DES.y)
+    if(pushers.in()){log("pushers",id)}
+    if(s.in()){ log("swarm",id)
+     s.exec(gradient)}
+    if(TASK)
+    {
+    log(id,": distance",math.vec2.dis(POS_DES,pose.position))
+    var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw)
+    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5.0)
+    cmd_vel = LCA(vector_to_target)
+    goto(cmd_vel.x, cmd_vel.y)
+    if(math.vec2.dis(POS_DES,pose.position)<0.1)
+    {
+        TASK = 0
+        next_task_update()
+        POS_DES={.x=0,.y=0}
+        set_wheels(0.0,0.0)
+    }
+    }
+}
+
+function next_task_update()
+{   
+  i = v.size()
+  val = {.id=id,.pos={.x=pose.position.x+0.5,.y=pose.position.y},.bid = 1000000}
+  v.put(i+1,val)
+}
+
+function obtain_local_vec_to_target(coord1,coord2,yaw)
+{
+    m_target = math.vec2.new(coord1.x,coord1.y)
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_target = math.vec2.sub(m_target,m_pos)
+    m_target = math.vec2.rotate(m_target,-yaw)
+    return m_target
+}
+
+
+
+
+function gradient()
+{
+    task_size = v.size()
+    cnt = 1
+    if (task_size>1 or task_size==1)
+    {
+    while(cnt-1 < task_size)
+    { 
+      if(v.get(cnt))
+      {
+      if (not bidding_timer[cnt]%k)
+      {
+      current_pose = math.vec2.new(pose.position.x,pose.position.y)
+      current_bid = v.get(cnt).bid
+      my_bid = math.vec2.dis(v.get(cnt).pos,current_pose)
+      log(id,": bid",current_bid," : my_bid",my_bid)
+      if (current_bid>my_bid)
+         {
+           v.put(cnt,{.id=id,.pos=v.get(cnt).pos,.bid=my_bid})
+         }
+         bidding_timer[cnt] = bidding_timer[cnt] + 1
+      }
+      else 
+         {
+           bidding_timer[cnt] = bidding_timer[cnt] + 1
+         }
+      
+      if (bidding_timer[cnt] == bidding_time)
+      {
+        if (v.get(cnt).id == id)
+        {
+          s.leave()
+          pushers.join()
+          TASK = 1
+          POS_DES = v.get(cnt).pos
+          v.put(cnt,NIL)
+        }
+      }
+      }
+      cnt = cnt + 1
+    }  
+    }
+    
+}
