@@ -1,0 +1,7 @@
+/home/karthik/collaborative_transport/bui/CMakeFiles/install/strip.dir
+/home/karthik/collaborative_transport/bui/CMakeFiles/edit_cache.dir
+/home/karthik/collaborative_transport/bui/CMakeFiles/Collab_tras_loop.dir
+/home/karthik/collaborative_transport/bui/CMakeFiles/list_install_components.dir
+/home/karthik/collaborative_transport/bui/CMakeFiles/install/local.dir
+/home/karthik/collaborative_transport/bui/CMakeFiles/rebuild_cache.dir
+/home/karthik/collaborative_transport/bui/CMakeFiles/install.dir
