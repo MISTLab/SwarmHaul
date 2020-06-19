@@ -6,16 +6,17 @@ Pushed_obj_pos = {}
 
 function init() { 
 TASK = 0
+DIR = 1
 POS_DES={.x=0,.y=0}
 s = swarm.create(1)
 s.join()
 pushers=swarm.create(2)
 pushers.leave()
 v = stigmergy.create(3)
-v.put(1,{.id=id,.pos={.x = -0.15,.y=0},.bid=100000})
+v.put(1,{.id=id,.pos={.x = 0,.y=-0.6},.dir = -1,.bid=100000})
 k = 10
 bidding_time = 50
-bidding_timer={.1=0,.2=0,.3=0,.4=0,.5=0,.6=0}
+bidding_timer={.1=0,.2=0,.3=0,.4=0,.5=0,.6=0,.7=0,.8=0,.9=0,.10=0,.11=0,.12=0,.13=0,.14=0,.15=0,.16=0,.17=0,.18=0,.19=0,.20=0}
 bidding_timer[1] = 0
 v.onconflict(function (k,local,remote) {	
 		if(remote.bid <=local.bid)
@@ -27,31 +28,69 @@ v.onconflict(function (k,local,remote) {
 function step()
 {
     #log(id,": size ",v.size(),TASK," : pos",POS_DES.x,":",POS_DES.y)
-    if(pushers.in()){log("pushers",id)}
-    if(s.in()){ log("swarm",id)
-     s.exec(gradient)}
+    s.exec(gradient)
+
     if(TASK)
     {
     log(id,": distance",math.vec2.dis(POS_DES,pose.position))
     var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw)
     vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5.0)
-    cmd_vel = LCA(vector_to_target)
-    goto(cmd_vel.x, cmd_vel.y)
-    if(math.vec2.dis(POS_DES,pose.position)<0.1)
+    #cmd_vel = LCA(vector_to_target)
+    goto(vector_to_target.x, vector_to_target.y)
+    if(math.vec2.dis(POS_DES,pose.position)<0.01)
     {
         TASK = 0
-        next_task_update()
+        prox_vec = obs_vec()
+        next_task_update(prox_vec)
         POS_DES={.x=0,.y=0}
         set_wheels(0.0,0.0)
+        if (prox_vec.len>0.05)
+        {
+        s.leave()
+        pushers.join()
+        }
     }
     }
 }
 
-function next_task_update()
+function next_task_update(pos)
 {   
   i = v.size()
-  val = {.id=id,.pos={.x=pose.position.x+0.5,.y=pose.position.y},.bid = 1000000}
-  v.put(i+1,val)
+  if (i==1)
+  {
+  if  (( pos.ang  > 1.33 and pos.ang < 1.82 ) or ( pos.ang  < -1.33 and pos.ang > -1.82 ))
+  {
+    log(id,":y")
+  next_branch_one = {.id=id,.pos={.x=pose.position.x+0.25,.y=pose.position.y},.dir=1,.bid = 1000000}
+  next_branch_two = {.id=id,.pos={.x=pose.position.x-0.25,.y=pose.position.y},.dir=-1,.bid = 1000000}
+  v.put(i+1,next_branch_one)
+  v.put(i+2,next_branch_two)
+  }
+  else if  ( pos.ang  < 0.24 and pos.ang > -0.24 ) 
+  {
+    log(id,":x")
+  next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+0.25},.dir=1,.bid = 1000000}
+  next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-0.25},.dir=-1,.bid = 1000000}
+  v.put(i+1,next_branch_one)
+  v.put(i+2,next_branch_two)
+  }
+  
+  }
+  else 
+  {
+  if  (( pos.ang  > 1.33 and pos.ang < 1.82 ) or ( pos.ang  < -1.33 and pos.ang > -1.82 ))
+  {
+    log(id,":y")
+  next_one = {.id=id,.pos={.x=pose.position.x+(DIR*0.25),.y=pose.position.y},.dir=DIR,.bid = 1000000}
+  v.put(i+1,next_one)
+  }
+  else if  ( pos.ang  < 0.24 and pos.ang > -0.24 ) 
+  {
+    log(id,":x")
+  next_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+(DIR*0.25)},.dir=DIR,.bid = 1000000}
+  v.put(i+1,next_one)
+  }
+  }
 }
 
 function obtain_local_vec_to_target(coord1,coord2,yaw)
@@ -63,8 +102,29 @@ function obtain_local_vec_to_target(coord1,coord2,yaw)
     return m_target
 }
 
-
-
+function obs_vec()
+{
+ var accum = {}
+  accum.x = 0.0
+  accum.y = 0.0
+  var i = 0
+  while(i < size(proximity)) {
+	accum.x = accum.x + proximity[i].value * math.cos(proximity[i].angle)
+	accum.y = accum.y + proximity[i].value * math.sin(proximity[i].angle)
+	i = i + 1
+  }
+  accum.x = accum.x / size(proximity)
+  accum.y = accum.y / size(proximity)
+  var len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+  var ang = math.atan(accum.y, accum.x)
+  log (id," :",len," :",ang)
+  accum = math.vec2.rotate(accum,+pose.orientation.yaw)
+   len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+   ang = math.atan(accum.y, accum.x)
+  log (id," :",len," :",ang)
+  log("-------------------")
+  return {.len=len,.ang=ang}
+}
 
 function gradient()
 {
@@ -74,17 +134,18 @@ function gradient()
     {
     while(cnt-1 < task_size)
     { 
-      if(v.get(cnt))
+      if(v.get(cnt).bid)
       {
-      if (not bidding_timer[cnt]%k)
+      if ((not bidding_timer[cnt]%k) and (not TASK))
       {
       current_pose = math.vec2.new(pose.position.x,pose.position.y)
       current_bid = v.get(cnt).bid
+      dir = v.get(cnt).dir
       my_bid = math.vec2.dis(v.get(cnt).pos,current_pose)
-      log(id,": bid",current_bid," : my_bid",my_bid)
+      log(id,": bid",current_bid," : my_bid",my_bid," :dir",dir)
       if (current_bid>my_bid)
          {
-           v.put(cnt,{.id=id,.pos=v.get(cnt).pos,.bid=my_bid})
+           v.put(cnt,{.id=id,.pos=v.get(cnt).pos,.dir = v.get(cnt).dir,.bid=my_bid})
          }
          bidding_timer[cnt] = bidding_timer[cnt] + 1
       }
@@ -97,11 +158,19 @@ function gradient()
       {
         if (v.get(cnt).id == id)
         {
-          s.leave()
-          pushers.join()
+          if(not TASK)
+          {
+          
           TASK = 1
           POS_DES = v.get(cnt).pos
-          v.put(cnt,NIL)
+          DIR = v.get(cnt).dir
+          v.put(cnt,{.id=id,.pos=v.get(cnt).pos,.dir = v.get(cnt).dir, .bid=NIL})
+          }
+          else
+          {
+            v.put(cnt,{.id=id,.pos=v.get(cnt).pos,.dir = v.get(cnt).dir, .bid=NIL})
+            v.put(v.size()+1,{.id=id,.pos=v.get(cnt).pos,.dir = v.get(cnt).dir, .bid=100000})
+          }
         }
       }
       }
