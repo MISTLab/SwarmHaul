@@ -1,19 +1,46 @@
 include "includes/vec2.bzz"
-Pushed_obj_pos = {}
-Target = {.x=1,.y=0}
+Pushed_obj_pos = {.x = 0,.y = 0}
 function init() { 
-
+  time_step = 0  
+  flag = 0 
 }
   
 
 function step()
 {
+    if(not time_step%5)
+    {
+    prox_vec = obs_vec()
+    log(prox_vec.len)
 
+    if((prox_vec.len < 0.1))
+    {
     log("[",id,"] Obj pos X:", Pushed_obj_pos.x," Y: ", Pushed_obj_pos.y)
-    var move_vec = obtain_local_vec_to_target(Target,pose.position,pose.orientation.yaw)
-    goto(move_vec.x,move_vec.y)
-
+    var move_vec = obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5.0)
+    goto(vector_to_target.x,vector_to_target.y)
+    }
+    else if((prox_vec.len > 0.1))
+    {
+        #set_wheels(0.0,0.0)
+        move_vec=obtain_perpendicular(Pushed_obj_pos,pose.position)
+        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 2.5)
+        goto(vector_to_target.x,vector_to_target.y)
+    }
+    }
+    time_step = time_step + 1
     
+
+}
+
+function obtain_perpendicular(coord1,coord2)
+{
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_object = math.vec2.new(coord1.x,coord1.y)
+    m_target = math.vec2.sub(m_object,m_pos)
+    m_target = math.vec2.rotate(m_target,1.57 - pose.orientation.yaw)
+
+    return m_target
 
 }
 
@@ -23,4 +50,28 @@ function obtain_local_vec_to_target(coord1,coord2,yaw){
     m_target = math.vec2.sub(m_target,m_pos)
     m_target = math.vec2.rotate(m_target,-yaw)
     return m_target
+}
+
+
+function obs_vec()
+{
+ var accum = {}
+  accum.x = 0.0
+  accum.y = 0.0
+  var i = 0
+  while(i < size(proximity)) {
+	accum.x = accum.x + proximity[i].value * math.cos(proximity[i].angle)
+	accum.y = accum.y + proximity[i].value * math.sin(proximity[i].angle)
+	i = i + 1
+  }
+  accum.x = accum.x / size(proximity)
+  accum.y = accum.y / size(proximity)
+  var len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+  var ang = math.atan(accum.y, accum.x)
+  
+  #accum = math.vec2.rotate(accum,+pose.orientation.yaw)
+   #len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+   #ang = math.atan(accum.y, accum.x)
+  log("-------------------")
+  return {.len=len,.ang=ang}
 }
