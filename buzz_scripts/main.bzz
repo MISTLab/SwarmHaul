@@ -1,5 +1,5 @@
 include "includes/vec2.bzz"
-include "includes/LCA.bzz"
+include "includes/RVO.bzz"
 
 
 Pushed_obj_pos = {}
@@ -13,10 +13,10 @@ s.join()
 pushers=swarm.create(2)
 pushers.leave()
 v = stigmergy.create(3)
-v.put(1,{.id=id,.pos={.x = 0,.y=-0.6},.dir = -1,.bid=100000})
+v.put(1,{.id=id,.pos={.x = -0.6,.y=0},.dir = -1,.bid=100000})
 k = 10
 bidding_time = 50
-bidding_timer={.1=0,.2=0,.3=0,.4=0,.5=0,.6=0,.7=0,.8=0,.9=0,.10=0,.11=0,.12=0,.13=0,.14=0,.15=0,.16=0,.17=0,.18=0,.19=0,.20=0}
+bidding_timer={.1=0,.2=0,.3=0,.4=0,.5=0,.6=0,.7=0,.8=0,.9=0,.10=0,.11=0,.12=0,.13=0,.14=0,.15=0,.16=0,.17=0,.18=0,.19=0,.20=0,.21=0,.22=0,.23=0,.24=0,.25=0}
 bidding_timer[1] = 0
 v.onconflict(function (k,local,remote) {	
 		if(remote.bid <=local.bid)
@@ -34,17 +34,17 @@ function step()
     {
     log(id,": distance",math.vec2.dis(POS_DES,pose.position))
     var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw)
-    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5.0)
-    #cmd_vel = LCA(vector_to_target)
-    goto(vector_to_target.x, vector_to_target.y)
-    if(math.vec2.dis(POS_DES,pose.position)<0.01)
+    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 100.0)
+    cmd_vel = LCA(vector_to_target)
+    goto(cmd_vel.x, cmd_vel.y)
+    if((math.vec2.dis(POS_DES,pose.position)<0.01) or (obs_vec().len > 0.2))
     {
         TASK = 0
         prox_vec = obs_vec()
         next_task_update(prox_vec)
         POS_DES={.x=0,.y=0}
         set_wheels(0.0,0.0)
-        if (prox_vec.len>0.05)
+        if (prox_vec.len > 0.05)
         {
         s.leave()
         pushers.join()
@@ -60,15 +60,15 @@ function next_task_update(pos)
   {
   if  (( pos.ang  > 1.33 and pos.ang < 1.82 ) or ( pos.ang  < -1.33 and pos.ang > -1.82 ))
   {
-    log(id,":y")
+    #log(id,":y")
   next_branch_one = {.id=id,.pos={.x=pose.position.x+0.25,.y=pose.position.y},.dir=1,.bid = 1000000}
   next_branch_two = {.id=id,.pos={.x=pose.position.x-0.25,.y=pose.position.y},.dir=-1,.bid = 1000000}
   v.put(i+1,next_branch_one)
   v.put(i+2,next_branch_two)
   }
-  else if  ( pos.ang  < 0.24 and pos.ang > -0.24 ) 
+  else if  ( pos.ang  < 0.24 and pos.ang > -0.24 )
   {
-    log(id,":x")
+    #log(id,":x")
   next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+0.25},.dir=1,.bid = 1000000}
   next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-0.25},.dir=-1,.bid = 1000000}
   v.put(i+1,next_branch_one)
@@ -78,20 +78,30 @@ function next_task_update(pos)
   }
   else 
   {
-  if  (( pos.ang  > 1.33 and pos.ang < 1.82 ) or ( pos.ang  < -1.33 and pos.ang > -1.82 ))
+  if  (( pos.ang  > 1 and pos.ang < 2 ) or ( pos.ang  < -1 and pos.ang > -2 ) and (prox_vec.len > 0.05))
   {
-    log(id,":y")
+    #log(id,":y")
   next_one = {.id=id,.pos={.x=pose.position.x+(DIR*0.25),.y=pose.position.y},.dir=DIR,.bid = 1000000}
   v.put(i+1,next_one)
   }
-  else if  ( pos.ang  < 0.24 and pos.ang > -0.24 ) 
+  else if  (( pos.ang  < 0.96 and pos.ang > -0.96 ) and (prox_vec.len > 0.05))
   {
-    log(id,":x")
+    
   next_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+(DIR*0.25)},.dir=DIR,.bid = 1000000}
   v.put(i+1,next_one)
   }
+  else if (prox_vec.len < 0.05)
+  {
+  log("change axis")
+  DIR = 1
+  next_one = {.id=id,.pos={.x=0.0,.y=0.0},.dir=DIR,.bid = 1000000}
+  v.put(i+1,next_one)
   }
-}
+  }
+  
+
+  }
+
 
 function obtain_local_vec_to_target(coord1,coord2,yaw)
 {
