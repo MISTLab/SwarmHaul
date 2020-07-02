@@ -1,0 +1,81 @@
+include "includes/vec2.bzz"
+include "includes/RVO.bzz"
+include "includes/debug.bzz"
+
+
+Pushed_obj_pos = {}
+target = {.x=2.0,.y=3.0}
+
+function init() { 
+TASK = 1
+pushers=swarm.create(4)
+pushers.join()
+TIME_STEP = 1
+POS_DES = {.x =0 ,.y= 0}
+}
+
+function step(){
+    
+    if (TIME_STEP == 1)
+    {
+    POS_DES = math.vec2.add(target,pose.position)
+    }
+    if (TIME_STEP > 1)
+    {
+    if(pushers.in()){
+    if(TASK)
+    {
+    show_colored_trajectory()
+    log(id,": distance_to_target",math.vec2.dis(target,Pushed_obj_pos))
+    var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
+    log("id",move_vec.x,move_vec.y)
+    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 40)
+    move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+    move_in = math.vec2.scale(math.vec2.norm(move_in), 30)
+    vector_to_neighbour = find_neighbours()
+    if (math.vec2.dis(vector_to_neighbour,{.x=0,.y=0})>0){
+    vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), -30)}
+    vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
+    vector_to_target = math.vec2.add(vector_to_target,move_in)
+    vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 10)
+    goto(vector_to_target.x, vector_to_target.y)
+    if(math.vec2.dis(POS_DES,pose.position)<0.01)
+    {
+      TASK = 0
+      pushers.leave()
+      set_wheels(0.0,0.0)
+      log(id," : pushed")
+    }
+
+    }}	
+     }
+    TIME_STEP = TIME_STEP + 1
+}
+
+function obtain_local_vec_to_target(coord1,coord2,yaw)
+{
+    m_target = math.vec2.new(coord1.x,coord1.y)
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_target = math.vec2.sub(m_target,m_pos)
+    m_target = math.vec2.rotate(m_target,-yaw)
+    return m_target
+}
+
+
+function find_neighbours()
+{
+  c = math.vec2.new(0.0,0.0)
+  neighbors.foreach(
+  function(rid, data) {
+        
+
+            c.x = c.x + (data.distance + 15) * math.cos(data.azimuth) / data.distance
+            c.y = c.y + (data.distance + 15) * math.sin(data.azimuth) / data.distance
+            
+        })
+
+  #log(id,":",c.x,":",c.y)
+  
+  return c
+
+}
