@@ -1,4 +1,4 @@
-# Install script for directory: /home/karthik/collaborative_transport/loop_fun_src
+# Install script for directory: /home/vivek/Vivek/Projects/Collobrative_transport/loop_fun_src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,12 +32,7 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-# Is this installation the result of a crosscompile?
-if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "FALSE")
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   if(EXISTS "$ENV{DESTDIR}/usr/local/lib/argos3/libCollab_tras_loop.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/local/lib/argos3/libCollab_tras_loop.so")
     file(RPATH_CHECK
@@ -52,12 +47,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/usr/local/lib/argos3" TYPE SHARED_LIBRARY FILES "/home/karthik/collaborative_transport/bui/libCollab_tras_loop.so")
+file(INSTALL DESTINATION "/usr/local/lib/argos3" TYPE SHARED_LIBRARY FILES "/home/vivek/Vivek/Projects/Collobrative_transport/build/libCollab_tras_loop.so")
   if(EXISTS "$ENV{DESTDIR}/usr/local/lib/argos3/libCollab_tras_loop.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/local/lib/argos3/libCollab_tras_loop.so")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/usr/local/lib/argos3/libCollab_tras_loop.so"
-         OLD_RPATH "/opt/ros/melodic/lib:/usr/local/lib/argos3:/usr/local/lib:"
+         OLD_RPATH "/usr/local/lib:/usr/local/lib/argos3:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/usr/local/lib/argos3/libCollab_tras_loop.so")
@@ -73,5 +68,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/karthik/collaborative_transport/bui/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vivek/Vivek/Projects/Collobrative_transport/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

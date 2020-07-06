@@ -1,32 +1,47 @@
 include "includes/vec2.bzz"
 Pushed_obj_pos = {.x = 0,.y = 0}
+GOAL_STATE = {}
+START_STATE = {}
+
 function init() { 
-  time_step = 0  
-  flag = 0 
+    GOAL_STATE = math.vec2.new(-22.5 , 16.5)
+    GOAL_STATE1 = math.vec2.new(9.5 , -9.5)
+
+    START_STATE = math.vec2.new(17.5 , -15.5)
+    debug.trajectory.enable(10000,0,0,255)
+    time_step = 0  
+    flag = 0 
+    # loads the ground truth map from the file specified in the .argos file 
+    LoadGTMap()
 }
   
 
 function step()
 {
+    if(time_step == 1 and id == 1){
+        # Call the one shot planner to compute the path for the current map
+        path_controls = OneShotPathPlanner(pose.position.x,pose.position.y,GOAL_STATE.x,GOAL_STATE.y,0.2)
+        table_print_path(path_controls)
+    }
     if(not time_step%5)
     {
-    prox_vec = obs_vec()
-    log(prox_vec.len)
+        prox_vec = obs_vec()
+        log(prox_vec.len)
 
-    if((prox_vec.len < 0.1))
-    {
-    log("[",id,"] Obj pos X:", Pushed_obj_pos.x," Y: ", Pushed_obj_pos.y)
-    var move_vec = obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
-    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5.0)
-    goto(vector_to_target.x,vector_to_target.y)
-    }
-    else if((prox_vec.len > 0.1))
-    {
-        #set_wheels(0.0,0.0)
-        move_vec=obtain_perpendicular(Pushed_obj_pos,pose.position)
-        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 2.5)
-        goto(vector_to_target.x,vector_to_target.y)
-    }
+        if((prox_vec.len < 0.1))
+        {
+            log("[",id,"] Obj pos X:", Pushed_obj_pos.x," Y: ", Pushed_obj_pos.y)
+            var move_vec = obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+            vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5.0)
+            goto(vector_to_target.x,vector_to_target.y)
+        }
+        else if((prox_vec.len > 0.1))
+        {
+            #set_wheels(0.0,0.0)
+            move_vec=obtain_perpendicular(Pushed_obj_pos,pose.position)
+            vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 2.5)
+            goto(vector_to_target.x,vector_to_target.y)
+        }
     }
     time_step = time_step + 1
     
@@ -74,4 +89,14 @@ function obs_vec()
    #ang = math.atan(accum.y, accum.x)
   log("-------------------")
   return {.len=len,.ang=ang}
+}
+
+# printing the contents of a table: a custom function
+function table_print_path(t) {
+  foreach(t, function(key, value) {
+      log("waypoint id ",key, " -> ")
+      foreach(value, function(cord,value){
+        log(cord,"-", value)
+        })
+    })
 }

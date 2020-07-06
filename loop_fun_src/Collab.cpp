@@ -90,6 +90,17 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
       //                c_spiri_range_x,
       //                c_spiri_range_y);
 
+      GetNodeAttribute(t_tree, "map_file_name", m_map_file_name);
+      int map_option = 0;
+      GetNodeAttribute(t_tree, "map_option", map_option);
+      if(map_option == 1){
+         // Load the specifed .map file into the arena
+         Load3DMapIntoArena(m_map_file_name);
+      }
+      else{
+         LoadMapIntoArena(m_map_file_name);
+      }
+
       /* Get reference to buzz controllers and stack them up in a vec*/
       for(int i=0; i<unRobots; i++){
         std::stringstream os;
@@ -412,6 +423,7 @@ void Planningloop::CloseFile(std::ofstream& c_stream) {
 void Planningloop::LoadMapIntoArena(std::string m_map_file_name){
   std::string line;
   std::ifstream m_map_file (m_map_file_name);
+  printf("Map file%s\n",m_map_file_name.c_str() );
   float length_offset = 0.3;
   float height_offset = 0.8;
   map_height = 0;

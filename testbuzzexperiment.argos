@@ -31,9 +31,9 @@
         <range_and_bearing    implementation="medium" medium="rab" show_rays="false" noise_std_dev="0" />
         <positioning          implementation="default" />
         </sensors>
-       <params bytecode_file="buzz_scripts/pushers.bo"
-              debug_file="buzz_scripts/pushers.bdb"
-              map_file="/home/karthik/Desktop/pathplanningconnectivitybundle/maps_custom/Comparisions/empty.map"
+       <params bytecode_file="buzz_scripts/Object_movement_test.bo"
+              debug_file="buzz_scripts/Object_movement_test.bdb"
+              map_file="/home/vivek/Vivek/Projects/Connectivity/ARGOS_Planning/maps_custom/dragon_age/maps/arena.map"
               map_option="0"
               save_svg_image ="1"
               map_resolution="0.1" />
@@ -62,12 +62,14 @@
   <!-- ****************** -->
   <loop_functions library="build/libCollab_tras_loop.so" 
                   label="Collab"
-                  Robots="12"/>
+                  Robots="12"
+                  map_option="0"
+                  map_file_name="/home/vivek/Vivek/Projects/Connectivity/ARGOS_Planning/maps_custom/dragon_age/maps/arena.map"/>
   
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
-  <arena size="20, 20, 5" center="0,0,2.5">
+  <arena size="50, 50, 5" center="0,0,2.5">
 
     <light id="light0"
            position="0,0,4"
@@ -76,7 +78,7 @@
            intensity="10.0"
            medium="light"/>
 
-    <box id="wall_north" size="19,0.1,0.5" movable="false">
+<!--     <box id="wall_north" size="19,0.1,0.5" movable="false">
       <body position="0,9.5,0" orientation="0,0,0" />
     </box>
     <box id="wall_south" size="19,0.1,0.5" movable="false">
@@ -88,7 +90,7 @@
     
     <box id="wall_west" size="0.1,19,0.5" movable="false">
       <body position="-9.5,0,0" orientation="0,0,0" />
-    </box>
+    </box> -->
 
     <box id="push_object" size="0.75,0.75,0.3" mass="2" movable="true">
       <body position="0,0,0" orientation="0,0,0" />

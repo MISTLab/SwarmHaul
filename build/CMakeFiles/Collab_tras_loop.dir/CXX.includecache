@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/karthik/collaborative_transport/loop_fun_src/Collab.cpp
+/home/vivek/Vivek/Projects/Collobrative_transport/loop_fun_src/Collab.cpp
 Collab.h
-/home/karthik/collaborative_transport/loop_fun_src/Collab.h
+/home/vivek/Vivek/Projects/Collobrative_transport/loop_fun_src/Collab.h
 argos3/plugins/simulator/entities/box_entity.h
 -
 argos3/plugins/simulator/entities/cylinder_entity.h
@@ -18,7 +18,7 @@ sstream
 list
 -
 
-/home/karthik/collaborative_transport/loop_fun_src/Collab.h
+/home/vivek/Vivek/Projects/Collobrative_transport/loop_fun_src/Collab.h
 argos3/core/simulator/loop_functions.h
 -
 argos3/plugins/robots/kheperaiv/control_interface/buzz_controller_kheperaiv.h
@@ -36,37 +36,37 @@ string
 cerrno
 -
 
-/usr/include/lua5.3/lauxlib.h
+/usr/include/lua5.2/lauxlib.h
 stddef.h
 -
 stdio.h
 -
 lua.h
-/usr/include/lua5.3/lua.h
+/usr/include/lua5.2/lua.h
 
-/usr/include/lua5.3/lua.h
+/usr/include/lua5.2/lua.h
 stdarg.h
 -
 stddef.h
 -
 luaconf.h
-/usr/include/lua5.3/luaconf.h
+/usr/include/lua5.2/luaconf.h
 
-/usr/include/lua5.3/luaconf.h
+/usr/include/lua5.2/luaconf.h
 limits.h
 -
 stddef.h
 -
-lua5.3-deb-multiarch.h
-/usr/include/lua5.3/lua5.3-deb-multiarch.h
-stdint.h
+lua5.2-deb-multiarch.h
+/usr/include/lua5.2/lua5.2-deb-multiarch.h
+stdio.h
 -
-assert.h
+math.h
 -
 
-/usr/include/lua5.3/lualib.h
+/usr/include/lua5.2/lualib.h
 lua.h
-/usr/include/lua5.3/lua.h
+/usr/include/lua5.2/lua.h
 
 /usr/local/include/argos3/core/config.h
 
