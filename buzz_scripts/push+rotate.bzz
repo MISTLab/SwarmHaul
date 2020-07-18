@@ -1,17 +1,20 @@
 include "includes/vec2.bzz"
 include "includes/RVO.bzz"
-include "includes/debug.bzz"
+#include "includes/debug.bzz"
 
 
 Pushed_obj_pos = {}
 #target = {{.x=2.5,.y=2.5,.yaw = 1.57},{.x=5.0,.y=5.0,.yaw = 1.57}}
+GOAL_STATE = math.vec2.new(-22.5, 16.5)
+
+START_STATE = math.vec2.new(0.0 , 0.0)
 
 function init() {
 SWARM_SIZE = 12 
 TASK_NUM = 1
 TASK = 1
 pushers=swarm.create(4)
-pushers.join()
+#pushers.join()
 rotaters= swarm.create(5)
 barrier = stigmergy.create(3)
 barrier.put(1,{.x=1,.y=0,.yaw = 0.75})
@@ -30,6 +33,10 @@ function step(){
 
     if (TIME_STEP == 1)
     {
+    if ()
+    LoadGTMap()
+    path_controls = OneShotPathPlanner(0.0,0.0,5.0,5.0,0.2)
+    table_print_path(path_controls)
     POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y},pose.position)
     n = find_nei_in_set()
     yaw = barrier.get(TASK_NUM).yaw
@@ -72,7 +79,8 @@ function step(){
     if(pushers.in()){
     if(TASK)
     {
-    show_colored_trajectory()
+    #show_colored_trajectory()
+    log(id,": ", Pushed_obj_pos.x,Pushed_obj_pos.y)
     log(id,": distance_to_target",math.vec2.dis(POS_DES,Pushed_obj_pos))
     var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
     #log("id",move_vec.x,move_vec.y)
@@ -108,7 +116,7 @@ function step(){
       if (TASK)
       {
       #log(id,"pose",pose.position.x,":",pose.position.y,":",pose.orientation.yaw)
-      show_colored_trajectory()
+      #show_colored_trajectory()
       move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
       move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
       move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
@@ -197,11 +205,20 @@ function find_nei_in_set()
   neighbors.foreach(
   function(rid, data) 
   {
-    if (data.distance<30)
+    if (data.distance<0)
       {
         log(id," : ",rid," : ",data.distance," : ",data.azimuth)
         neighbours[rid] = {.a = data.azimuth}
       }
   })
   return neighbours
+}
+
+function table_print_path(t) {
+  var t2 = {}
+  foreach(t, function(key, value) {
+      var ltab = {.x=value.x,.y=value.y}
+      log(id,":",key," : ",ltab.x," : ",ltab.y)
+    })
+  
 }
