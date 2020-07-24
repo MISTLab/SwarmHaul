@@ -1,11 +1,11 @@
 include "includes/vec2.bzz"
 include "includes/RVO.bzz"
-#include "includes/debug.bzz"
+include "includes/debug.bzz"
 
 
-Pushed_obj_pos = {}
+Pushed_obj_pos = {.x=0,.y=0}
 #target = {{.x=2.5,.y=2.5,.yaw = 1.57},{.x=5.0,.y=5.0,.yaw = 1.57}}
-GOAL_STATE = math.vec2.new(-22.5, 16.5)
+GOAL_STATE = math.vec2.new(10.0, 0.0)
 
 START_STATE = math.vec2.new(0.0 , 0.0)
 
@@ -14,13 +14,13 @@ SWARM_SIZE = 12
 TASK_NUM = 1
 TASK = 1
 pushers=swarm.create(4)
-#pushers.join()
+pushers.join()
 rotaters= swarm.create(5)
 barrier = stigmergy.create(3)
-barrier.put(1,{.x=1,.y=0,.yaw = 0.75})
-barrier.put(2,{.x=0,.y=1,.yaw = 0.75})
-barrier.put(3,{.x=1,.y=0,.yaw = 0.75})
-barrier.put(4,{.x=0,.y=-1,.yaw = 0.75})
+barrier.put(0,{.x=0,.y=0,.yaw = 0.04})
+#barrier.put(2,{.x=0,.y=1,.yaw = 0.05})
+#barrier.put(3,{.x=1,.y=0,.yaw = 0.05})
+#barrier.put(4,{.x=0,.y=-1,.yaw = 0.05})
 TIME_STEP = 1
 POS_DES = {.x=0,.y=0}
 barrier.onconflict(function (k,local,remote) { 
@@ -31,19 +31,24 @@ barrier.onconflict(function (k,local,remote) {
 
 function step(){
 
-    if (TIME_STEP == 1)
+    if ((TIME_STEP == 1))
     {
-    if ()
+    if (id == 0)
+    {
     LoadGTMap()
-    path_controls = OneShotPathPlanner(0.0,0.0,5.0,5.0,0.2)
+    path_controls = OneShotPathPlanner(START_STATE.x,START_STATE.y,GOAL_STATE.x,GOAL_STATE.y,0.2)
     table_print_path(path_controls)
-    POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y},pose.position)
+    }
+    }
+    else if ((TIME_STEP > 3) and (TIME_STEP < 5))
+    {
+    POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - barrier.get(TASK_NUM - 1).x,.y = barrier.get(TASK_NUM).y - barrier.get(TASK_NUM - 1).y},pose.position)
     n = find_nei_in_set()
     yaw = barrier.get(TASK_NUM).yaw
     barrier.put(TASK_NUM,1)
     }
 
-    if (barrier.get(TASK_NUM)>= 9)
+     if ((TIME_STEP > 5) and(barrier.get(TASK_NUM)>= 9))
     {
       if(pushers.in())
       {
@@ -62,7 +67,10 @@ function step(){
       pushers.join()
       TASK = 1
       TASK_NUM = TASK_NUM + 1
-      log(TASK_NUM)
+      if(id == 0)
+      {
+      log(TASK_NUM,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
+      }
       POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y},pose.position)
       n = find_nei_in_set()
       yaw = barrier.get(TASK_NUM).yaw
@@ -75,31 +83,31 @@ function step(){
 
 
 
-    if (TIME_STEP > 1) {
+    if (TIME_STEP > 5) {
     if(pushers.in()){
     if(TASK)
     {
-    #show_colored_trajectory()
-    log(id,": ", Pushed_obj_pos.x,Pushed_obj_pos.y)
-    log(id,": distance_to_target",math.vec2.dis(POS_DES,Pushed_obj_pos))
+    show_colored_trajectory()
+    #log(id,": ", Pushed_obj_pos.x,Pushed_obj_pos.y)
+    #log(id,": distance_to_target",math.vec2.dis(POS_DES,Pushed_obj_pos))
     var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
     #log("id",move_vec.x,move_vec.y)
     vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 35)
     move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
-    move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
+    move_in = math.vec2.scale(math.vec2.norm(move_in), 30)
     vector_to_neighbour = find_neighbours()
     if (math.vec2.dis(vector_to_neighbour,Pushed_obj_pos)>0){
-    vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), +40)}
+    vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), +35)}
     vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
     vector_to_target = math.vec2.add(vector_to_target,move_in)
     vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 10)
     goto(vector_to_target.x, vector_to_target.y)
-    if(math.vec2.dis(POS_DES,pose.position)<0.05)
+    if(math.vec2.dis(POS_DES,pose.position)<0.02)
     {
       TASK = 0
       #pushers.leave()
       set_wheels(0.0,0.0)
-      log(id,":",barrier.get(TASK_NUM))
+      #log(id,":",barrier.get(TASK_NUM))
       cnt = barrier.get(TASK_NUM)
       barrier.put(TASK_NUM,cnt + 1)
       
@@ -116,7 +124,7 @@ function step(){
       if (TASK)
       {
       #log(id,"pose",pose.position.x,":",pose.position.y,":",pose.orientation.yaw)
-      #show_colored_trajectory()
+      show_colored_trajectory()
       move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
       move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
       move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
@@ -142,7 +150,7 @@ function step(){
        TASK = 0
        set_wheels(0.0,0.0)
        #rotaters.leave()
-       log(id,":",barrier.get(TASK_NUM))
+       #log(id,":",barrier.get(TASK_NUM))
        cnt = barrier.get(TASK_NUM)
        barrier.put(TASK_NUM,cnt + 1)
       }
@@ -218,7 +226,8 @@ function table_print_path(t) {
   var t2 = {}
   foreach(t, function(key, value) {
       var ltab = {.x=value.x,.y=value.y}
+      barrier.put(key,{.x=ltab.x,.y=ltab.y,.yaw = 0.04})
       log(id,":",key," : ",ltab.x," : ",ltab.y)
-    })
+      })
   
 }
