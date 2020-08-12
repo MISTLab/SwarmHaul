@@ -23,11 +23,11 @@ barrier.put(2,{.cnt=0,.x=-1,.y=0,.yaw = 0.01})
 barrier.put(4,{.cnt=0,.x=-2,.y=0,.yaw = 0.01})
 barrier.put(6,{.cnt=0,.x=-3,.y=0,.yaw = 0.01})
 barrier.put(8,{.cnt=0,.x=-4,.y=0,.yaw = 1.57})
-barrier.put(10,{.cnt=0,.x=-4,.y=0.32,.yaw = 0.01})
-barrier.put(12,{.cnt=0,.x=-5,.y=0.32,.yaw = 0.01})
-barrier.put(14,{.cnt=0,.x=-6,.y=0.32.,.yaw = 0.01})
-barrier.put(16,{.cnt=0,.x=-7,.y=0.32,.yaw = 1.57})
-barrier.put(18,{.cnt=0,.x=-8,.y=0.25,.yaw = 0.01})
+barrier.put(10,{.cnt=0,.x=-4,.y=0.3,.yaw = 0.01})
+barrier.put(12,{.cnt=0,.x=-5,.y=0.3,.yaw = 0.01})
+barrier.put(14,{.cnt=0,.x=-6,.y=0.3.,.yaw = 0.01})
+barrier.put(16,{.cnt=0,.x=-7,.y=0.3,.yaw = 1.57})
+barrier.put(18,{.cnt=0,.x=-8,.y=0.3,.yaw = 0.01})
 barrier.put(20,{.cnt=0,.x=-10,.y=0.45,.yaw = 0.01})
 TIME_STEP = 1
 POS_DES = {.x=0,.y=0}
@@ -110,11 +110,19 @@ function step(){
 
     else if ((TIME_STEP > 5) and (barrier2.get(TASK_NUM)))
     {
+      if((id ==9) or (id == 0) and ((TIME_STEP%6) == 0))
+      {
+      log(id,(size(barrier_array)-1))
+      }
       check_and_add(barrier2.getrid(TASK_NUM),barrier_array)
-      if((size(barrier_array)-1)>= 10)
+      if((size(barrier_array)-1)>= 8)
       {
       if(pushers.in())
       {
+      if(id == 9)
+      {
+      log(id,"push ")
+      }
       pushers.leave()
       rotaters.join()
       TASK = 1
@@ -126,6 +134,10 @@ function step(){
 
       else if(rotaters.in())
       {
+      if(id == 9)
+      {
+      log(id,"rotate ")
+      }
       rotaters.leave()
       pushers.join()
       TASK = 1
@@ -133,7 +145,7 @@ function step(){
       TASK_NUM = TASK_NUM + 1
       if(id == 0)
       {
-      log((TASK_NUM-2),":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
+      log((TASK_NUM-2)/2,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
       }
       POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Prev_push_obj_pos.x,.y = barrier.get(TASK_NUM).y - Prev_push_obj_pos.y},pose.position)
       Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
@@ -149,30 +161,35 @@ function step(){
     if(TASK)
     {
     show_colored_trajectory()
+    vector_to_neighbour = {.x =0,.y=0}
     var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
     vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 45)
     move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
     move_in = math.vec2.scale(math.vec2.norm(move_in), 35)
     vector_to_neighbour = find_neighbours()
-    if (math.vec2.dis(vector_to_neighbour,Pushed_obj_pos)>0){
+    if (math.vec2.dis(vector_to_neighbour,{.x =0,.y=0})>0){
     vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), +40)}
     vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
     vector_to_target = math.vec2.add(vector_to_target,move_in)
     vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 10)
     goto(vector_to_target.x, vector_to_target.y)
+    if((id == 9) and ((TIME_STEP%5)==0)) 
+    {
+    log (id,"push + vecin",vector_to_neighbour.x,":",vector_to_neighbour.y,"vectar",vector_to_target.x,":",vector_to_target.y,"vectin",move_in.x,":",move_in.y)
+    }
     if(math.vec2.dis(POS_DES,pose.position)<0.01)
     {
       TASK = 0
       set_wheels(0.0,0.0)
       if(barrier2.get(TASK_NUM))
       {
-      log("push:",TASK_NUM,":",id,":",barrier2.get(TASK_NUM).val)
+      #log("push:",TASK_NUM,":",id,":",barrier2.get(TASK_NUM).val)
       barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt , .val = barrier2.get(TASK_NUM).val +1})
       
       }
       else 
       {
-      log("push:",TASK_NUM,":",id,":",1)
+      #log("push:",TASK_NUM,":",id,":",1)
       
       barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
       }
@@ -188,12 +205,13 @@ function step(){
       if (TASK)
       {
       show_colored_trajectory()
+      move_away = {.x =0,.y=0}
       move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
       move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
       move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
       move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
       move_away = find_neighbours()
-      if (math.vec2.dis(move_away,Pushed_obj_pos)>0){
+      if (math.vec2.dis(move_away,{.x=0,.y=0})>0){
       move_away = math.vec2.scale(math.vec2.norm(move_away), +20)}
       vector_to_target = math.vec2.add(move_per,move_in) 
       vector_to_target = math.vec2.add(vector_to_target,move_away)
@@ -204,20 +222,24 @@ function step(){
       num = math.vec2.dot(present_vec,init_vector)
       denom = present_dis * init_distance
       angle = math.acos(num/denom)
+      if((id == 14)) 
+      {
+      log (id,"rotate + vecin",vector_to_target.x,":",vector_to_target.y,"vectar",move_per.x,":",move_per.y,"vectin",move_in.x,":",move_in.y)
+      }
       if ((angle > (yaw - 0.01)) and (angle < (yaw + 0.01)))
       {
        TASK = 0
        set_wheels(0.0,0.0)
        if (barrier2.get(TASK_NUM))
        {
-       log("rot:",TASK_NUM,":",id,":",barrier2.get(TASK_NUM).val)
+       #log("rot:",TASK_NUM,":",id,":",barrier2.get(TASK_NUM).val)
        barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt,.val = barrier2.get(TASK_NUM).val+1})
        
        }
        else 
        {
        
-       log("rot:",TASK_NUM,":",id,":",1)
+       #log("rot:",TASK_NUM,":",id,":",1)
        barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
        }
       }
@@ -255,12 +277,12 @@ function find_neighbours()
              Accum ={.x=0,.y=0, .error=0 }
              neighbors.foreach(
                 function(rid, data) {
-                    var error = ((data.distance - 30)/data.distance)
+                    var error = ((data.distance - 27)/data.distance)
                     var angular_error = 0
                     if(n[rid]) angular_error=(data.azimuth - n[rid].a)/3.14 
                     
                     Accum.error = Accum.error + math.abs(error)
-                    if((n[rid]) or (data.distance < 30))
+                    if((n[rid]) or (data.distance < 27))
                     {
                         var my_vec = math.vec2.newp(data.distance, data.azimuth)
                         Accum.x= Accum.x + ( error * (my_vec.x - math.cos(angular_error)))
@@ -291,7 +313,7 @@ function table_print_path(t) {
   foreach(t, function(key, value) {
       var ltab = {.x=value.x,.y=value.y}
       barrier.put(key,{.cnt = 0,.x=ltab.x,.y=ltab.y,.yaw = 0.01})
-      log(id,":",key," : ",ltab.x," : ",ltab.y)
+      #log(id,":",key," : ",ltab.x," : ",ltab.y)
       })
   
 }
@@ -316,7 +338,7 @@ function print_array(t){
   var i = 1
   while(i<=siz)
     {
-      log("array0:",t[i])
+      #log("array0:",t[i])
       i = i+1
     }
 
