@@ -20,7 +20,10 @@ function step()
 {
     if(time_step == 1 and id == 1){
         # Call the one shot planner to compute the path for the current map
-        path_controls = OneShotPathPlanner(pose.position.x,pose.position.y,GOAL_STATE.x,GOAL_STATE.y,0.2)
+        ############################################################################################################################
+        ## ARGS: start x, start y, start yaw, goal x, goal y, goal yaw, planning time, size of the object pushed+clearence (in m).##
+        ############################################################################################################################
+        path_controls = OneShotPathPlanner(pose.position.x,pose.position.y,3.14159,GOAL_STATE.x,GOAL_STATE.y,1.5708,3,5)
         table_print_path(path_controls)
     }
     if(not time_step%5)

@@ -16,7 +16,8 @@
   <!-- *************** -->
   <controllers>
 
-    <buzz_controller_kheperaiv id="khivbz">
+      <buzz_connectivity_controller_kheperaiv id="khivbz"
+                                          library="GitHub_repo/Hooks_src/build/libconnectivity_controller">
         <actuators>
         <differential_steering implementation="default" />
         <leds                  implementation="default" medium="leds" />
@@ -38,7 +39,7 @@
               save_svg_image ="1"
               map_resolution="0.1" />
       
-    </buzz_controller_kheperaiv>
+    </buzz_connectivity_controller_kheperaiv>
 
 <!--     <buzz_controller_spiri id="bcs">
       <actuators>
@@ -60,11 +61,11 @@
   <!-- ****************** -->
   <!-- * Loop functions * -->
   <!-- ****************** -->
-  <loop_functions library="build/libCollab_tras_loop.so" 
-                  label="Collab"
-                  Robots="12"
+  <loop_functions library="GitHub_repo/Loop_fun_src/build/libplanning_exp.so" 
+                  label="Planning"
+                  map_file_name="GitHub_repo/maps/Comparisions/comp_structure.map" 
                   map_option="0"
-                  map_file_name="/home/vivek/Vivek/Projects/Connectivity/ARGOS_Planning/maps_custom/dragon_age/maps/arena.map"/>
+                 />
   
   <!-- *********************** -->
   <!-- * Arena configuration * -->
