@@ -6,16 +6,18 @@ include "includes/debug.bzz"
 
 function init() { 
 flag =1
+FLAG = 0
 SWARM_SIZE = 16
 Pushed_obj_pos = {}
 last_size = 0
 left_branch = {.1={.x=0,.y=0}}
 right_branch = {.1={.x=0,.y=0}}
-target = {.x = 4,.y=4}
+
 target_array = {.1={.x=0,.y=0}}
 x= 2
 TASK = 0
 DIR = 1
+total_bots = 25
 POS_DES={.x=0,.y=0}
 DIR_AXIS = 1
 s = swarm.create(1)
@@ -23,28 +25,32 @@ s.join()
 cagers=swarm.create(2)
 barrier_cage= stigmergy.create(5)
 task = stigmergy.create(3)
-k = 10
-bidding_time = 50
+k = 5
+bidding_time = 100
 bidding_timer={}
 task.put(1,{.id=id,.pos={.x=0,.y=0},.dir = -1,.dir_axis=-1,.bid=100000,.branch = 0})
-barrier_array = {.1=17} 
+barrier_array = {.1=100000} 
 TASK_NUM = 0
 pushers=swarm.create(4)
 rotaters= swarm.create(5)
 barrier = stigmergy.create(20)
 barrier2 = stigmergy.create(10)
 barrier3 = stigmergy.create(11)
+swarm_size = stigmergy.create(21)
+centroid = stigmergy.create(23)
+target= stigmergy.create(30)
 barrier.put(0,{.cnt=0,.x=0.0,.y=0.0,.yaw = 0.01})
 barrier.put(2,{.cnt=0,.x=-1,.y=0,.yaw = 0.01})
-barrier.put(4,{.cnt=0,.x=-2,.y=0,.yaw = 1.59})
-barrier.put(6,{.cnt=0,.x=-2,.y=0.4,.yaw = 0.01})
-barrier.put(8,{.cnt=0,.x=-4.5,.y=0.4,.yaw = 0.01})
-barrier.put(10,{.cnt=0,.x=-4.5,.y=0.4,.yaw = 1.60})
-barrier.put(12,{.cnt=0,.x=-5,.y=0.4,.yaw = 0.01})
-barrier.put(14,{.cnt=0,.x=-6,.y=0.34.,.yaw = 0.01})
-barrier.put(16,{.cnt=0,.x=-7,.y=0.34,.yaw = 1.57})
-barrier.put(18,{.cnt=0,.x=-8,.y=0.34,.yaw = 0.01})
-barrier.put(20,{.cnt=0,.x=-10,.y=0.45,.yaw = 0.01})
+barrier.put(4,{.cnt=0,.x=-2,.y=0.3,.yaw = 0.01})
+barrier.put(6,{.cnt=0,.x=-2,.y=0.6,.yaw = 0.01})
+barrier.put(8,{.cnt=0,.x=-3,.y=0.9,.yaw = 0.01})
+barrier.put(10,{.cnt=0,.x=-4,.y=1.2,.yaw = 0.01})
+barrier.put(12,{.cnt=0,.x=-4.5,.y=0.33,.yaw = 0.01})
+barrier.put(14,{.cnt=0,.x=-5,.y=0.33,.yaw = 0.01})
+barrier.put(16,{.cnt=0,.x=-6,.y=0.33.,.yaw = 0.01})
+barrier.put(18,{.cnt=0,.x=-7,.y=0.33,.yaw = 0.01})
+barrier.put(20,{.cnt=0,.x=-8,.y=0.33,.yaw = 0.01})
+barrier.put(22,{.cnt=0,.x=-10,.y=0.33,.yaw = 0.01})
 task.onconflict(function (k,local,remote) {	
 		if(remote.bid <=local.bid)
 	    {return remote}
@@ -66,35 +72,55 @@ barrier.onconflict(function (k,local,remote) {
     )
 
 
+centroid.onconflict(function (k,local,remote) { 
+
+      if((local.data) and (not remote.data))
+      {
+       return local
+      }
+      else if((not local.data) and (remote.data))
+      {
+       return remote
+      } 
+      
+      }
+    )
+
+target.onconflict(function (k,local,remote) { 
+
+      if((local.data) and (not remote.data))
+      {
+       return local
+      }
+      else if((not local.data) and (remote.data))
+      {
+       return remote
+      } 
+      
+      }
+    )
+
+
 barrier2.onconflict(function (k,local,remote) { 
 
         if(local.data.val<remote.data.val)
           {
-          #log(local.robot,":",remote.robot,"error-",local.data.val,":",remote.data.val)
-          #remote.data.val = remote.data.val + 1
           check_and_add_barrier(local.robot,barrier_array)
           check_and_add_barrier(remote.robot,barrier_array)
-          #print_array(barrier_array)
           return remote
           }
         
         else if(local.data.val>remote.data.val)
           {
-          #log(local.robot,":",remote.robot,"error+",local.data.val,":",remote.data.val)
-          #local.data.val = local.data.val + 1
           check_and_add_barrier(local.robot,barrier_array)
           check_and_add_barrier(remote.robot,barrier_array)
-          #print_array(barrier_array)
           return local
           }
 
         if(local.data.val==remote.data.val)
           {
-          #log(local.robot,":",remote.robot,"error=",local.data.val,":",remote.data.val)
-          #remote.data.val = remote.data.val + 1
           check_and_add_barrier(local.robot,barrier_array)
           check_and_add_barrier(remote.robot,barrier_array)
-          #print_array(barrier_array)
           return remote
           }                                          
 
@@ -110,7 +136,7 @@ function step()
 
   if(flag)
   {
-    if (s.in())
+    if ((s.in()) and (barrier_cage.size()<2))
     {
     s.exec(gradient)
     }
@@ -122,9 +148,9 @@ function step()
                cagers.leave()
                flag = 0
                pushers.join()
+               swarm_size.put(id,{.x= pose.position.x,.y=pose.position.y})
                TASK_NUM = 2
                TASK = 1
-               Prev_push_obj_pos={.x = barrier.get(TASK_NUM).x, .y = barrier.get(TASK_NUM).y}
                POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - barrier.get(TASK_NUM - 2).x,.y = barrier.get(TASK_NUM).y - barrier.get(TASK_NUM - 2).y},pose.position)
                n = find_nei_in_set()
                yaw = barrier.get(TASK_NUM).yaw
@@ -143,8 +169,9 @@ function step()
         goto(cmd_vel.x, cmd_vel.y)
         if(target_array[x])
         {
-        if((math.vec2.dis(POS_DES,pose.position)<0.3))
+        if((math.vec2.dis(POS_DES,pose.position)<0.4))
           {
+            log(x,":",id,": x",POS_DES.x,": y",POS_DES.y)
             x=x+1
             if(target_array[x])
              {
@@ -155,10 +182,13 @@ function step()
         }
         if(not target_array[x])  
          {
-           if (((math.vec2.dis(POS_DES,pose.position)<0.02) or (obs_vec().len > 0.2)))
+           if (((math.vec2.dis(POS_DES,pose.position)<0.015) or (obs_vec().len > 0.2)))
            {
-           check_for_barrier(pose.position)
+           
+           
+           #check_for_barrier(pose.position)
            log(id,":",POS_DES.x,":",POS_DES.y)
+           log("obs.len:",obs_vec().len,"obs.ang:",obs_vec().ang)
            x=2
            TASK = 0
            target_array = {}
@@ -166,7 +196,7 @@ function step()
            next_task_update(prox_vec)
            POS_DES={.x=0,.y=0}
            set_wheels(0.0,0.0)
-           if (prox_vec.len > 0.05)
+           if (prox_vec.len > 0.015)
            {
            s.leave()
            cagers.join()
@@ -185,29 +215,25 @@ function step()
     {
 
       check_and_add_barrier(barrier2.getrid(TASK_NUM),barrier_array)
-      if((size(barrier_array)-1)>= 9)
+
+      if((size(barrier_array)-1)>= swarm_size.size()*3/4)
       {
       if(pushers.in())
       {
-      if(id == 9)
-      {
-      log(id,"push ")
-      }
+      set_wheels(0.0,0.0)
+      TASK = 0
       pushers.leave()
-      rotaters.join()
-      TASK = 1
-      init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
-      init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
+      rotaters.join()  
+      centroid.put(id,{.x=pose.position.x,.y=pose.position.y})
       barrier_array = {.1=17}
       TASK_NUM = TASK_NUM + 1
       }
 
       else if(rotaters.in())
       {
-      if(id == 9)
-      {
-      log(id,"rotate ")
-      }
+      set_wheels(0.0,0.0)
+      centroid.put(id,NIL)
+      FLAG =0
       rotaters.leave()
       pushers.join()
       TASK = 1
@@ -217,61 +243,97 @@ function step()
       {
       log((TASK_NUM-2)/2,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
       }
-      POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Prev_push_obj_pos.x,.y = barrier.get(TASK_NUM).y - Prev_push_obj_pos.y},pose.position)
+      POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Pushed_obj_pos.x,.y = barrier.get(TASK_NUM).y - Pushed_obj_pos.y},pose.position)
       Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
       n = find_nei_in_set()
       yaw = barrier.get(TASK_NUM).yaw
+      if(TASK_NUM == 22)
+       {
+        log("Over ....... ")
+        pushers.leave()
 
+       }
       }
       }
     }
 
   
-    if(pushers.in()){
-    if(TASK)
+    if(pushers.in())
     {
-    show_colored_trajectory()
-    vector_to_neighbour = {.x =0,.y=0}
-    var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
-    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 45)
-    move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
-    move_in = math.vec2.scale(math.vec2.norm(move_in), 40)
-    vector_to_neighbour = find_neighbours()
-    if (math.vec2.dis(vector_to_neighbour,{.x =0,.y=0})>0){
-    vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), +40)}
-    vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
-    vector_to_target = math.vec2.add(vector_to_target,move_in)
-    vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 10)
-    goto(vector_to_target.x, vector_to_target.y)
-    # if((id == 9) and ((TIME_STEP%5)==0)) 
-    # {
-    # log (id,"push + vecin",vector_to_neighbour.x,":",vector_to_neighbour.y,"vectar",vector_to_target.x,":",vector_to_target.y,"vectin",move_in.x,":",move_in.y)
-    # }
-    if(math.vec2.dis(POS_DES,pose.position)<0.02)
-    {
-      TASK = 0
-      set_wheels(0.0,0.0)
-      if(barrier2.get(TASK_NUM))
+      if(TASK)
       {
-      log("push:",TASK_NUM,":",id,":",size(barrier_array))
-      barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt , .val = barrier2.get(TASK_NUM).val +1})
-      
-      }
-      else 
-      {
-      #log("push:",TASK_NUM,":",id,":",1)
-      
-      barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
-      }
-    }
+        show_colored_trajectory()
+        vector_to_neighbour = {.x =0,.y=0}
+        move_in_wc = {.x=0,.y=0}
+        move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
+        var move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+        move_in_wc = math.vec2.newp(obs_vec_1().len,obs_vec_1().ang)
+        
+        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5)
+        if (math.vec2.dis(move_in_wc,{.x=0,.y=0})>0)
+        {
+                       num = math.vec2.dot(move_vec,move_in_wc)
+                       denom =  math.vec2.length(move_vec) * math.vec2.length(move_in_wc) 
+                       angle = math.acos(num/denom)
+                       if((angle > 2) or (angle < -2))
+                        {
+                        move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 1)
+                        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
+                        }
 
-    }}	
+                      else
+                        {
+                        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
+                        move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 2)
+                        }
+        }
+        vector_to_neighbour = find_neighbours()
+        if (math.vec2.dis(vector_to_neighbour,{.x=0,.y=0})>0)
+            {vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), 2)}
+    
+        vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
+    
+        if (math.vec2.dis(move_in,{.x=0,.y=0})>0)
+            {vector_to_target = math.vec2.add(vector_to_target,move_in)}
+    
+        vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 20)
+        goto(vector_to_target.x, vector_to_target.y)
+        if(math.vec2.dis(POS_DES,pose.position)<0.02)
+         {
+          TASK = 0
+          set_wheels(0.0,0.0)
+          if(barrier2.get(TASK_NUM))
+             {
+             log("push:",TASK_NUM,":",id,":",size(barrier_array))
+             barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt ,.val = barrier2.get(TASK_NUM).val +1})
+             }
+          else 
+             {barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})}
+          }
+
+      }
+    }	
      
 
      
     if(rotaters.in())
     {
-      
+
+      #set_wheels(0.0,0.0)
+      if((centroid.size()==swarm_size.size()) and (not FLAG) and (count_null() == swarm_size.size()))
+      {
+      TASK =1
+      FLAG = 1
+      init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
+      init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
+      centre = calc_centroid()
+      if (id == 0)
+      {
+      log(id,":","centre",centre.x,":",centre.y)
+      log(id,":","real",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
+      log(id,":","difference",math.vec2.dis(centre,Pushed_obj_pos))
+      }
+      }
       if (TASK)
       {
       show_colored_trajectory()
@@ -292,24 +354,16 @@ function step()
       num = math.vec2.dot(present_vec,init_vector)
       denom = present_dis * init_distance
       angle = math.acos(num/denom)
-      # if((id == 14)) 
-      # {
-      # log (id,"rotate + vecin",vector_to_target.x,":",vector_to_target.y,"vectar",move_per.x,":",move_per.y,"vectin",move_in.x,":",move_in.y)
-      # }
-      if ((angle > (yaw - 0.01)) and (angle < (yaw + 0.01)))
+      if ((angle > (yaw - 0.02)) and (angle < (yaw + 0.02)))
       {
        TASK = 0
        set_wheels(0.0,0.0)
        if (barrier2.get(TASK_NUM))
        {
-       #log("rot:",TASK_NUM,":",id,":",barrier2.get(TASK_NUM).val)
        barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt,.val = barrier2.get(TASK_NUM).val+1})
-       
        }
        else 
        {
-       
-       #log("rot:",TASK_NUM,":",id,":",1)
        barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
        }
       }
@@ -335,12 +389,12 @@ function find_neighbours()
              Accum ={.x=0,.y=0, .error=0 }
              neighbors.foreach(
                 function(rid, data) {
-                    var error = ((data.distance - 27)/data.distance)
+                    var error = ((data.distance - 30)/data.distance)
                     var angular_error = 0
                     if(n[rid]) angular_error=(data.azimuth - n[rid].a)/3.14 
                     
                     Accum.error = Accum.error + math.abs(error)
-                    if((n[rid]) or (data.distance < 27))
+                    if((n[rid]) or (data.distance < 30))
                     {
                         var my_vec = math.vec2.newp(data.distance, data.azimuth)
                         Accum.x= Accum.x + ( error * (my_vec.x - math.cos(angular_error)))
@@ -358,7 +412,7 @@ function find_nei_in_set()
   neighbors.foreach(
   function(rid, data) 
   {
-    if (data.distance<27)
+    if (data.distance<30)
       {
         neighbours[rid] = {.a = data.azimuth}
       }
@@ -387,16 +441,23 @@ function next_task_update(obs)
   var i = task.size()
   if (i==1)
   {
-  if(( obs.ang  > 0.9 and obs.ang < 2.5 ) or ( obs.ang  < -0.9 and obs.ang > -2.5 ))
+  target_point = {.x=0,.y=0}
+  target_point.x = -10*pose.position.x
+  target_point.y = -10*pose.position.y
+  log("target x:",target_point.x," y:",target_point.y )
+  target.put("target",{.x = target_point.x, .y = target_point.y})
+  if(( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 ))
   {
+  log(id,"1 in loop")
   DIR_AXIS = 1
   next_branch_one = {.id=id,.pos={.x=pose.position.x+0.25,.y=pose.position.y},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
   next_branch_two = {.id=id,.pos={.x=pose.position.x-0.25,.y=pose.position.y},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch =-1}
   task.put(i+1,next_branch_one)
   task.put(i+2,next_branch_two)
   }
-  else if((obs.ang  < 0.78 and obs.ang > -0.78 ) or (obs.ang  < 3.67 and obs.ang > 2.6) or (obs.ang  > -3.67 and obs.ang < -2.6))
+  else if((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55))
   {
+  log(id,"2 in loop")
   DIR_AXIS = -1
   next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+0.25},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
   next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-0.25},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = -1}
@@ -406,8 +467,10 @@ function next_task_update(obs)
   }
   else 
   {
-  if(( obs.ang  > 0.9 and obs.ang < 2.5 ) or ( obs.ang  < -0.9 and obs.ang > -2.5 ) and (obs.len > 0.05))
+  if(( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 ) and (obs.len > 0.015))
   {
+  log(id,":1 in loop:")
+  log("neighbour's around : ", neighbour_check())
   DIR_AXIS = 1
   next_one = {.id=id,.pos={.x=pose.position.x+(DIR*0.25),.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
   if(not check_for_barrier(next_one.pos))
@@ -415,8 +478,10 @@ function next_task_update(obs)
   task.put(i+1,next_one)
   }
   }
-  else if  ((obs.ang  < 0.78 and obs.ang > -0.78 ) or (obs.ang  < 3.67 and obs.ang > 2.6) or (obs.ang  > -3.67 and obs.ang < -2.6) and (obs.len > 0.05))
+  else if  ((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55) and (obs.len > 0.015))
   { 
+  log(id,"2 in loop")
+  log("neighbour's around : ", neighbour_check())
   DIR_AXIS = -1
   next_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+(DIR*0.25)},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
   if (not check_for_barrier(next_one.pos))
@@ -424,31 +489,43 @@ function next_task_update(obs)
   task.put(i+1,next_one)
   }
   }
-  else if (obs.len < 0.05)
+  else if (obs.len < 0.015)
   {
   if (DIR_AXIS==1)
   {
+    log(id,"1 in loop")
+    log("neighbour's around : ",neighbour_check())
     if(math.vec2.dis({.x=pose.position.x,.y=pose.position.y+0.1},{.x=0,.y=0})>math.vec2.dis({.x=pose.position.x,.y=pose.position.y-0.1},{.x=0,.y=0}))
     {
       DIR = -1
+      TASK = 1
+      POS_DES = {.x=0,.y=0}
     }
     else 
     {
       DIR = +1
+      TASK = 1
+      POS_DES = {.x=0,.y=0}
     }
   }
   else  if (DIR_AXIS==-1)
   {
+    log(id,"2 in loop")
+    log("neighbour's around : ",neighbour_check())
     if(math.vec2.dis({.x=pose.position.x+0.1,.y=pose.position.y},{.x=0,.y=0})>math.vec2.dis({.x=pose.position.x-0.1,.y=pose.position.y},{.x=0,.y=0}))
     {
       DIR = -1
+      TASK = 1
+      POS_DES = {.x=0,.y=0}
     }
     else 
     {
       DIR = 1
+      TASK = 1
+      POS_DES = {.x=0,.y=0}
     }
   }
-  next_one = {.id=id,.pos={.x=0.0,.y=0.0},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = branch}
+  next_one = {.id=id,.pos={.x=0.0,.y=0.0},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
   if (not check_for_barrier(next_one.pos))
   {
   task.put(i+1,next_one)
@@ -461,16 +538,18 @@ function check_for_barrier(coord1)
 {
   vec_next_one = math.vec2.new(coord1.x,coord1.y)
   vec_obs = math.vec2.new(0.0,0.0)
-  denom = math.vec2.dis(vec_obs,target)*math.vec2.dis(vec_next_one,target)
-  obs_target = math.vec2.dis(vec_obs,target)
-  next_one_target = math.vec2.dis(vec_next_one,target)
-  vec_next_one=math.vec2.sub(vec_next_one,target)
-  vec_obs = math.vec2.sub(vec_obs,target)
+  target_point = target.get("target")
+  denom = math.vec2.dis(vec_obs,target_point)*math.vec2.dis(vec_next_one,target_point)
+  obs_target = math.vec2.dis(vec_obs,target_point)
+  next_one_target = math.vec2.dis(vec_next_one,target_point)
+  vec_next_one=math.vec2.sub(vec_next_one,target_point)
+  vec_obs = math.vec2.sub(vec_obs,target_point)
   num =  math.vec2.dot(vec_obs,vec_next_one)
   angle = math.acos((num/denom))
-  if (((angle<0.02) and (angle>-0.02)) and (obs_target>next_one_target))
+  if (((angle<0.03) and (angle>-0.03)) and (obs_target>next_one_target))
   {
     barrier_cage.put(id,1)
+    log("barrier")
     return 1
   }
   else 
@@ -479,6 +558,23 @@ function check_for_barrier(coord1)
   }
 }
 
+
+function neighbour_check()
+{
+  count = 0
+  
+  neigbhors.foreach(
+  function(rid,data)
+  {
+      if(data.distance<0.55)
+      {
+      count  = count + 1
+      }
+
+  })}
+  return count
+
+}
 
 function obtain_local_vec_to_target(coord1,coord2,yaw)
 {
@@ -509,6 +605,32 @@ function obs_vec()
   ang = math.atan(accum.y, accum.x)
   return {.len=len,.ang=ang}
 }
+
+
+function obs_vec_1()
+{
+  var accum = {}
+  accum.x = 0.0
+  accum.y = 0.0
+  var i = 0
+  while(i < size(proximity)) {
+  accum.x = accum.x + proximity[i].value * math.cos(proximity[i].angle)
+  accum.y = accum.y + proximity[i].value * math.sin(proximity[i].angle)
+  i = i + 1
+  }
+  accum.x = accum.x / size(proximity)
+  accum.y = accum.y / size(proximity)
+  var len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+  var ang = math.atan(accum.y, accum.x)
+  len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+  ang = math.atan(accum.y, accum.x)
+  return {.len=len,.ang=ang}
+}
+
+
+
+
+
 
 function gradient()
 {
@@ -575,10 +697,18 @@ function gradient()
           check_and_copy(POS_DES,right_branch)
           }
           print_array(target_array)
-          if(target_array[2])
-          {
-          POS_DES = {.x=target_array[2].x,.y=target_array[2].y}
-          }
+             if(size(target_array) < 7)
+                  {
+                    if(target_array[2])
+                       {
+                         POS_DES = {.x=target_array[2].x,.y=target_array[2].y}
+                       }
+                  }
+             else 
+                  {
+                     x = size(target_array) - 5
+                     POS_DES = {.x=target_array[x].x,.y=target_array[x].y}
+                  }
           task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
           }
           else
@@ -641,4 +771,43 @@ function print_array(t){
     }
   }
 }
+
+function calc_centroid()
+{
+centre = {.x=0,.y=0}
+siz = total_bots
+var i = 0
+while(i<siz)
+  { 
+    if(centroid.get(i))
+    {
+    centre.x = centroid.get(i).x/swarm_size.size() + centre.x
+    centre.y = centroid.get(i).y/swarm_size.size() + centre.y
+    }
+    i = i + 1
+  }
+  
+  return centre
+}
+
+function count_null()
+{
+siz = total_bots
+var i = 0
+var count = 0
+while(i<siz)
+{
+  if(centroid.get(i))
+  {
+   count = count + 1
+  }
+  i=i+1
+}
+  if (id == 0)
+  {
+   log(id,"not null ",count)
+  }
+  return count 
+}
+
 

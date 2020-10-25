@@ -1,8 +1,8 @@
 # SIM 
-robot_radius = 12
-safety_radius = 2
+robot_radius = 15
+safety_radius = 5
 combined_radius = (2 * robot_radius) + safety_radius
-GOTO_MAXVEL = 40 #cm/s
+GOTO_MAXVEL = 100 #cm/s
 
 # REAL
 # robot_radius = 0.12

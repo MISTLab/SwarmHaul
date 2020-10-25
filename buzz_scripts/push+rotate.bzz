@@ -4,7 +4,7 @@ include "includes/debug.bzz"
 
 
 Pushed_obj_pos = {.x=0,.y=0}
-GOAL_STATE = math.vec2.new(-10.0, 0.0)
+GOAL_STATE = math.vec2.new(-5, 0.0)
 START_STATE = math.vec2.new(0.0 , 0.0)
 
 function init() {
@@ -18,17 +18,7 @@ rotaters= swarm.create(5)
 barrier = stigmergy.create(3)
 barrier2 = stigmergy.create(10)
 barrier3 = stigmergy.create(11)
-barrier.put(0,{.cnt=0,.x=Pushed_obj_pos.x,.y=Pushed_obj_pos.y,.yaw = 0.01})
-barrier.put(2,{.cnt=0,.x=-1,.y=0,.yaw = 0.01})
-barrier.put(4,{.cnt=0,.x=-2,.y=0,.yaw = 0.01})
-barrier.put(6,{.cnt=0,.x=-3,.y=0,.yaw = 0.01})
-barrier.put(8,{.cnt=0,.x=-4,.y=0,.yaw = 1.57})
-barrier.put(10,{.cnt=0,.x=-4,.y=0.3,.yaw = 0.01})
-barrier.put(12,{.cnt=0,.x=-5,.y=0.3,.yaw = 0.01})
-barrier.put(14,{.cnt=0,.x=-6,.y=0.3.,.yaw = 0.01})
-barrier.put(16,{.cnt=0,.x=-7,.y=0.3,.yaw = 1.57})
-barrier.put(18,{.cnt=0,.x=-8,.y=0.3,.yaw = 0.01})
-barrier.put(20,{.cnt=0,.x=-10,.y=0.45,.yaw = 0.01})
+barrier.put(0,{.cnt=0,.x=0.0,.y=0.0,.yaw = 0})
 TIME_STEP = 1
 POS_DES = {.x=0,.y=0}
 barrier.onconflict(function (k,local,remote) { 
@@ -94,8 +84,8 @@ function step(){
     if (id == 0)
     {
     LoadGTMap()
-    path_controls = OneShotPathPlanner(START_STATE.x,START_STATE.y,GOAL_STATE.x,GOAL_STATE.y,0.5)
-    #table_print_path(path_controls)
+    path_controls = OneShotPathPlanner(START_STATE.x,START_STATE.y,-3.14,GOAL_STATE.x,GOAL_STATE.y,-3.14,4,2.5)
+    table_print_path(path_controls)
     }
     }
     
@@ -105,15 +95,12 @@ function step(){
     Prev_push_obj_pos={.x = barrier.get(TASK_NUM).x, .y = barrier.get(TASK_NUM).y}
     POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - barrier.get(TASK_NUM - 2).x,.y = barrier.get(TASK_NUM).y - barrier.get(TASK_NUM - 2).y},pose.position)
     n = find_nei_in_set()
-    yaw = barrier.get(TASK_NUM).yaw
+    yaw = barrier.get(TASK_NUM).yaw - barrier.get(TASK_NUM - 2).yaw
     }
 
     else if ((TIME_STEP > 5) and (barrier2.get(TASK_NUM)))
     {
-      if((id ==9) or (id == 0) and ((TIME_STEP%6) == 0))
-      {
-      log(id,(size(barrier_array)-1))
-      }
+
       check_and_add(barrier2.getrid(TASK_NUM),barrier_array)
       if((size(barrier_array)-1)>= 8)
       {
@@ -147,11 +134,10 @@ function step(){
       {
       log((TASK_NUM-2)/2,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
       }
-      POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Prev_push_obj_pos.x,.y = barrier.get(TASK_NUM).y - Prev_push_obj_pos.y},pose.position)
-      Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
+      POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Pushed_obj_pos.x,.y = barrier.get(TASK_NUM).y - Pushed_obj_pos.y},pose.position)
+      Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y,.yaw = barrier.get(TASK_NUM).yaw}
       n = find_nei_in_set()
-      yaw = barrier.get(TASK_NUM).yaw
-
+      yaw = barrier.get(TASK_NUM).yaw - Prev_push_obj_pos.yaw
       }
       }
     }
@@ -162,22 +148,31 @@ function step(){
     {
     show_colored_trajectory()
     vector_to_neighbour = {.x =0,.y=0}
-    var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
-    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 45)
-    move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
-    move_in = math.vec2.scale(math.vec2.norm(move_in), 35)
+    move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
+    var move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+    num = math.vec2.dot(move_vec,move_in)
+    denom =  math.vec2.length(move_vec) * math.vec2.length(move_in) 
+    angle = math.acos(num/denom)
+    if((angle > 2) or (angle < -2))
+    {
+    #log(id,"not needed for pushing")
+    move_in = math.vec2.scale(math.vec2.norm(move_in), 0)
+    vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 10.0)
+    }
+
+    else{
+       vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 4.5)
+       move_in = math.vec2.scale(math.vec2.norm(move_in), 4)
+    }
     vector_to_neighbour = find_neighbours()
-    if (math.vec2.dis(vector_to_neighbour,{.x =0,.y=0})>0){
-    vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), +40)}
+    if (math.vec2.dis(vector_to_neighbour,{.x=0,.y=0})>0){
+    vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), +4)}
     vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
     vector_to_target = math.vec2.add(vector_to_target,move_in)
-    vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 10)
+    vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 20)
     goto(vector_to_target.x, vector_to_target.y)
-    if((id == 9) and ((TIME_STEP%5)==0)) 
-    {
-    log (id,"push + vecin",vector_to_neighbour.x,":",vector_to_neighbour.y,"vectar",vector_to_target.x,":",vector_to_target.y,"vectin",move_in.x,":",move_in.y)
-    }
-    if(math.vec2.dis(POS_DES,pose.position)<0.01)
+
+    if(math.vec2.dis(POS_DES,pose.position)<0.02)
     {
       TASK = 0
       set_wheels(0.0,0.0)
@@ -208,6 +203,14 @@ function step(){
       move_away = {.x =0,.y=0}
       move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
       move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+      if (yaw>0)
+      {
+      move_per = math.vec2.scale(math.vec2.norm(move_per), -30)
+      }
+      if ((yaw<0) or (yaw == 0))
+      {
+      move_per = math.vec2.scale(math.vec2.norm(move_per), +30)
+      }
       move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
       move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
       move_away = find_neighbours()
@@ -222,11 +225,11 @@ function step(){
       num = math.vec2.dot(present_vec,init_vector)
       denom = present_dis * init_distance
       angle = math.acos(num/denom)
-      if((id == 14)) 
-      {
-      log (id,"rotate + vecin",vector_to_target.x,":",vector_to_target.y,"vectar",move_per.x,":",move_per.y,"vectin",move_in.x,":",move_in.y)
-      }
-      if ((angle > (yaw - 0.01)) and (angle < (yaw + 0.01)))
+       if ((id == 5) and (not TIME_STEP%10))
+       {
+        log(id," : ", angle , "yaw" , yaw)
+        }
+      if ((angle > (abs(yaw) - 0.02)) and (angle < (abs(yaw) + 0.02)))
       {
        TASK = 0
        set_wheels(0.0,0.0)
@@ -243,10 +246,13 @@ function step(){
        barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
        }
       }
-      }
+      
+
+      
     }
     
   
+    }
     }
     TIME_STEP = TIME_STEP + 1
 }
@@ -311,11 +317,11 @@ function find_nei_in_set()
 function table_print_path(t) {
   var t2 = {}
   foreach(t, function(key, value) {
-      var ltab = {.x=value.x,.y=value.y}
-      barrier.put(key,{.cnt = 0,.x=ltab.x,.y=ltab.y,.yaw = 0.01})
-      #log(id,":",key," : ",ltab.x," : ",ltab.y)
+      var ltab = {.x=value.x,.y=value.y,.yaw=value.yaw}
+      barrier.put(2*key,{.cnt = 0,.x=ltab.x,.y=ltab.y,.yaw = ltab.yaw})
+      log(id,":",key," : ",ltab.x," : ",ltab.y," : ",ltab.yaw)
       })
-  
+  barrier.put(0,{.cnt=0,.x=0.0,.y=0.0,.yaw = 0})
 }
 
 
@@ -343,4 +349,11 @@ function print_array(t){
     }
 
 }
-                           
+     
+function abs(x)
+{
+	if ((x>0) or (x==0))
+	{return x}
+	else 
+	{return -x}
+}                      

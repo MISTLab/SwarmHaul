@@ -1,6 +1,6 @@
 include "includes/vec2.bzz"
 include "includes/RVO.bzz"
-include "includes/debug.bzz"
+#include "includes/debug.bzz"
 
 
 Pushed_obj_pos = {.x = 0,.y = 0}
@@ -34,7 +34,7 @@ function step()
       if (TASK)
       {
       #log(id,"pose",pose.position.x,":",pose.position.y,":",pose.orientation.yaw)
-      show_colored_trajectory()
+      #show_colored_trajectory()
       move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
       move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
       move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
