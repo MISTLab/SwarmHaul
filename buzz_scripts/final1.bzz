@@ -5,113 +5,142 @@ include "includes/debug.bzz"
 
 
 function init() { 
-flag =1
-FLAG = 0
-SWARM_SIZE = 16
-Pushed_obj_pos = {}
-last_size = 0
-left_branch = {.1={.x=0,.y=0}}
-right_branch = {.1={.x=0,.y=0}}
-target = {.x = 4,.y = 4}
-target_array = {.1={.x=0,.y=0}}
-x= 2
-TASK = 0
-DIR = 1
-total_bots = 25
-POS_DES={.x=0,.y=0}
-DIR_AXIS = 1
-s = swarm.create(1)
-s.join()
-cagers=swarm.create(2)
-barrier_cage= stigmergy.create(5)
-task = stigmergy.create(3)
-k = 5
-bidding_time = 100
-bidding_timer={}
-task.put(1,{.id=id,.pos={.x=0,.y=0},.dir = -1,.dir_axis=-1,.bid=100000,.branch = 0})
-barrier_array = {.1=100000} 
-TASK_NUM = 0
-pushers=swarm.create(4)
-rotaters= swarm.create(5)
-barrier = stigmergy.create(20)
-barrier2 = stigmergy.create(10)
-barrier3 = stigmergy.create(11)
-swarm_size = stigmergy.create(21)
-centroid = stigmergy.create(23)
-barrier.put(0,{.cnt=0,.x=0.0,.y=0.0,.yaw = 0.01})
-barrier.put(2,{.cnt=0,.x=-1,.y=0,.yaw = 0.01})
-barrier.put(4,{.cnt=0,.x=-2,.y=0.3,.yaw = 0.01})
-barrier.put(6,{.cnt=0,.x=-2,.y=0.6,.yaw = 0.01})
-barrier.put(8,{.cnt=0,.x=-3,.y=0.9,.yaw = 0.01})
-barrier.put(10,{.cnt=0,.x=-4,.y=1.2,.yaw = 0.01})
-barrier.put(12,{.cnt=0,.x=-4.5,.y=0.33,.yaw = 0.01})
-barrier.put(14,{.cnt=0,.x=-5,.y=0.33,.yaw = 0.01})
-barrier.put(16,{.cnt=0,.x=-6,.y=0.33.,.yaw = 0.01})
-barrier.put(18,{.cnt=0,.x=-7,.y=0.33,.yaw = 0.01})
-barrier.put(20,{.cnt=0,.x=-8,.y=0.33,.yaw = 0.01})
-barrier.put(22,{.cnt=0,.x=-10,.y=0.33,.yaw = 0.01})
-task.onconflict(function (k,local,remote) {	
-		if(remote.bid <=local.bid)
-	    {return remote}
-		else {return local}})
+  # State switch beteeen caging and pushing+Rotating
+  flag =1
 
-barrier.onconflict(function (k,local,remote) { 
+  # Flag to determine if centroid computation has to be done, done after the robots reaching a WP. 
+  FLAG = 0
 
-        if(remote.robot<=local.robot)
-        {
-          return remote
-        }
-        else 
-        {
-          return local
-        }
+  #  Unused
+  # SWARM_SIZE = 16
+  # position of the pushed object. 
+  Pushed_obj_pos = {}
+  # Records the pervious task size, to identify the avilability of new tasks. 
+  last_size = 0
+  # List of positions on the left and right side, used for edge following and reaching the assigned target.
+  left_branch = {.1={.x=0,.y=0}}
+  right_branch = {.1={.x=0,.y=0}}
+  # Target to reach, used for estimating the cone to stop caging. 
+  target = {.x = 4,.y = 4}
+  # list of positions beinging copied from either left or right branch with the last position. 
+  target_array = {.1={.x=0,.y=0}}
+  # Current waypoint that the robot is performing to edge following and reaching assigned target.(only used in Caging)
+  x= 2
+  # Flag to determine if the robot is performing a task, used to determine if the robot is performing something, includes, following edge, pushing, rotating. 
+  TASK = 0
+  # Direction to spawn the next task for caging: left, right, top, down.
+  DIR = 1
+  DIR_AXIS = 1
+  # Total number of robots used for looping and getting centroid coordinates.
+  total_bots = 10
+  # Local target assigned for the robots during pushing and rotation. 
+  POS_DES={.x=0,.y=0}
+  # Swarm containing all the robots, used to execute gardient algorithm. (Robots leave on joing cagers or pushers)
+  s = swarm.create(1)
+  s.join()
+  # All the robots that have reached the caging goal will be in this swarm. (Robots leave on joing cagers or pushers)
+  cagers=swarm.create(2)
+  # Stigmergy to stop caging. Once two robots reach the calulated target cone.
+  barrier_cage= stigmergy.create(5)
+  # Indicates the local goals in caging, identifies if the robot has reached its target while pushing and rotating.
+  task = stigmergy.create(3)
+  # K from the interval in gradient algorithm.
+  k = 5
+  # bidding max time.
+  bidding_time = 100
+  # List of timers for all caging tasks. 
+  bidding_timer={}
+  # The first task to initiate caging.
+  task.put(1,{.id=id,.pos={.x=0,.y=0},.dir = -1,.dir_axis=-1,.bid=100000,.branch = 0})
+  # List of robots that have completed pushing or rotating.
+  barrier_array = {.1=100000} 
+  # Current Waypoint pursued by the robot while pushing and rotating. 
+  TASK_NUM = 0
+  # All the robots that are pushing the object (leaves it when the barrier is satisfied)
+  pushers=swarm.create(4)
+  # All the robots in rotating mode (leaves it when the barrier is satisfied.)
+  rotaters= swarm.create(5)
+  # Sharing the path thought this stig.  
+  barrier = stigmergy.create(20)
+  # Number of robots that have reached the target for pushing and rotating.
+  barrier2 = stigmergy.create(10)
+  # Unused, To check 
+  # barrier3 = stigmergy.create(11)
+  # After caging, to find the size of the robots. 
+  swarm_size = stigmergy.create(21)
+  # Calculating the centroid after pushing after every waypoint. 
+  centroid = stigmergy.create(23)
+  # Hardcoded path for pushing. 
+  barrier.put(0,{.cnt=0,.x=0.0,.y=0.0,.yaw = 0.01})
+  barrier.put(2,{.cnt=0,.x=-1,.y=0,.yaw = 0.01})
+  barrier.put(4,{.cnt=0,.x=-2,.y=0.3,.yaw = 0.01})
+  barrier.put(6,{.cnt=0,.x=-2,.y=0.6,.yaw = 0.01})
+  barrier.put(8,{.cnt=0,.x=-3,.y=0.9,.yaw = 0.01})
+  barrier.put(10,{.cnt=0,.x=-4,.y=1.2,.yaw = 0.01})
+  barrier.put(12,{.cnt=0,.x=-4.5,.y=0.33,.yaw = 0.01})
+  barrier.put(14,{.cnt=0,.x=-5,.y=0.33,.yaw = 0.01})
+  barrier.put(16,{.cnt=0,.x=-6,.y=0.33.,.yaw = 0.01})
+  barrier.put(18,{.cnt=0,.x=-7,.y=0.33,.yaw = 0.01})
+  barrier.put(20,{.cnt=0,.x=-8,.y=0.33,.yaw = 0.01})
+  barrier.put(22,{.cnt=0,.x=-10,.y=0.33,.yaw = 0.01})
+  task.onconflict(function (k,local,remote) {	
+  		if(remote.bid <=local.bid)
+  	    {return remote}
+  		else {return local}})
 
-      
-      }
-    )
-
-
-centroid.onconflict(function (k,local,remote) { 
-
-      if((local.data) and (not remote.data))
+  barrier.onconflict(function (k,local,remote) { 
+      if(remote.robot<=local.robot)
       {
-       return local
+        return remote
       }
-      else if((not local.data) and (remote.data))
+      else 
       {
-       return remote
-      } 
-      
+        return local
       }
-    )
-
-
-
-barrier2.onconflict(function (k,local,remote) { 
-
-        if(local.data.val<remote.data.val)
-          {
-          check_and_add_barrier(local.robot,barrier_array)
-          check_and_add_barrier(remote.robot,barrier_array)
-          return remote
-          }
         
-        else if(local.data.val>remote.data.val)
-          {
-          check_and_add_barrier(local.robot,barrier_array)
-          check_and_add_barrier(remote.robot,barrier_array)
-          return local
-          }
+    }
+  )
 
-        if(local.data.val==remote.data.val)
-          {
+
+  centroid.onconflict(function (k,local,remote) { 
+    if((local.data) and (not remote.data))
+    {
+     return local
+    }
+    else if((not local.data) and (remote.data))
+    {
+     return remote
+    } 
+    
+    }
+  )
+
+
+
+  barrier2.onconflict(function (k,local,remote) { 
+      if(local.data.val<remote.data.val)
+        {
           check_and_add_barrier(local.robot,barrier_array)
           check_and_add_barrier(remote.robot,barrier_array)
           return remote
-          }                                          
+        }
+      
+      else if(local.data.val>remote.data.val)
+      {
+        check_and_add_barrier(local.robot,barrier_array)
+        check_and_add_barrier(remote.robot,barrier_array)
+        return local
+      }
 
-                                          }
-    )
+      if(local.data.val==remote.data.val)
+      {
+        check_and_add_barrier(local.robot,barrier_array)
+        check_and_add_barrier(remote.robot,barrier_array)
+        return remote
+      }                                          
+
+    }
+  )
 
 }
 
@@ -119,133 +148,108 @@ barrier2.onconflict(function (k,local,remote) {
 
 function step()
 {
-
   if(flag)
   {
-    if ((s.in()) and (barrier_cage.size()<2))
-    {
-    s.exec(gradient)
+    if ((s.in()) and (barrier_cage.size()<2)){
+      s.exec(gradient)
     }
-    if(cagers.in()) 
-      {  
-          if (barrier_cage.size()==2)
-             {
-               log("caging_done")
-               cagers.leave()
-               flag = 0
-               pushers.join()
-               swarm_size.put(id,{.x= pose.position.x,.y=pose.position.y})
-               TASK_NUM = 2
-               TASK = 1
-               POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - barrier.get(TASK_NUM - 2).x,.y = barrier.get(TASK_NUM).y - barrier.get(TASK_NUM - 2).y},pose.position)
-               #log(id,POS_DES.x,":",POS_DES.y)
-               #log(id,pose.position.x,":",pose.position.y)
-               n = find_nei_in_set()
-               yaw = barrier.get(TASK_NUM).yaw
-             }
+    if(cagers.in()){  
+      if(barrier_cage.size()==2){
+        log("caging_done")
+        cagers.leave()
+        flag = 0
+        pushers.join()
+        swarm_size.put(id,{.x= pose.position.x,.y=pose.position.y})
+        TASK_NUM = 2
+        TASK = 1
+        POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - barrier.get(TASK_NUM - 2).x,.y = barrier.get(TASK_NUM).y - barrier.get(TASK_NUM - 2).y},pose.position)
+        #log(id,POS_DES.x,":",POS_DES.y)
+        #log(id,pose.position.x,":",pose.position.y)
+        n = find_nei_in_set()
+        yaw = barrier.get(TASK_NUM).yaw
+      }
+  
+     }
     
-       }
-    
-    if(s.in())
-       {
-        if(TASK)
-        {
+    if(s.in()){
+      if(TASK){
         show_colored_trajectory()
         var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw)
         vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 30)
         cmd_vel = LCA(vector_to_target)
         goto(cmd_vel.x, cmd_vel.y)
-        if(target_array[x])
-        {
-        if((math.vec2.dis(POS_DES,pose.position)<0.4))
-          {
+        if(target_array[x]){
+          if((math.vec2.dis(POS_DES,pose.position)<0.4)){
             log(x,":",id,": x",POS_DES.x,": y",POS_DES.y)
             x=x+1
-            if(target_array[x])
-             {
-               POS_DES = target_array[x]
-             }
-
-           }
+            if(target_array[x]){
+              POS_DES = target_array[x]
+            }
+          }
         }
-        if(not target_array[x])  
-         {
-           if (((math.vec2.dis(POS_DES,pose.position)<0.015) or (obs_vec().len > 0.2)))
-           {
-           
-           
-           #check_for_barrier(pose.position)
-           log(id,":",POS_DES.x,":",POS_DES.y)
-           log("obs.len:",obs_vec().len,"obs.ang:",obs_vec().ang)
-           x=2
-           TASK = 0
-           target_array = {}
-           prox_vec = obs_vec()
-           next_task_update(prox_vec)
-           POS_DES={.x=0,.y=0}
-           set_wheels(0.0,0.0)
-           if (prox_vec.len > 0.015)
-           {
-           s.leave()
-           cagers.join()
-           }
-         }   
-
-
-         }
+        if(not target_array[x]){
+          debug.print(" Distance: ", (math.vec2.dis(POS_DES,pose.position)), " obs len ", obs_vec().len )
+          if(((math.vec2.dis(POS_DES,pose.position)<0.015) or (obs_vec().len > 0.2))){
+            #check_for_barrier(pose.position)
+            log(id,":",POS_DES.x,":",POS_DES.y)
+            log("obs.len:",obs_vec().len,"obs.ang:",obs_vec().ang)
+            x=2
+            TASK = 0
+            target_array = {}
+            prox_vec = obs_vec()
+            next_task_update(prox_vec)
+            POS_DES={.x=0,.y=0}
+            set_wheels(0.0,0.0)
+            if (prox_vec.len > 0.015){
+              s.leave()
+              cagers.join()
+            }
+          }   
         }
       }
-
     }
-    if (not flag)
-    {
-    if(barrier2.get(TASK_NUM))
-    {
+  }
 
+  if(not flag){
+    if(barrier2.get(TASK_NUM)){
       check_and_add_barrier(barrier2.getrid(TASK_NUM),barrier_array)
-
-      if((size(barrier_array)-1)>= swarm_size.size()*3/4)
-      {
-      if(pushers.in())
-      {
-      set_wheels(0.0,0.0)
-      TASK = 0
-      pushers.leave()
-      rotaters.join()  
-      centroid.put(id,{.x=pose.position.x,.y=pose.position.y})
-      barrier_array = {.1=17}
-      TASK_NUM = TASK_NUM + 1
-      }
-
-      else if(rotaters.in())
-      {
-      set_wheels(0.0,0.0)
-      centroid.put(id,NIL)
-      FLAG =0
-      rotaters.leave()
-      pushers.join()
-      TASK = 1
-      barrier_array = {.1=17}
-      TASK_NUM = TASK_NUM + 1
-      if(id == 0)
-      {
-      log((TASK_NUM-2)/2,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
-      }
-      POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Pushed_obj_pos.x,.y = barrier.get(TASK_NUM).y - Pushed_obj_pos.y},pose.position)
-      Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
-      n = find_nei_in_set()
-      yaw = barrier.get(TASK_NUM).yaw
-      if(TASK_NUM == 22)
-       {
-        log("Over ....... ")
-        pushers.leave()
-
-       }
-      }
+      if((size(barrier_array)-1)>= swarm_size.size()*3/4){
+        if(pushers.in()){
+          set_wheels(0.0,0.0)
+          TASK = 0
+          pushers.leave()
+          rotaters.join()  
+          centroid.put(id,{.x=pose.position.x,.y=pose.position.y})
+          barrier_array = {.1=17}
+          TASK_NUM = TASK_NUM + 1
+        }
+        else if(rotaters.in())
+        {
+          set_wheels(0.0,0.0)
+          centroid.put(id,NIL)
+          FLAG =0
+          rotaters.leave()
+          pushers.join()
+          TASK = 1
+          barrier_array = {.1=17}
+          TASK_NUM = TASK_NUM + 1
+          if(id == 0)
+          {
+            log((TASK_NUM-2)/2,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
+          }
+          POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Pushed_obj_pos.x,.y = barrier.get(TASK_NUM).y - Pushed_obj_pos.y},pose.position)
+          Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
+          n = find_nei_in_set()
+          yaw = barrier.get(TASK_NUM).yaw
+          if(TASK_NUM == 22)
+          {
+            log("Over ....... ")
+            pushers.leave()
+          }
+        }
       }
     }
 
-  
     if(pushers.in())
     {
       if(TASK)
@@ -256,109 +260,95 @@ function step()
         move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw) 
         #var move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
         move_in_wc = math.vec2.newp(obs_vec_1().len,obs_vec_1().ang)
-        
-        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5)
-        if (math.vec2.dis(move_in_wc,{.x=0,.y=0})>0)
-        {
-                       num = math.vec2.dot(move_vec,move_in_wc)
-                       denom =  math.vec2.length(move_vec) * math.vec2.length(move_in_wc) 
-                       angle = math.acos(num/denom)
-                       if((angle > 2) or (angle < -2))
-                        {
-                        move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 1)
-                        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
-                        }
 
-                      else
-                        {
-                        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
-                        move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 2)
-                        }
+        vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 5)
+        if(math.vec2.dis(move_in_wc,{.x=0,.y=0})>0){
+          num = math.vec2.dot(move_vec,move_in_wc)
+          denom =  math.vec2.length(move_vec) * math.vec2.length(move_in_wc) 
+          angle = math.acos(num/denom)
+          if((angle > 2) or (angle < -2))
+          {
+            move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 1)
+            vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
+          }
+          else{
+            vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
+            move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 2)
+          }
         }
         vector_to_neighbour = find_neighbours()
-        if (math.vec2.dis(vector_to_neighbour,{.x=0,.y=0})>0)
-            {vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), 2)}
-    
+        if(math.vec2.dis(vector_to_neighbour,{.x=0,.y=0})>0){
+          vector_to_neighbour = math.vec2.scale(math.vec2.norm(vector_to_neighbour), 2)
+        }
         vector_to_target = math.vec2.add(vector_to_neighbour,vector_to_target)
-    
-        if (math.vec2.dis(move_in,{.x=0,.y=0})>0)
-            {vector_to_target = math.vec2.add(vector_to_target,move_in)}
-    
+        if (math.vec2.dis(move_in,{.x=0,.y=0})>0){
+          vector_to_target = math.vec2.add(vector_to_target,move_in)
+        }
         vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 20)
         goto(vector_to_target.x, vector_to_target.y)
         if(math.vec2.dis(POS_DES,pose.position)<0.02)
-         {
+        {
           TASK = 0
           set_wheels(0.0,0.0)
-          if(barrier2.get(TASK_NUM))
-             {
-             log("push:",TASK_NUM,":",id,":",size(barrier_array))
-             barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt ,.val = barrier2.get(TASK_NUM).val +1})
-             }
-          else 
-             {barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})}
+          if(barrier2.get(TASK_NUM)){
+            log("push:",TASK_NUM,":",id,":",size(barrier_array))
+            barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt ,.val = barrier2.get(TASK_NUM).val +1})
           }
-
+          else{
+            barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
+          }
+        }
       }
     }	
      
-
-     
-    if(rotaters.in())
-    {
-
+    if(rotaters.in()){
       #set_wheels(0.0,0.0)
-      if((centroid.size()==swarm_size.size()) and (not FLAG) and (count_null() == swarm_size.size()))
-      {
-      TASK =1
-      FLAG = 1
-      #log(pose.position.x,pose.position.y)
-      init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
-      init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
-      centre = calc_centroid()
-      if (id == 0)
-      {
-      log(id,":","centre",centre.x,":",centre.y)
-      log(id,":","real",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
-      log(id,":","difference",math.vec2.dis(centre,Pushed_obj_pos))
+      if((centroid.size()==swarm_size.size()) and (not FLAG) and (count_null() == swarm_size.size())){
+        TASK =1
+        FLAG = 1
+        #log(pose.position.x,pose.position.y)
+        init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
+        init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
+        centre = calc_centroid()
+        if (id == 0){
+          log(id,":","centre",centre.x,":",centre.y)
+          log(id,":","real",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
+          log(id,":","difference",math.vec2.dis(centre,Pushed_obj_pos))
+        }
       }
-      }
-      if (TASK)
-      {
-      show_colored_trajectory()
-      move_away = {.x =0,.y=0}
-      move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
-      move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
-      move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
-      move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
-      move_away = find_neighbours()
-      if (math.vec2.dis(move_away,{.x=0,.y=0})>0){
-      move_away = math.vec2.scale(math.vec2.norm(move_away), +20)}
-      vector_to_target = math.vec2.add(move_per,move_in) 
-      vector_to_target = math.vec2.add(vector_to_target,move_away)
-      vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 9)
-      goto(vector_to_target.x,vector_to_target.y)
-      present_vec = math.vec2.sub(pose.position,Pushed_obj_pos)
-      present_dis = math.vec2.dis(pose.position,Pushed_obj_pos)
-      num = math.vec2.dot(present_vec,init_vector)
-      denom = present_dis * init_distance
-      angle = math.acos(num/denom)
-      if ((angle > (yaw - 0.02)) and (angle < (yaw + 0.02)))
-      {
-       TASK = 0
-       set_wheels(0.0,0.0)
-       if (barrier2.get(TASK_NUM))
-       {
-       barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt,.val = barrier2.get(TASK_NUM).val+1})
-       }
-       else 
-       {
-       barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
-       }
-      }
+      if(TASK){
+        show_colored_trajectory()
+        move_away = {.x =0,.y=0}
+        move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
+        move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+        move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
+        move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
+        move_away = find_neighbours()
+        if (math.vec2.dis(move_away,{.x=0,.y=0})>0){
+          move_away = math.vec2.scale(math.vec2.norm(move_away), +20)
+        }
+        vector_to_target = math.vec2.add(move_per,move_in) 
+        vector_to_target = math.vec2.add(vector_to_target,move_away)
+        vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 9)
+        goto(vector_to_target.x,vector_to_target.y)
+        present_vec = math.vec2.sub(pose.position,Pushed_obj_pos)
+        present_dis = math.vec2.dis(pose.position,Pushed_obj_pos)
+        num = math.vec2.dot(present_vec,init_vector)
+        denom = present_dis * init_distance
+        angle = math.acos(num/denom)
+        if ((angle > (yaw - 0.02)) and (angle < (yaw + 0.02))){
+          TASK = 0
+          set_wheels(0.0,0.0)
+          if (barrier2.get(TASK_NUM)){
+            barrier2.put(TASK_NUM,{.cnt = barrier2.get(TASK_NUM).cnt,.val = barrier2.get(TASK_NUM).val+1})
+          }
+          else{
+           barrier2.put(TASK_NUM,{.cnt = 1 , .val = 1})
+          }
+        }
       }
     }
-    }
+  }  # End of not flag 
 }
 
 
