@@ -7,11 +7,13 @@ SAFETY_DISTANCE = 40
 HARMON_A0 = 0.0
 HARMON_K = 1.0/50.0
 TARGET_CONE_ANGLE = 0.05
-CORNER_CAGE_ANGLE = 0.08
-NORMAL_CAGE_ANGLE = 0.2
+CORNER_CAGE_ANGLE = 0.13
+NORMAL_CAGE_ANGLE = 0.17
 
 
 # Global Vaiables 
+# Step time variable 
+time = 0 
 # State switch beteeen caging and pushing+Rotating
 flag =1
 # Flag to determine if centroid computation has to be done, done after the robots reaching a WP. 
@@ -38,6 +40,8 @@ DIR_AXIS = 1
 total_bots = 25
 # Local target assigned for the robots during pushing and rotation. 
 POS_DES={.x=0,.y=0}
+# Timer that makes the robot wait before going into next waypoint.
+Wait_time_for_next_task = 0
 
 
 function init() { 
@@ -53,7 +57,7 @@ function init() {
   # K from the interval in gradient algorithm.
   k = 5
   # bidding max time.
-  bidding_time = 100
+  bidding_time = 70
   # List of timers for all caging tasks. 
   bidding_timer={}
   # The first task to initiate caging.
@@ -73,7 +77,8 @@ function init() {
   # Unused, To check 
   # barrier3 = stigmergy.create(11)
   # After caging, to find the size of the robots. 
-  swarm_size = stigmergy.create(21)
+  swarm_size = 0
+   # = stigmergy.create(21)
   # Calculating the centroid after pushing after every waypoint. 
   centroid = stigmergy.create(23)
   # Hardcoded path for pushing. 
@@ -153,9 +158,11 @@ function init() {
 
 
 function step(){
+  time = time + 1 
   debug.print("Pos (",pose.position.x,",",pose.position.y,")")
-  if(flag){
+  swarm_size = Cagers_SwarmSize + Pushers_SwarmSize + Rotators_SwarmSize - 1
 
+  if(flag){
     if ((s.in()) and (barrier_cage.size()<2)){
       s.exec(gradient)
     }
@@ -165,7 +172,7 @@ function step(){
         cagers.leave()
         flag = 0
         pushers.join()
-        swarm_size.put(id,{.x= pose.position.x,.y=pose.position.y})
+        # swarm_size.put(id,1)
         TASK_NUM = 2
         TASK = 1
         POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - barrier.get(TASK_NUM - 2).x,.y = barrier.get(TASK_NUM).y - barrier.get(TASK_NUM - 2).y},pose.position)
@@ -174,16 +181,16 @@ function step(){
         n = find_nei_in_set()
         yaw = barrier.get(TASK_NUM).yaw
       }
-  
     }
+
     if(s.in()){
       if(TASK){
         show_colored_trajectory()
         var move_vec = obtain_local_vec_to_target(POS_DES,pose.position,pose.orientation.yaw)
         vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 30)
-        cmd_vel = LCA(vector_to_target)
-        # var cmd_vel = avoid_nei_using_potential(move_vec)
-        # cmd_vel = math.vec2.scale(cmd_vel,10)
+        #cmd_vel = LCA(vector_to_target)
+         var cmd_vel = avoid_nei_using_potential(move_vec)
+         cmd_vel = math.vec2.scale(cmd_vel,20)
         goto(cmd_vel.x, cmd_vel.y)
         if(target_array[x]){
           if((math.vec2.dis(POS_DES,pose.position)<0.35)){
@@ -197,7 +204,7 @@ function step(){
         if(not target_array[x]){
           var obstacle_vector = obs_vec()
           debug.print(" Distance: ", (math.vec2.dis(POS_DES,pose.position)), " obs len ", obstacle_vector.len, "Pos (",pose.position.x,",",pose.position.y,") going to (",POS_DES.x,",",POS_DES.y,")")
-          if((math.vec2.dis(POS_DES,pose.position) < 0.015) or (obstacle_vector.len > NORMAL_CAGE_ANGLE)){
+          if((math.vec2.dis(POS_DES,pose.position) < 0.012) or (obstacle_vector.len > NORMAL_CAGE_ANGLE)){
             #check_for_barrier(pose.position)
             log("[",id,"]",":",POS_DES.x,":",POS_DES.y)
             log("[",id,"]","obs.len:",obstacle_vector.len,"obs.ang:",obstacle_vector.ang)
@@ -210,6 +217,7 @@ function step(){
             if (obstacle_vector.len > CORNER_CAGE_ANGLE){
               log("[",id,"] Leaving s swarm and joining cagers")
               s.leave()
+              task = nil
               cagers.join()
             }
           }   
@@ -221,12 +229,13 @@ function step(){
   if(not flag){
     if(barrier2.get(TASK_NUM)){
       check_and_add_barrier(barrier2.getrid(TASK_NUM),barrier_array)
-      if((size(barrier_array)-1)>= swarm_size.size()*3/4){
+      if((size(barrier_array)-1)>= swarm_size){
         if(pushers.in()){
           set_wheels(0.0,0.0)
           TASK = 0
           pushers.leave()
           rotaters.join()  
+          log("[",id,"] Put centroid val")
           centroid.put(id,{.x=pose.position.x,.y=pose.position.y})
           barrier_array = {.1=17}
           TASK_NUM = TASK_NUM + 1
@@ -291,7 +300,7 @@ function step(){
         }
         vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 20)
         goto(vector_to_target.x, vector_to_target.y)
-        if(math.vec2.dis(POS_DES,pose.position)<0.02)
+        if(math.vec2.dis(POS_DES,pose.position)<0.025)
         {
           TASK = 0
           set_wheels(0.0,0.0)
@@ -308,17 +317,24 @@ function step(){
      
     if(rotaters.in()){
       #set_wheels(0.0,0.0)
-      if((centroid.size()==swarm_size.size()) and (not FLAG) and (count_null() == swarm_size.size())){
-        TASK =1
-        FLAG = 1
-        #log(pose.position.x,pose.position.y)
-        init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
-        init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
-        centre = calc_centroid()
-        if (id == 0){
-          log(id,":","centre",centre.x,":",centre.y)
-          log(id,":","real",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
-          log(id,":","difference",math.vec2.dis(centre,Pushed_obj_pos))
+      log("[",id,"] size of swarms ", swarm_size," centroid ", centroid.size()," null ", count_null())
+      if((centroid.size()>=swarm_size) and (not FLAG) and (count_null()>=swarm_size)){
+        if(Wait_time_for_next_task == 0){
+          Wait_time_for_next_task = time 
+        }
+        else if(time - Wait_time_for_next_task > 10){
+          Wait_time_for_next_task = 0
+          TASK =1
+          FLAG = 1
+          #log(pose.position.x,pose.position.y)
+          init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
+          init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
+          centre = calc_centroid()
+          if (id == 0){
+            log(id,":","centre",centre.x,":",centre.y)
+            log(id,":","real",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
+            log(id,":","difference",math.vec2.dis(centre,Pushed_obj_pos))
+          }
         }
       }
       if(TASK){
@@ -499,11 +515,11 @@ function next_task_update(obs){
           POS_DES = {.x=0,.y=0}
         }
       }
-      next_one = {.id=id,.pos={.x=0.0,.y=0.0},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
-      if (not check_for_barrier(next_one.pos)){
-        log("[",id,"] Adding task: ", i+1)
-        task.put(i+1,next_one)
-      }
+      # next_one = {.id=id,.pos={.x=0.0,.y=0.0},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
+      # if (not check_for_barrier(next_one.pos)){
+      #   log("[",id,"] Adding task: ", i+1)
+      #   task.put(i+1,next_one)
+      # }
     }
   }
 }
@@ -607,106 +623,91 @@ function obs_vec_1()
 
 function gradient()
 {
-    task_size = task.size()
-    if(task_size - last_size)
+  task_size = task.size()
+  if(task_size - last_size)
+  {
+
+    i = 1
+    while((i-1)<(task_size - last_size)) 
     {
-
-      i = 1
-      while((i-1)<(task_size - last_size)) 
-      {
-        bidding_timer[last_size+i] = 0
-        i = i + 1
-      }
+      bidding_timer[last_size+i] = 0
+      i = i + 1
     }
-    cnt = 1
-    while(cnt-1 < task_size)
-    { 
-      if(task.get(cnt).bid)
-      {
-      if(task.get(cnt).branch == 1)
-      {
-      check_and_add(task.get(cnt).pos,left_branch)
+  }
+  cnt = 1
+  while(cnt-1 < task_size){ 
+    if(task.get(cnt).bid){
+      if(task.get(cnt).branch == 1){
+        check_and_add(task.get(cnt).pos,left_branch)
       } 
-      if(task.get(cnt).branch == -1)
-      {
-      check_and_add(task.get(cnt).pos,right_branch)
+      if(task.get(cnt).branch == -1){
+        check_and_add(task.get(cnt).pos,right_branch)
       } 
-      if ((not bidding_timer[cnt]%k) and (not TASK))
-      {
-      current_pose = math.vec2.new(pose.position.x,pose.position.y)
-      current_bid = task.get(cnt).bid
-      dir = task.get(cnt).dir
-      my_bid = math.vec2.dis(task.get(cnt).pos,current_pose)
-      dir_axis = task.get(cnt).dir_axis
-      branch = task.get(cnt).branch
-      if (current_bid>my_bid)
-         {
-           task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=dir_axis,.bid=my_bid,.branch=branch})
-         }
-         bidding_timer[cnt] = bidding_timer[cnt] + 1
+      if ((not bidding_timer[cnt]%k) and (not TASK)){
+        current_pose = math.vec2.new(pose.position.x,pose.position.y)
+        current_bid = task.get(cnt).bid
+        dir = task.get(cnt).dir
+        my_bid = math.vec2.dis(task.get(cnt).pos,current_pose)
+        dir_axis = task.get(cnt).dir_axis
+        branch = task.get(cnt).branch
+        if (current_bid>my_bid){
+          task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=dir_axis,.bid=my_bid,.branch=branch})
+        }
+        bidding_timer[cnt] = bidding_timer[cnt] + 1
       }
-      else 
-         {
-           bidding_timer[cnt] = bidding_timer[cnt] + 1
-         }
+      else{
+        bidding_timer[cnt] = bidding_timer[cnt] + 1
+      }
       
-      if (bidding_timer[cnt] == bidding_time)
-      {
-        if (task.get(cnt).id == id)
-        {
-          if(not TASK)
-          {
-          TASK = 1
-          POS_DES = task.get(cnt).pos
-          DIR = task.get(cnt).dir
-          DIR_AXIS = task.get(cnt).dir_axis
-          BRANCH = task.get(cnt).branch
-          if(BRANCH == 1)
-          {
-          check_and_copy(POS_DES,left_branch)
-          }
-          if(BRANCH == -1)
-          {
-          check_and_copy(POS_DES,right_branch)
-          }
-          print_array(target_array)
+      if(bidding_timer[cnt] == bidding_time){
+        if(task.get(cnt).id == id){
+          if(not TASK){
+            TASK = 1
+            POS_DES = task.get(cnt).pos
+            DIR = task.get(cnt).dir
+            DIR_AXIS = task.get(cnt).dir_axis
+            BRANCH = task.get(cnt).branch
+            if(BRANCH == 1){
+              check_and_copy(POS_DES,left_branch)
+            }
+            if(BRANCH == -1){
+              check_and_copy(POS_DES,right_branch)
+            }
+            print_array(target_array)
 
-          if(target_array[2])
-          {
-            POS_DES = {.x = target_array[2].x,.y = target_array[2].y}
+            if(target_array[2]){
+              POS_DES = {.x = target_array[2].x,.y = target_array[2].y}
+            }
+               #if(size(target_array) < 7)
+                    #{
+                      #if(target_array[2])
+                         #{
+                          # POS_DES = {.x=target_array[2].x,.y=target_array[2].y}
+                         #}
+                    #}
+               #else 
+                    #{
+                       #x = size(target_array) - 5
+                       #POS_DES = {.x=target_array[x].x,.y=target_array[x].y}
+                    #}
+            task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
           }
-             #if(size(target_array) < 7)
-                  #{
-                    #if(target_array[2])
-                       #{
-                        # POS_DES = {.x=target_array[2].x,.y=target_array[2].y}
-                       #}
-                  #}
-             #else 
-                  #{
-                     #x = size(target_array) - 5
-                     #POS_DES = {.x=target_array[x].x,.y=target_array[x].y}
-                  #}
-          task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
-          }
-          else
-          {
-          task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
-          task.put(task.size()+1,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=100000,.branch=task.get(cnt).branch})
+          else{
+            task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
+            task.put(task.size()+1,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=100000,.branch=task.get(cnt).branch})
           }
         }
       }
-      }
-      cnt = cnt + 1
-    }  
-    last_size = task_size
-
+    }
+    cnt = cnt + 1
+  }  
+  last_size = task_size
 
 }
 
 function check_and_add(a,t) {
 
-  siz = size(t)
+  var siz = size(t)
   var i = 1
   while(i<=(siz))
   {
@@ -724,7 +725,7 @@ function check_and_add(a,t) {
 
 
 function check_and_copy(a,t) {
-siz = size(t)
+var siz = size(t)
 var i=1
 while(i<=(siz))
 {
@@ -759,8 +760,8 @@ while(i<siz)
   { 
     if(centroid.get(i))
     {
-    centre.x = centroid.get(i).x/swarm_size.size() + centre.x
-    centre.y = centroid.get(i).y/swarm_size.size() + centre.y
+    centre.x = centroid.get(i).x/swarm_size + centre.x
+    centre.y = centroid.get(i).y/swarm_size + centre.y
     }
     i = i + 1
   }

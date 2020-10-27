@@ -367,8 +367,63 @@ void CConnectivityBuzzControllerKheperaIV::Init(TConfigurationNode& t_node) {
 
 /****************************************/
 /****************************************/
+struct buzzswarm_elem_s {
+   buzzdarray_t swarms;
+   uint16_t age;
+};
+typedef struct buzzswarm_elem_s* buzzswarm_elem_t;
+
+void check_swarm_members(const void* key, void* data, void* params) {
+  buzzswarm_elem_t e = *(buzzswarm_elem_t*)data; 
+  int* status = (int*)params;
+  int sid = 1;
+  // S Swarm
+  if(buzzdarray_get(e->swarms, 0, uint16_t) == sid) {
+     status[0] += 1;
+     return;
+  }
+  // Cagers
+  sid = 2;
+  if(buzzdarray_get(e->swarms, 0, uint16_t) == sid) {
+     status[1] += 1;
+     return;
+  }
+  // Pushers
+  sid = 4;
+  if(buzzdarray_get(e->swarms, 0, uint16_t) == sid) {
+     status[2] += 1;
+     return;
+  }
+  // Rotators
+  sid = 5;
+  if(buzzdarray_get(e->swarms, 0, uint16_t) == sid) {
+     status[3] += 1;
+     return;
+  }
+}
+
 
 void CConnectivityBuzzControllerKheperaIV::UpdateSensors() {
+    int status[4] = {0,0,0,0}; 
+    buzzdict_foreach(m_tBuzzVM->swarmmembers, check_swarm_members, &status);
+
+    buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "S_SwarmSize", 1));
+    buzzvm_pushi(m_tBuzzVM, status[0]);
+    buzzvm_gstore(m_tBuzzVM);
+
+    buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "Cagers_SwarmSize", 1));
+    buzzvm_pushi(m_tBuzzVM, status[1]);
+    buzzvm_gstore(m_tBuzzVM);
+
+    buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "Pushers_SwarmSize", 1));
+    buzzvm_pushi(m_tBuzzVM, status[2]);
+    buzzvm_gstore(m_tBuzzVM);
+
+    buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "Rotators_SwarmSize", 1));
+    buzzvm_pushi(m_tBuzzVM, status[3]);
+    buzzvm_gstore(m_tBuzzVM);
+    // printf("[%d]Swarm size: %d , %d ,s %d ,%d \n",m_tBuzzVM->robot,  status[0], status[1], status[2], status[3]);
+    
    /*
     * Update generic sensors
     */
