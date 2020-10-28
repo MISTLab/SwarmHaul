@@ -3,17 +3,23 @@ include "includes/RVO.bzz"
 include "includes/debug.bzz"
 
 # Constants
-SAFETY_DISTANCE = 40
+SAFETY_DISTANCE = 35
 HARMON_A0 = 0.0
 HARMON_K = 1.0/50.0
 TARGET_CONE_ANGLE = 0.05
-CORNER_CAGE_ANGLE = 0.13
+CORNER_CAGE_LEN = 0.13
 NORMAL_CAGE_ANGLE = 0.17
+CORNER_CAGE_LEN = 0.9
+
+INTER_ROBOT_CAGING_DIS=0.4
 
 
 # Global Vaiables 
 # Step time variable 
 time = 0 
+
+allow_corner_pass = 0
+stored_target_array ={}
 # State switch beteeen caging and pushing+Rotating
 flag =1
 # Flag to determine if centroid computation has to be done, done after the robots reaching a WP. 
@@ -36,6 +42,7 @@ TASK = 0
 # Direction to spawn the next task for caging: left, right, top, down.
 DIR = 1
 DIR_AXIS = 1
+OLD_DIR = DIR
 # Total number of robots used for looping and getting centroid coordinates.
 total_bots = 25
 # Local target assigned for the robots during pushing and rotation. 
@@ -159,8 +166,9 @@ function init() {
 
 function step(){
   time = time + 1 
-  debug.print("Pos (",pose.position.x,",",pose.position.y,")")
-  swarm_size = Cagers_SwarmSize + Pushers_SwarmSize + Rotators_SwarmSize - 1
+  var obstacle_vector = obs_vec()
+  debug.print("Pos (",pose.position.x,",",pose.position.y,") obstacle_vector cnt", obstacle_vector.cnt, " obs len ", obstacle_vector.len, " ang ", obstacle_vector.ang)
+  swarm_size = Cagers_SwarmSize + Pushers_SwarmSize + Rotators_SwarmSize
 
   if(flag){
     if ((s.in()) and (barrier_cage.size()<2)){
@@ -193,7 +201,7 @@ function step(){
          cmd_vel = math.vec2.scale(cmd_vel,20)
         goto(cmd_vel.x, cmd_vel.y)
         if(target_array[x]){
-          if((math.vec2.dis(POS_DES,pose.position)<0.35)){
+          if((math.vec2.dis(POS_DES,pose.position)<0.3)){
             log(x,":",id,": x",POS_DES.x,": y",POS_DES.y)
             x=x+1
             if(target_array[x]){
@@ -202,19 +210,27 @@ function step(){
           }
         }
         if(not target_array[x]){
-          var obstacle_vector = obs_vec()
-          debug.print(" Distance: ", (math.vec2.dis(POS_DES,pose.position)), " obs len ", obstacle_vector.len, "Pos (",pose.position.x,",",pose.position.y,") going to (",POS_DES.x,",",POS_DES.y,")")
-          if((math.vec2.dis(POS_DES,pose.position) < 0.012) or (obstacle_vector.len > NORMAL_CAGE_ANGLE)){
+          debug.print(" Distance: ", (math.vec2.dis(POS_DES,pose.position)), " obs len ", obstacle_vector.len, " cnt ", obstacle_vector.cnt, "Pos (",pose.position.x,",",pose.position.y,") going to (",POS_DES.x,",",POS_DES.y,")")
+          if((math.vec2.dis(POS_DES,pose.position) < 0.03) or (obstacle_vector.len > NORMAL_CAGE_ANGLE) or allow_corner_pass == 1){
             #check_for_barrier(pose.position)
             log("[",id,"]",":",POS_DES.x,":",POS_DES.y)
-            log("[",id,"]","obs.len:",obstacle_vector.len,"obs.ang:",obstacle_vector.ang)
-            x=2
+            log("[",id,"]","obs.len:",obstacle_vector.len,"obs.ang:",obstacle_vector.ang," cnt ", obstacle_vector.cnt)
             TASK = 0
-            target_array = {}
             POS_DES={.x=0,.y=0}
-            set_wheels(0.0,0.0)
+            
             next_task_update(obstacle_vector)
-            if (obstacle_vector.len > CORNER_CAGE_ANGLE){
+            if(size(target_array) <= 2){
+              stored_target_array = math.vec2.new(0,0)
+            }
+            else{
+              stored_target_array = math.vec2.new(target_array[x-1].x,target_array[x-1].y)
+            }
+            stored_target_array.size=size(target_array)
+            target_array = {}
+            allow_corner_pass = 1
+            x=2
+            if (obstacle_vector.cnt > CORNER_CAGE_LEN){
+              goto(0.0,0.0)
               log("[",id,"] Leaving s swarm and joining cagers")
               s.leave()
               task = nil
@@ -229,7 +245,7 @@ function step(){
   if(not flag){
     if(barrier2.get(TASK_NUM)){
       check_and_add_barrier(barrier2.getrid(TASK_NUM),barrier_array)
-      if((size(barrier_array)-1)>= swarm_size){
+      if((size(barrier_array)-1)>= swarm_size*(1)){
         if(pushers.in()){
           set_wheels(0.0,0.0)
           TASK = 0
@@ -300,7 +316,7 @@ function step(){
         }
         vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 20)
         goto(vector_to_target.x, vector_to_target.y)
-        if(math.vec2.dis(POS_DES,pose.position)<0.025)
+        if(math.vec2.dis(POS_DES,pose.position)<0.03)
         {
           TASK = 0
           set_wheels(0.0,0.0)
@@ -390,12 +406,12 @@ function find_neighbours(){
   Accum ={.x=0,.y=0, .error=0}
   neighbors.foreach(
     function(rid, data){
-      var error = ((data.distance - 30)/data.distance)
+      var error = ((data.distance - (INTER_ROBOT_CAGING_DIS*10)+10)/data.distance)
       var angular_error = 0
       if(n[rid]) angular_error=(data.azimuth - n[rid].a)/3.14 
       
       Accum.error = Accum.error + math.abs(error)
-      if((n[rid]) or (data.distance < 30))
+      if((n[rid]) or (data.distance < (INTER_ROBOT_CAGING_DIS*10)+10))
       {
           var my_vec = math.vec2.newp(data.distance, data.azimuth)
           Accum.x= Accum.x + ( error * (my_vec.x - math.cos(angular_error)))
@@ -413,7 +429,7 @@ function find_nei_in_set()
   neighbors.foreach(
   function(rid, data) 
   {
-    if (data.distance<30)
+    if (data.distance< (INTER_ROBOT_CAGING_DIS*10)+10)
       {
         neighbours[rid] = {.a = data.azimuth}
       }
@@ -448,51 +464,57 @@ function next_task_update(obs){
     if(( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 )){
       log("[",id,"]  X increment " )
       DIR_AXIS = 1
-      next_branch_one = {.id=id,.pos={.x=pose.position.x+0.25,.y=pose.position.y},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
-      next_branch_two = {.id=id,.pos={.x=pose.position.x-0.25,.y=pose.position.y},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch =-1}
+      next_branch_one = {.id=id,.pos={.x=pose.position.x+INTER_ROBOT_CAGING_DIS,.y=pose.position.y},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
+      next_branch_two = {.id=id,.pos={.x=pose.position.x-INTER_ROBOT_CAGING_DIS,.y=pose.position.y},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch =-1}
       task.put(i+1,next_branch_one)
       task.put(i+2,next_branch_two)
     }
     else if((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55)){
       log("[",id,"]  Y increment " )
       DIR_AXIS = -1
-      next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+0.25},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
-      next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-0.25},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = -1}
+      next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+INTER_ROBOT_CAGING_DIS},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
+      next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-INTER_ROBOT_CAGING_DIS},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = -1}
       task.put(i+1,next_branch_one)
       task.put(i+2,next_branch_two)
     }
   }
   else{
-    if(( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 ) and (obs.len > CORNER_CAGE_ANGLE)){
+    var previous_point_check = Check_for_robots_in_previous_dir()
+    if((( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 ) and (obs.cnt > CORNER_CAGE_LEN)) ){
       log("[",id,"]  X increment " )
+      if(OLD_DIR != 0 and previous_point_check==1) DIR = OLD_DIR
       #log("neighbour's around : ", neighbour_check())
       DIR_AXIS = 1
-      next_one = {.id=id,.pos={.x=pose.position.x+(DIR*0.25),.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
+      next_one = {.id=id,.pos={.x=pose.position.x+(DIR*INTER_ROBOT_CAGING_DIS),.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
       if(not check_for_barrier(next_one.pos)){
         log("[",id,"] Adding task: ", i+1)
         task.put(i+1,next_one)
       }
     }
-    else if((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55) and (obs.len > CORNER_CAGE_ANGLE)){ 
+    else if(((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55) and (obs.cnt > CORNER_CAGE_LEN))){ 
       log("[",id,"]  Y increment " )
+      if(OLD_DIR != 0 and previous_point_check==1) DIR = OLD_DIR
       #log("neighbour's around : ", neighbour_check())
       DIR_AXIS = -1
-      next_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+(DIR*0.25)},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
+      next_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+(DIR*INTER_ROBOT_CAGING_DIS)},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
       if (not check_for_barrier(next_one.pos)){
         log("[",id,"] Adding task: ", i+1)
         task.put(i+1,next_one)
       }
     }
-    else if(obs.len < CORNER_CAGE_ANGLE){
+    else if(obs.cnt < CORNER_CAGE_LEN){
+      OLD_DIR = DIR
       if(DIR_AXIS==1){
-        log("[",id,"]  Y increment " )
+        log("[",id,"] Corner Y increment " )
         #log("neighbour's around : ",neighbour_check())
         if(math.vec2.dis({.x=pose.position.x,.y=pose.position.y+0.1},{.x=0,.y=0})>math.vec2.dis({.x=pose.position.x,.y=pose.position.y-0.1},{.x=0,.y=0})){
+          log("[",id,"] y --")
           DIR = -1
           TASK = 1
           POS_DES = {.x=0,.y=0}
         }
         else{
+          log("[",id,"] y ++")
           DIR = +1
           TASK = 1
           POS_DES = {.x=0,.y=0}
@@ -500,16 +522,19 @@ function next_task_update(obs){
       }
       else if(DIR_AXIS==-1)
       {
-        log("[",id,"]  X increment " )
+        log("[",id,"] Corner  X increment " )
         #log("neighbour's around : ",neighbour_check())
         if(math.vec2.dis({.x=pose.position.x+0.1,.y=pose.position.y},{.x=0,.y=0})>math.vec2.dis({.x=pose.position.x-0.1,.y=pose.position.y},{.x=0,.y=0}))
         {
+          log("[",id,"] x --")
+
           DIR = -1
           TASK = 1
           POS_DES = {.x=0,.y=0}
         }
         else 
         {
+          log("[",id,"] x ++")
           DIR = 1
           TASK = 1
           POS_DES = {.x=0,.y=0}
@@ -520,7 +545,7 @@ function next_task_update(obs){
       #   log("[",id,"] Adding task: ", i+1)
       #   task.put(i+1,next_one)
       # }
-    }
+    } 
   }
 }
 
@@ -549,24 +574,6 @@ function check_for_barrier(coord1)
 }
 
 
-function neighbour_check()
-{
-   c = 0
-  
-  neighbors.foreach(
-  function(rid, data)
-  {
-     
-     if(data.distance < 36.0)
-     {
-      log(id,":",rid,":",data.distance)
-      c = c + 1
-     }
-  })
-  return c
-
-}
-
 function obtain_local_vec_to_target(coord1,coord2,yaw)
 {
     m_target = {.x =0, .y = 0}
@@ -580,14 +587,18 @@ function obtain_local_vec_to_target(coord1,coord2,yaw)
 
 function obs_vec()
 {
-  var accum = {}
+  var accum = {.cnt = 0, .x=0, .y=0 }
   accum.x = 0.0
   accum.y = 0.0
+  var accum_max=0
   var i = 0
   while(i < size(proximity)) {
-	accum.x = accum.x + proximity[i].value * math.cos(proximity[i].angle)
-	accum.y = accum.y + proximity[i].value * math.sin(proximity[i].angle)
-	i = i + 1
+  if(proximity[i].value > accum_max){
+	  accum_max = proximity[i].value
+  }
+  accum.x = accum.x + proximity[i].value * math.cos(proximity[i].angle)
+  accum.y = accum.y + proximity[i].value * math.sin(proximity[i].angle)
+  i = i + 1
   }
   accum.x = accum.x / size(proximity)
   accum.y = accum.y / size(proximity)
@@ -596,7 +607,7 @@ function obs_vec()
   accum = math.vec2.rotate(accum,+pose.orientation.yaw)
   len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
   ang = math.atan(accum.y, accum.x)
-  return {.len=len,.ang=ang}
+  return {.len=len,.ang=ang, .cnt = accum_max}
 }
 
 
@@ -666,6 +677,7 @@ function gradient()
             POS_DES = task.get(cnt).pos
             DIR = task.get(cnt).dir
             DIR_AXIS = task.get(cnt).dir_axis
+            OLD_DIR =0
             BRANCH = task.get(cnt).branch
             if(BRANCH == 1){
               check_and_copy(POS_DES,left_branch)
@@ -794,7 +806,7 @@ function avoid_nei_using_potential(m_target){
   var Accum = {.cnt=0,.x=0.0,.y=0.0}
   neighbors.foreach(
     function(rid, data){
-      var potential = harmonMagnitude(data.distance, SAFETY_DISTANCE, HARMON_A0, HARMON_K)
+      var potential = harmonMagnitude(data.distance, SAFETY_DISTANCE+10, HARMON_A0, HARMON_K)
       if(data.distance < SAFETY_DISTANCE and potential < 0){
         var my_vec = math.vec2.newp(data.distance, data.azimuth)
         debug.rays.add(0,100,0, my_vec.x/100, my_vec.y/100, 0.0)
@@ -811,11 +823,40 @@ function avoid_nei_using_potential(m_target){
   }
   var normalized_target_vec = math.vec2.new(m_target.x,m_target.y)
   normalized_target_vec = math.vec2.scale(normalized_target_vec, 1/math.vec2.length(normalized_target_vec))
-  var return_vec = math.vec2.new((2*normalized_target_vec.x)+ Accum.x,(2*normalized_target_vec.y)+Accum.y)
+  var return_vec = math.vec2.new((3*normalized_target_vec.x)+ Accum.x,(3*normalized_target_vec.y)+Accum.y)
   # return_vec = math.vec2.scale(return_vec,10)
   return return_vec
 }
 
 function harmonMagnitude(dist, desiredDist, a0, k) {
   return a0 + ((dist - desiredDist)/math.abs(dist - desiredDist)) * 1.0/2.0 * k * (dist - desiredDist)^2
+}
+
+function Check_for_robots_in_previous_dir(){
+  var previous_point = math.vec2.new(stored_target_array.x,stored_target_array.y)
+  if(stored_target_array.size <= 2){
+    if(DIR_AXIS == -1){
+      previous_point = {.x=pose.position.x,.y=pose.position.y-(DIR*INTER_ROBOT_CAGING_DIS)}
+    }
+    else{
+      previous_point = {.x=pose.position.x-(DIR*INTER_ROBOT_CAGING_DIS),.y=pose.position.y}
+    }
+    # previous_point = math.vec2.new(target_array[index_of_array].x,target_array[index_of_array].y)
+  }
+  
+  log("[",id,"] last point ", previous_point.x,",",previous_point.y)
+  previous_point =math.vec2.sub(previous_point,pose.position)
+  previous_point = math.vec2.rotate(previous_point, -pose.orientation.yaw)
+  var previous_point_ang = math.vec2.angle(previous_point)
+  var comparision_result = {.res=0}
+  neighbors.foreach(function(rid, data){
+    # var my_vec = math.vec2.newp(data.distance, data.azimuth)
+    var ang_diff = math.abs(previous_point_ang - data.azimuth)
+    if(ang_diff < 0.08 and data.distance < INTER_ROBOT_CAGING_DIS*20){
+    log("[",id,"] ang diff with ",rid, " is ", ang_diff)
+
+      comparision_result.res = 1
+    }
+  })
+  return comparision_result.res  
 }
