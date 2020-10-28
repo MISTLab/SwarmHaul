@@ -3,6 +3,8 @@ include "includes/RVO.bzz"
 include "includes/debug.bzz"
 
 # Constants
+# Note make sure INTER_ROBOT_CAGING_DIS > INTER_WP_TOLERENCE > SAFETY_DISTANCE,
+
 SAFETY_DISTANCE = 35
 HARMON_A0 = 0.0
 HARMON_K = 1.0/50.0
@@ -10,8 +12,8 @@ TARGET_CONE_ANGLE = 0.05
 CORNER_CAGE_LEN = 0.13
 NORMAL_CAGE_ANGLE = 0.17
 CORNER_CAGE_LEN = 0.9
-
-INTER_ROBOT_CAGING_DIS=0.4
+INTER_WP_TOLERENCE = 0.4
+INTER_ROBOT_CAGING_DIS=0.45
 
 
 # Global Vaiables 
@@ -198,10 +200,10 @@ function step(){
         vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 30)
         #cmd_vel = LCA(vector_to_target)
          var cmd_vel = avoid_nei_using_potential(move_vec)
-         cmd_vel = math.vec2.scale(cmd_vel,20)
+         cmd_vel = math.vec2.scale(cmd_vel,100)
         goto(cmd_vel.x, cmd_vel.y)
         if(target_array[x]){
-          if((math.vec2.dis(POS_DES,pose.position)<0.3)){
+          if((math.vec2.dis(POS_DES,pose.position)<INTER_WP_TOLERENCE)){
             log(x,":",id,": x",POS_DES.x,": y",POS_DES.y)
             x=x+1
             if(target_array[x]){
@@ -406,12 +408,12 @@ function find_neighbours(){
   Accum ={.x=0,.y=0, .error=0}
   neighbors.foreach(
     function(rid, data){
-      var error = ((data.distance - (INTER_ROBOT_CAGING_DIS*10)+10)/data.distance)
+      var error = ((data.distance - (INTER_ROBOT_CAGING_DIS*100)+10)/data.distance)
       var angular_error = 0
       if(n[rid]) angular_error=(data.azimuth - n[rid].a)/3.14 
       
       Accum.error = Accum.error + math.abs(error)
-      if((n[rid]) or (data.distance < (INTER_ROBOT_CAGING_DIS*10)+10))
+      if((n[rid]) or (data.distance < (INTER_ROBOT_CAGING_DIS*100)+10))
       {
           var my_vec = math.vec2.newp(data.distance, data.azimuth)
           Accum.x= Accum.x + ( error * (my_vec.x - math.cos(angular_error)))
@@ -429,7 +431,7 @@ function find_nei_in_set()
   neighbors.foreach(
   function(rid, data) 
   {
-    if (data.distance< (INTER_ROBOT_CAGING_DIS*10)+10)
+    if (data.distance< (INTER_ROBOT_CAGING_DIS*100)+10)
       {
         neighbours[rid] = {.a = data.azimuth}
       }
@@ -806,7 +808,7 @@ function avoid_nei_using_potential(m_target){
   var Accum = {.cnt=0,.x=0.0,.y=0.0}
   neighbors.foreach(
     function(rid, data){
-      var potential = harmonMagnitude(data.distance, SAFETY_DISTANCE+10, HARMON_A0, HARMON_K)
+      var potential = harmonMagnitude(data.distance, SAFETY_DISTANCE, HARMON_A0, HARMON_K)
       if(data.distance < SAFETY_DISTANCE and potential < 0){
         var my_vec = math.vec2.newp(data.distance, data.azimuth)
         debug.rays.add(0,100,0, my_vec.x/100, my_vec.y/100, 0.0)
@@ -823,7 +825,10 @@ function avoid_nei_using_potential(m_target){
   }
   var normalized_target_vec = math.vec2.new(m_target.x,m_target.y)
   normalized_target_vec = math.vec2.scale(normalized_target_vec, 1/math.vec2.length(normalized_target_vec))
-  var return_vec = math.vec2.new((3*normalized_target_vec.x)+ Accum.x,(3*normalized_target_vec.y)+Accum.y)
+  
+  if(math.vec2.length(Accum) > 0) Accum = math.vec2.scale(Accum, 1/math.vec2.length(Accum))
+  var target_weight = 0.6
+  var return_vec = math.vec2.new((target_weight*normalized_target_vec.x)+ ((1-target_weight)*Accum.x),(target_weight*normalized_target_vec.y)+((1-target_weight)*Accum.y))
   # return_vec = math.vec2.scale(return_vec,10)
   return return_vec
 }
@@ -852,7 +857,7 @@ function Check_for_robots_in_previous_dir(){
   neighbors.foreach(function(rid, data){
     # var my_vec = math.vec2.newp(data.distance, data.azimuth)
     var ang_diff = math.abs(previous_point_ang - data.azimuth)
-    if(ang_diff < 0.08 and data.distance < INTER_ROBOT_CAGING_DIS*20){
+    if(ang_diff < 0.08 and data.distance < INTER_ROBOT_CAGING_DIS*200){
     log("[",id,"] ang diff with ",rid, " is ", ang_diff)
 
       comparision_result.res = 1
