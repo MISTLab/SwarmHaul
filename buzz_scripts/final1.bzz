@@ -53,10 +53,7 @@ target_array = {.1={.x=0,.y=0}}
 x= 2
 # Flag to determine if the robot is performing a task, used to determine if the robot is performing something, includes, following edge, pushing, rotating. 
 TASK = 0
-# Direction to spawn the next task for caging: left, right, top, down.
-DIR = 1
-DIR_AXIS = 1
-OLD_DIR = DIR
+
 # Total number of robots used for looping and getting centroid coordinates.
 
 # Local target assigned for the robots during pushing and rotation. 
@@ -82,7 +79,7 @@ function init() {
   # List of timers for all caging tasks. 
   bidding_timer={}
   # The first task to initiate caging.
-  task.put(1,{.id=id,.pos={.x=0,.y=0},.dir = -1,.dir_axis=-1,.bid=100000,.branch = 0})
+  task.put(1,{.id=id,.pos={.x=0,.y=0},.bid=100000,.branch = 0})
   # List of robots that have completed pushing or rotating.
   barrier_array = {.1=100000} 
   # Current Waypoint pursued by the robot while pushing and rotating. 
@@ -116,9 +113,38 @@ function init() {
   barrier.put(20,{.cnt=0,.x=-8,.y=0.33,.yaw = 0.01})
   barrier.put(22,{.cnt=0,.x=-10,.y=0.33,.yaw = 0.01})
   task.onconflict(function (k,local,remote) {	
-  		if(remote.bid <=local.bid)
-  	    {return remote}
-  		else {return local}})
+  		# Resolving bid conficts
+      if(local.data.pos.x == remote.data.pos.x and local.data.pos.y == remote.data.pos.y){
+        if(remote.data.bid <=local.data.bid){
+          return remote
+        }
+    		else{
+          return local
+        }
+      }
+      else{
+        # Resolving Task id conflicts
+        if(local.robot < remote.robot){
+          if(id != remote.robot){
+            return local
+          }
+          else{
+            task.put(k+1, remote.data)
+            return local
+          }
+        }
+        else{
+          if(id != local.robot){
+            return remote
+          }
+          else{
+            task.put(k+1, local.data)
+            return remote
+          } 
+        }
+      }
+    }
+  )
 
   barrier.onconflict(function (k,local,remote) { 
       if(remote.robot<=local.robot)
@@ -150,22 +176,18 @@ function init() {
 
 
   barrier2.onconflict(function (k,local,remote) { 
-      if(local.data.val<remote.data.val)
-        {
-          check_and_add_barrier(local.robot,barrier_array)
-          check_and_add_barrier(remote.robot,barrier_array)
-          return remote
-        }
-      
-      else if(local.data.val>remote.data.val)
-      {
+      if(local.data.val<remote.data.val){
+        check_and_add_barrier(local.robot,barrier_array)
+        check_and_add_barrier(remote.robot,barrier_array)
+        return remote
+      }
+      else if(local.data.val>remote.data.val){
         check_and_add_barrier(local.robot,barrier_array)
         check_and_add_barrier(remote.robot,barrier_array)
         return local
       }
 
-      if(local.data.val==remote.data.val)
-      {
+      if(local.data.val==remote.data.val){
         check_and_add_barrier(local.robot,barrier_array)
         check_and_add_barrier(remote.robot,barrier_array)
         return remote
@@ -227,7 +249,7 @@ function step(){
         else if( x > (size(target_array)-1) ){
 
           debug.print(" Distance: ", (math.vec2.dis(POS_DES,pose.position)), " obs len ", obstacle_vector.len, " cnt ", obstacle_vector.cnt, "Pos (",pose.position.x,",",pose.position.y,") going to (",POS_DES.x,",",POS_DES.y,") WP: ",x, "Branch ", BRANCH)
-          if((math.vec2.dis(POS_DES,pose.position) < 0.03) or (obstacle_vector.len > NORMAL_CAGE_ANGLE) or allow_corner_pass == 1 or obstacle_vector.cnt > TOUCHING_OBS_THRESH){
+          if((math.vec2.dis(POS_DES,pose.position) < 0.05) or (obstacle_vector.len > NORMAL_CAGE_ANGLE) or allow_corner_pass == 1 or obstacle_vector.cnt > TOUCHING_OBS_THRESH){
             # Corner case detection. 
             var allow_correner_Case = 0
             if(task.size() > 1) allow_correner_Case = Check_for_robots_in_previous_dir()
@@ -270,7 +292,7 @@ function step(){
               var obs_orth = math.vec2.rotate(obs_vec_cur, math.pi/2)
               # var ortho_Limited = LimitAngle(math.vec2.angle(obs_orth)) 
               log("!!!![",id,"] Applying inter robot correction")              
-              if(obstacle_vector.ang <  -0.72 and obstacle_vector.ang >  -2.28){
+              if(obstacle_vector.ang <  -0.72 and obstacle_vector.ang >  -2.28 and BRANCH != 1){
                 obs_orth = math.vec2.rotate(obs_orth, math.pi*(6/4))
               }
               var rotated_obs_orth = math.vec2.rotate(obs_orth, -pose.orientation.yaw)
@@ -301,7 +323,6 @@ function step(){
   if(not flag){
 
     debug.print("[",id,"] [first]Pos (",pose.position.x,",",pose.position.y,"), going to (",POS_DES.x,",",POS_DES.y,") WP ", (TASK_NUM-2)/2,"rotaters pushers",rotaters.in(),":",pushers.in())
-
 
     if(barrier2.get(TASK_NUM)){
       check_and_add_barrier(barrier2.getrid(TASK_NUM),barrier_array)
@@ -542,9 +563,8 @@ function next_task_update(obs, nei_in_previous_point){
     #target.put("target",{.x = target_point.x, .y = target_point.y})
     if( (( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 )) and math.vec2.length(POS_DES) == 0 ){
       log("[",id,"]  X increment " )
-      DIR_AXIS = 1
-      next_branch_one = {.id=id,.pos={.x=pose.position.x+INTER_ROBOT_CAGING_DIS,.y=pose.position.y},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
-      next_branch_two = {.id=id,.pos={.x=pose.position.x-INTER_ROBOT_CAGING_DIS,.y=pose.position.y},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch =-1}
+      next_branch_one = {.id=id,.pos={.x=pose.position.x+INTER_ROBOT_CAGING_DIS,.y=pose.position.y},.bid = 1000000,.branch = 1}
+      next_branch_two = {.id=id,.pos={.x=pose.position.x-INTER_ROBOT_CAGING_DIS,.y=pose.position.y},.bid = 1000000,.branch =-1}
       var current_task = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y},.bid = NIL,.branch = 0}
       task.put(1,current_task)
       task.put(i+1,next_branch_one)
@@ -552,9 +572,8 @@ function next_task_update(obs, nei_in_previous_point){
     }
     else if(((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55)) and math.vec2.length(POS_DES) == 0 ){
       log("[",id,"]  Y increment " )
-      DIR_AXIS = -1
-      next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+INTER_ROBOT_CAGING_DIS},.dir=1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = 1}
-      next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-INTER_ROBOT_CAGING_DIS},.dir=-1,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = -1}
+      next_branch_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+INTER_ROBOT_CAGING_DIS},.bid = 1000000,.branch = 1}
+      next_branch_two = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y-INTER_ROBOT_CAGING_DIS},.bid = 1000000,.branch = -1}
       var current_task = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y},.bid = NIL,.branch = 0}
       task.put(1,current_task)
       task.put(i+1,next_branch_one)
@@ -594,94 +613,14 @@ function next_task_update(obs, nei_in_previous_point){
     rotated_prev_task = math.vec2.newp(INTER_ROBOT_CAGING_DIS, math.vec2.angle(rotated_prev_task) )
     rotated_prev_task = math.vec2.add(rotated_prev_task, pose.position)
       
-    var next_one = {.id=id,.pos={.x=rotated_prev_task.x,.y=rotated_prev_task.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
-    var current_task = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
+    var next_one = {.id=id,.pos={.x=rotated_prev_task.x,.y=rotated_prev_task.y},.bid = 1000000,.branch = BRANCH}
+    var current_task = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y},.bid = NIL,.branch = BRANCH}
     task.put(M_CAGING_TASK,current_task)
     if (not check_for_barrier(next_one.pos) and task_checker(next_one.pos)){
-      log("[",id,"] Adding task: ", i+1," Branch ", BRANCH)
       task.put(i+1,next_one)
-    }
+      log("[",id,"] Adding task: ", i+1," Branch ", BRANCH, " Stig branch: ",task.get(i+1).branch)
 
-    # # var previous_point_check = Check_for_robots_in_previous_dir()
-    # if(I_was_in_corner){
-    #   OLD_DIR = DIR
-    #   if(DIR_AXIS==1){
-    #     log("[",id,"] Corner Y increment " )
-    #     #log("neighbour's around : ",neighbour_check())
-    #     if(math.vec2.dis({.x=pose.position.x,.y=pose.position.y+0.1},{.x=0,.y=0})>math.vec2.dis({.x=pose.position.x,.y=pose.position.y-0.1},{.x=0,.y=0})){
-    #       log("[",id,"] y --")
-    #       DIR = -1
-    #       TASK = 1
-    #       POS_DES = {.x=0,.y=0}
-    #     }
-    #     else{
-    #       log("[",id,"] y ++")
-    #       DIR = +1
-    #       TASK = 1
-    #       POS_DES = {.x=0,.y=0}
-    #     }
-    #   }
-    #   else if(DIR_AXIS==-1)
-    #   {
-    #     log("[",id,"] Corner  X increment " )
-    #     #log("neighbour's around : ",neighbour_check())
-    #     if(math.vec2.dis({.x=pose.position.x+0.1,.y=pose.position.y},{.x=0,.y=0})>math.vec2.dis({.x=pose.position.x-0.1,.y=pose.position.y},{.x=0,.y=0}))
-    #     {
-    #       log("[",id,"] x --")
-
-    #       DIR = -1
-    #       TASK = 1
-    #       POS_DES = {.x=0,.y=0}
-    #     }
-    #     else 
-    #     {
-    #       log("[",id,"] x ++")
-    #       DIR = 1
-    #       TASK = 1
-    #       POS_DES = {.x=0,.y=0}
-    #     }
-    #   }
-    #   # next_one = {.id=id,.pos={.x=0.0,.y=0.0},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
-    #   # if (not check_for_barrier(next_one.pos)){
-    #   #   log("[",id,"] Adding task: ", i+1)
-    #   #   task.put(i+1,next_one)
-    #   # }
-    # }
-
-    # if((( obs.ang  > 0.85 and obs.ang < 2.55 ) or ( obs.ang  < -0.85 and obs.ang > -2.55 ) and (obs.cnt > TOUCHING_OBS_THRESH)) and math.vec2.length(POS_DES) == 0 ){
-    #   log("[",id,"]  X increment " )
-    #   # if(OLD_DIR != 0 and previous_point_check==1) DIR = OLD_DIR
-    #   #log("neighbour's around : ", neighbour_check())
-    #   DIR_AXIS = 1
-    #   next_one = {.id=id,.pos={.x=pose.position.x+(DIR*INTER_ROBOT_CAGING_DIS),.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
-    #   if(not check_for_barrier(next_one.pos)){
-    #     log("[",id,"] Adding task: ", i+1)
-    #     # if(OLD_DIR != 0 and previous_point_check != 1){
-    #       log("[",id,"] Updating current task: ", M_CAGING_TASK)
-          
-    #       var current_task = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
-    #       task.put(M_CAGING_TASK,current_task)
-    #     # }
-    #     task.put(i+1,next_one)
-    #   }
-    # }
-    # else if(((obs.ang  < 0.85 and obs.ang > -0.85 ) or (obs.ang  < 3.67 and obs.ang > 2.55) or (obs.ang  > -3.67 and obs.ang < -2.55) and (obs.cnt > TOUCHING_OBS_THRESH)) and math.vec2.length(POS_DES) == 0){ 
-    #   log("[",id,"]  Y increment " )
-    #   # if(OLD_DIR != 0 and previous_point_check==1) DIR = OLD_DIR
-    #   #log("neighbour's around : ", neighbour_check())
-    #   DIR_AXIS = -1
-    #   next_one = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y+(DIR*INTER_ROBOT_CAGING_DIS)},.dir=DIR,.dir_axis=DIR_AXIS,.bid = 1000000,.branch = BRANCH}
-    #   if (not check_for_barrier(next_one.pos)){
-    #     log("[",id,"] Adding task: ", i+1)
-    #     # if(OLD_DIR != 0 and previous_point_check != 1){
-    #       log("[",id,"] Updating current task: ", M_CAGING_TASK)
-    #       var current_task = {.id=id,.pos={.x=pose.position.x,.y=pose.position.y},.dir=DIR,.dir_axis=DIR_AXIS,.bid = NIL,.branch = BRANCH}
-    #       task.put(M_CAGING_TASK,current_task)
-    #     # }
-    #     task.put(i+1,next_one)
-    #   }
-    # }
-   
+    }  
 
   }
 }
@@ -867,14 +806,19 @@ function gradient()
     }
   }
   cnt = 1
-  if(M_CAGING_TASK == -1){
-    while(cnt-1 < task_size){ 
+  while(cnt-1 < task_size){ 
       # if(cnt == 5){
       #   var task5 = task.get(5)
       #   if(id== 0 and task5 !=nil) log(" Task 5 Assigned to ", task5.id)
       # }
 
-      if(task.get(cnt).bid){
+    if(task.get(cnt).bid){
+      if( M_CAGING_TASK != -1 and task.get(cnt).id == id){
+        log("[",id,"] ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK ",M_CAGING_TASK," SECOND TASK ", cnt)      
+        task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=10000,.branch=task.get(cnt).branch})
+      }
+      if(M_CAGING_TASK == -1){
+  
         if(task.get(cnt).bid >= 10000){
           bidding_timer[cnt] = 0
         }
@@ -895,12 +839,10 @@ function gradient()
         if ((not bidding_timer[cnt]%k) and M_CAGING_TASK == -1){
           current_pose = math.vec2.new(pose.position.x,pose.position.y)
           current_bid = task.get(cnt).bid
-          dir = task.get(cnt).dir
           my_bid = math.vec2.dis(task.get(cnt).pos,current_pose)
-          dir_axis = task.get(cnt).dir_axis
           branch = task.get(cnt).branch
           if (current_bid > my_bid){
-            task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=dir_axis,.bid=my_bid,.branch=branch})
+            task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=my_bid,.branch=branch})
           }
           bidding_timer[cnt] = bidding_timer[cnt] + 1
         }
@@ -908,18 +850,11 @@ function gradient()
           bidding_timer[cnt] = bidding_timer[cnt] + 1
         }
         
-        if( M_CAGING_TASK != -1 and task.get(cnt).id == id){
-          task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=dir_axis,.bid=10000,.branch=branch})
-        }
-        
         if(bidding_timer[cnt] == bidding_time){
           if(task.get(cnt).id == id){
             if(M_CAGING_TASK == -1){
               TASK = 1
               POS_DES = task.get(cnt).pos
-              DIR = task.get(cnt).dir
-              DIR_AXIS = task.get(cnt).dir_axis
-              OLD_DIR =0
               BRANCH = task.get(cnt).branch
               M_CAGING_TASK = cnt
               log("[",id,"] Task assigned to me ",cnt, " BRANCH ", BRANCH) 
@@ -985,19 +920,17 @@ function gradient()
                 POS_DES = {.x = target_array[2].x,.y = target_array[2].y}}
               
               
-              task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
+              task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=NIL,.branch=task.get(cnt).branch})
             }
             else{
               log("[",id,"] ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK ",M_CAGING_TASK," SECOND TASK ", cnt)
-              task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=100000,.branch=task.get(cnt).branch})
-              # task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=NIL,.branch=task.get(cnt).branch})
-              # task.put(task.size()+1,{.id=id,.pos=task.get(cnt).pos,.dir = task.get(cnt).dir,.dir_axis=task.get(cnt).dir_axis,.bid=100000,.branch=task.get(cnt).branch})
+              task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=100000,.branch=task.get(cnt).branch})
             }
           }
         }
       }
-      cnt = cnt + 1
     }
+    cnt = cnt + 1
   }  
   last_size = task_size
 
@@ -1173,8 +1106,12 @@ function check_for_nei_not_obs(c_obs){
   neighbors.foreach(function(rid,data){
     var global_nei_pos = math.vec2.newp(data.distance,data.azimuth)
     global_nei_pos = math.vec2.rotate(global_nei_pos, pose.orientation.yaw)
-    var nei_ang_diff = math.abs(math.vec2.angle(global_nei_pos) - c_obs.ang) 
-    log("[",id,"] nei",":", data.distance,":", nei_ang_diff )
+    var global_nei_limited_ang = LimitAngle(math.vec2.angle(global_nei_pos))
+    var c_obs_limited_ang = LimitAngle(c_obs.ang)
+
+    var nei_ang_diff = math.abs(global_nei_limited_ang - c_obs_limited_ang) 
+     
+    # log("[",id,"] nei",":", data.distance,":", nei_ang_diff )
     if(data.distance < (INTER_ROBOT_CAGING_DIS*100) and nei_ang_diff < 0.2){
       ret.val=1
     }
