@@ -1,7 +1,7 @@
 #include "controller.h"
 #include "virtual_stigmergy2.h"
 #include <argos3/core/utility/logging/argos_log.h>
-#include <ompl/geometric/planners/rrt/RRTstar.h>
+// #include <ompl/geometric/planners/rrt/RRTstar.h>
 #include <boost/program_options.hpp>
 
 // path planning Constants
@@ -641,248 +641,248 @@ void CConnectivityBuzzControllerKheperaIV::SetLEDs(const CColor& c_color) {
 
 
 
-std::vector<std::vector<double>> CConnectivityBuzzControllerKheperaIV::OneShotPathPlanner(float* start_end_time){
-  // for(int i =0; i< 8; i++){
-  //   fprintf(stderr, "pos args received in recur planner %i -> %f \n",i,start_end_time[i]);
-  // }
-  // /* If solved obtain the best solutions found */
-  std::vector<std::vector<double>> solution_nodes;
-  /* Initialize a 2d vector state space within the planner */
+// std::vector<std::vector<double>> CConnectivityBuzzControllerKheperaIV::OneShotPathPlanner(float* start_end_time){
+//   // for(int i =0; i< 8; i++){
+//   //   fprintf(stderr, "pos args received in recur planner %i -> %f \n",i,start_end_time[i]);
+//   // }
+//   // /* If solved obtain the best solutions found */
+//   std::vector<std::vector<double>> solution_nodes;
+//   /* Initialize a 2d vector state space within the planner */
 
-    // ob::StateSpacePtr oneshot_space = ob::StateSpacePtr(new ob::RealVectorStateSpace(2));
+//     // ob::StateSpacePtr oneshot_space = ob::StateSpacePtr(new ob::RealVectorStateSpace(2));
 
-    ob::StateSpacePtr oneshot_space = std::make_shared<ob::DubinsStateSpace>();
+//     ob::StateSpacePtr oneshot_space = std::make_shared<ob::DubinsStateSpace>();
 
-    /* Set bounds to the state space */
-    ob::RealVectorBounds m_bound(2);
-    m_bound.setLow(0,0);
-    m_bound.setLow(1,0);
+//     /* Set bounds to the state space */
+//     ob::RealVectorBounds m_bound(2);
+//     m_bound.setLow(0,0);
+//     m_bound.setLow(1,0);
 
-    /* Should have been updated by import map call */
-    m_bound.setHigh(0,half_map_height);
-    m_bound.setHigh(1,half_map_length);
-    statespacemax[0]=half_map_height;
-    statespacemax[1]=half_map_length;
+//     /* Should have been updated by import map call */
+//     m_bound.setHigh(0,half_map_height);
+//     m_bound.setHigh(1,half_map_length);
+//     statespacemax[0]=half_map_height;
+//     statespacemax[1]=half_map_length;
 
-    /* Set the bounds of space */
-    // oneshot_space->as<ob::RealVectorStateSpace>()->setBounds(m_bound);
-    oneshot_space->as<ob::SE2StateSpace>()->setBounds(m_bound);
+//     /* Set the bounds of space */
+//     // oneshot_space->as<ob::RealVectorStateSpace>()->setBounds(m_bound);
+//     oneshot_space->as<ob::SE2StateSpace>()->setBounds(m_bound);
     
-    /* Construct a space information instance for this state space */
-    ob::SpaceInformationPtr si(new ob::SpaceInformation(oneshot_space));
-    /* Set the object used to check which states in the space are valid */
-    si->setStateValidityChecker(ob::StateValidityCheckerPtr(new ValidityChecker(si,&Grid_map[0], &m_restrictz, map_resolution, start_end_time[7])));
-    si->setup();
-    // printf("Half height %f length %f\n",half_map_height, half_map_length );
-    // Set our robot's starting state to be the one obtained by import map
-    ob::ScopedState<> start(oneshot_space);
-    start[0] = start_end_time[0]+(half_map_height/2);//start_end_pos[0][0];
-    start[1] = start_end_time[1]+(half_map_length/2);//start_end_pos[0][1];
-    start[2] = start_end_time[2]; // Start angle
-    // Set our robot's goal state tto be the one obtained by import map
-    ob::ScopedState<> goal(oneshot_space);
-    goal[0] = start_end_time[3]+(half_map_height/2); //start_end_pos[1][0];
-    goal[1] = start_end_time[4]+(half_map_length/2); //start_end_pos[1][1];
-    goal[2] = start_end_time[5];
-    // printf("Start (%f,%f,%f), End (%f,%f,%f)\n",start_end_time[0],start_end_time[1],start_end_time[2],
-    //                                             start_end_time[3],start_end_time[4],start_end_time[5]
-    //                                             );
-    // Create a problem instance
-    ob::ProblemDefinitionPtr oneshot_pdef= ob::ProblemDefinitionPtr(new ob::ProblemDefinition(si));
-    // Set the start and goal states
-    oneshot_pdef->setStartAndGoalStates(start, goal);
+//     /* Construct a space information instance for this state space */
+//     ob::SpaceInformationPtr si(new ob::SpaceInformation(oneshot_space));
+//     /* Set the object used to check which states in the space are valid */
+//     si->setStateValidityChecker(ob::StateValidityCheckerPtr(new ValidityChecker(si,&Grid_map[0], &m_restrictz, map_resolution, start_end_time[7])));
+//     si->setup();
+//     // printf("Half height %f length %f\n",half_map_height, half_map_length );
+//     // Set our robot's starting state to be the one obtained by import map
+//     ob::ScopedState<> start(oneshot_space);
+//     start[0] = start_end_time[0]+(half_map_height/2);//start_end_pos[0][0];
+//     start[1] = start_end_time[1]+(half_map_length/2);//start_end_pos[0][1];
+//     start[2] = start_end_time[2]; // Start angle
+//     // Set our robot's goal state tto be the one obtained by import map
+//     ob::ScopedState<> goal(oneshot_space);
+//     goal[0] = start_end_time[3]+(half_map_height/2); //start_end_pos[1][0];
+//     goal[1] = start_end_time[4]+(half_map_length/2); //start_end_pos[1][1];
+//     goal[2] = start_end_time[5];
+//     // printf("Start (%f,%f,%f), End (%f,%f,%f)\n",start_end_time[0],start_end_time[1],start_end_time[2],
+//     //                                             start_end_time[3],start_end_time[4],start_end_time[5]
+//     //                                             );
+//     // Create a problem instance
+//     ob::ProblemDefinitionPtr oneshot_pdef= ob::ProblemDefinitionPtr(new ob::ProblemDefinition(si));
+//     // Set the start and goal states
+//     oneshot_pdef->setStartAndGoalStates(start, goal);
 
-    // Construct our optimizing planner using the RRTstar algorithm.
-    og::RRTstar* oneshot_m_rrt_planner = new og::RRTstar(si);
+//     // Construct our optimizing planner using the RRTstar algorithm.
+//     og::RRTstar* oneshot_m_rrt_planner = new og::RRTstar(si);
 
-    // UnComment for any other planner !!!
-    // og::PRMstar* oneshot_m_rrt_planner = new og::PRMstar(si);
+//     // UnComment for any other planner !!!
+//     // og::PRMstar* oneshot_m_rrt_planner = new og::PRMstar(si);
 
-    // og::SST* oneshot_m_rrt_planner = new og::SST(si);
+//     // og::SST* oneshot_m_rrt_planner = new og::SST(si);
 
-    // m_rrt_planner->printProperties(std::cout);
-    ob::PlannerPtr oneshot_optimizingPlanner = ob::PlannerPtr(oneshot_m_rrt_planner);
-    // Set the problem instance for our planner to solve
-    oneshot_optimizingPlanner->setProblemDefinition(oneshot_pdef);
-    oneshot_optimizingPlanner->setup();
-    // attempt to solve the planning problem within time in second given by the user from bzz.
-    ob::PlannerStatus solved = oneshot_optimizingPlanner->solve(start_end_time[6]);
+//     // m_rrt_planner->printProperties(std::cout);
+//     ob::PlannerPtr oneshot_optimizingPlanner = ob::PlannerPtr(oneshot_m_rrt_planner);
+//     // Set the problem instance for our planner to solve
+//     oneshot_optimizingPlanner->setProblemDefinition(oneshot_pdef);
+//     oneshot_optimizingPlanner->setup();
+//     // attempt to solve the planning problem within time in second given by the user from bzz.
+//     ob::PlannerStatus solved = oneshot_optimizingPlanner->solve(start_end_time[6]);
 
-    // Keep solving, if you did not reach the target yet. 
-    // while(oneshot_pdef->hasApproximateSolution()) solved = oneshot_optimizingPlanner->solve(0.1);
+//     // Keep solving, if you did not reach the target yet. 
+//     // while(oneshot_pdef->hasApproximateSolution()) solved = oneshot_optimizingPlanner->solve(0.1);
     
-    if (solved)
-    {
+//     if (solved)
+//     {
 
-      // Output the length of the path found
-      // std::cout 
-      //     << optimizingPlanner->getName()
-      //     << " found a solution of length "
-      //     << pdef->getSolutionPath()->length()
-      //     << " with an optimization objective value of "
-      //     << pdef->getSolutionPath()->cost(pdef->getOptimizationObjective())<<"Best path : "
-      //     << std::endl;
-          // std::dynamic_pointer_cast<ompl::geometric::PathGeometric>(pdef->getSolutionPath())->print(std::cout);
-      std::shared_ptr<ompl::geometric::PathGeometric> c_path = 
-            std::dynamic_pointer_cast<ompl::geometric::PathGeometric>(oneshot_pdef->getSolutionPath());
+//       // Output the length of the path found
+//       // std::cout 
+//       //     << optimizingPlanner->getName()
+//       //     << " found a solution of length "
+//       //     << pdef->getSolutionPath()->length()
+//       //     << " with an optimization objective value of "
+//       //     << pdef->getSolutionPath()->cost(pdef->getOptimizationObjective())<<"Best path : "
+//       //     << std::endl;
+//           // std::dynamic_pointer_cast<ompl::geometric::PathGeometric>(pdef->getSolutionPath())->print(std::cout);
+//       std::shared_ptr<ompl::geometric::PathGeometric> c_path = 
+//             std::dynamic_pointer_cast<ompl::geometric::PathGeometric>(oneshot_pdef->getSolutionPath());
       
-      // fprintf(stderr, "Current state count in path: %i , length: %f, Num of states req %f\n", 
-      //                   (int)(c_path->getStateCount()), c_path->length(), c_path->length()/Required_path_segment_len);
-      c_path->interpolate((unsigned int) c_path->length()/Required_path_segment_len);
-      // fprintf(stderr, "After intepolation: %i \n", (int)(c_path->getStateCount())); 
-      std::vector<ob::State *> solutionStates = c_path->getStates();                  
-      for(auto state : solutionStates){
-        std::vector<double> statePoint(3,0.0);
-        // std::cout<<" SOl state  X "<< (state->as<ob::RealVectorStateSpace::StateType>()->values[0])-(half_map_height/2)
-        //   <<" Y "<<(state->as<ob::RealVectorStateSpace::StateType>()->values[1])-(half_map_length/2)<<std::endl;
-          statePoint[0]= state->as<ob::SE2StateSpace::StateType>()->getX()-(half_map_height/2);
-          statePoint[1]= state->as<ob::SE2StateSpace::StateType>()->getY()-(half_map_length/2);
-          statePoint[2]= state->as<ob::SE2StateSpace::StateType>()->getYaw();
+//       // fprintf(stderr, "Current state count in path: %i , length: %f, Num of states req %f\n", 
+//       //                   (int)(c_path->getStateCount()), c_path->length(), c_path->length()/Required_path_segment_len);
+//       c_path->interpolate((unsigned int) c_path->length()/Required_path_segment_len);
+//       // fprintf(stderr, "After intepolation: %i \n", (int)(c_path->getStateCount())); 
+//       std::vector<ob::State *> solutionStates = c_path->getStates();                  
+//       for(auto state : solutionStates){
+//         std::vector<double> statePoint(3,0.0);
+//         // std::cout<<" SOl state  X "<< (state->as<ob::RealVectorStateSpace::StateType>()->values[0])-(half_map_height/2)
+//         //   <<" Y "<<(state->as<ob::RealVectorStateSpace::StateType>()->values[1])-(half_map_length/2)<<std::endl;
+//           statePoint[0]= state->as<ob::SE2StateSpace::StateType>()->getX()-(half_map_height/2);
+//           statePoint[1]= state->as<ob::SE2StateSpace::StateType>()->getY()-(half_map_length/2);
+//           statePoint[2]= state->as<ob::SE2StateSpace::StateType>()->getYaw();
 
-          // printf("path solution: (%f,%f,%f)\n", statePoint[0],statePoint[1],statePoint[2]);
-          solution_nodes.push_back(statePoint);
-      }
+//           // printf("path solution: (%f,%f,%f)\n", statePoint[0],statePoint[1],statePoint[2]);
+//           solution_nodes.push_back(statePoint);
+//       }
 
-      buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "PATH_TYPE", 1));
-      buzzvm_pushi(m_tBuzzVM, -1);
-      buzzvm_gstore(m_tBuzzVM);
+//       buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "PATH_TYPE", 1));
+//       buzzvm_pushi(m_tBuzzVM, -1);
+//       buzzvm_gstore(m_tBuzzVM);
 
       
-      // For boder padding
-      MIN_X =-(half_map_height/2.0)-5;
-      MIN_Y =-(half_map_length/2.0)-5;
-      MAX_X =(half_map_height/2.0)+5;
-      MAX_Y =(half_map_length/2.0)+5;
-      // Save nodes to file
-      if(save_solution_svg){
-         std::stringstream s_name;
-         s_name<<"nodes_"<<m_tBuzzVM->robot<<".svg";
-         std::string dir(s_name.str());
-         int image_width=500;
-         int image_height=500;
+//       // For boder padding
+//       MIN_X =-(half_map_height/2.0)-5;
+//       MIN_Y =-(half_map_length/2.0)-5;
+//       MAX_X =(half_map_height/2.0)+5;
+//       MAX_Y =(half_map_length/2.0)+5;
+//       // Save nodes to file
+//       if(save_solution_svg){
+//          std::stringstream s_name;
+//          s_name<<"nodes_"<<m_tBuzzVM->robot<<".svg";
+//          std::string dir(s_name.str());
+//          int image_width=500;
+//          int image_height=500;
 
-         svg::Dimensions dimensions(image_width, image_height);
-         svg::Document doc(dir, svg::Layout(dimensions, svg::Layout::BottomLeft));
+//          svg::Dimensions dimensions(image_width, image_height);
+//          svg::Document doc(dir, svg::Layout(dimensions, svg::Layout::BottomLeft));
 
-         // Draw solution path
+//          // Draw solution path
 
-         std::vector<ob::State *> s_path = 
-            std::dynamic_pointer_cast<ompl::geometric::PathGeometric>(oneshot_pdef->getSolutionPath())->getStates();
-         svg::Polyline traj_line(svg::Stroke(0.5, svg::Color::Black));
-         for(auto state : s_path){
-            traj_line<<visualize_point(state,dimensions);
-         }
-         doc<<traj_line;
-         // if(! (debug_steps % 100) ) 
-         //   m_rrt_planner->draw_tree(doc,dimensions,half_map_height,half_map_length);
-         debug_steps++;
-         double x_offset= 0.0,y_offset=0.0;
-         int Planning_plane = 0;
+//          std::vector<ob::State *> s_path = 
+//             std::dynamic_pointer_cast<ompl::geometric::PathGeometric>(oneshot_pdef->getSolutionPath())->getStates();
+//          svg::Polyline traj_line(svg::Stroke(0.5, svg::Color::Black));
+//          for(auto state : s_path){
+//             traj_line<<visualize_point(state,dimensions);
+//          }
+//          doc<<traj_line;
+//          // if(! (debug_steps % 100) ) 
+//          //   m_rrt_planner->draw_tree(doc,dimensions,half_map_height,half_map_length);
+//          debug_steps++;
+//          double x_offset= 0.0,y_offset=0.0;
+//          int Planning_plane = 0;
 
         
-         // Draw obstacles
-         for(int i=0;i<Grid_map_GT[Planning_plane].size();++i){
-           for(int j=0;j<Grid_map_GT[Planning_plane][i].size();++j){
-             if(i==0){ // top case
-               if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 ||
-                 Grid_map_GT[Planning_plane][i][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j] == 0 ||
-                 Grid_map_GT[Planning_plane][i+1][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j-1] == 0) ){
-                 double temp[2];
-                 // Add a column for trees
-                 temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
-                 temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
-                 doc<<svg::Rectangle(visualize_point(temp,dimensions), 
-                 (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
-                 (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
-                 svg::Color::Red);
-               }
-             }
-             else if(i == Grid_map_GT[Planning_plane].size()-1){ // bottom case 
-               if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 || 
-                 Grid_map_GT[Planning_plane][i][j+1] == 0 || Grid_map_GT[Planning_plane][i-1][j] == 0 ||
-                 Grid_map_GT[Planning_plane][i-1][j-1] == 0 || Grid_map_GT[Planning_plane][i-1][j+1] == 0) ){
-                 double temp[2];
-                 // Add a column for trees
-                 temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
-                 temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
-                 doc<<svg::Rectangle(visualize_point(temp,dimensions), 
-                 (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
-                 (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
-                 svg::Color::Red);
-               }
-             }
-             else if(j == 0){ // Left case
-               if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j+1] == 0 || 
-                 Grid_map_GT[Planning_plane][i-1][j] == 0 || Grid_map_GT[Planning_plane][i+1][j] == 0 ||
-                 Grid_map_GT[Planning_plane][i-1][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j+1] == 0) ){
-                 double temp[2];
-                 // Add a column for trees
-                 temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
-                 temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
-                 doc<<svg::Rectangle(visualize_point(temp,dimensions), 
-                 (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
-                 (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
-                 svg::Color::Red);
+//          // Draw obstacles
+//          for(int i=0;i<Grid_map_GT[Planning_plane].size();++i){
+//            for(int j=0;j<Grid_map_GT[Planning_plane][i].size();++j){
+//              if(i==0){ // top case
+//                if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 ||
+//                  Grid_map_GT[Planning_plane][i][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j] == 0 ||
+//                  Grid_map_GT[Planning_plane][i+1][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j-1] == 0) ){
+//                  double temp[2];
+//                  // Add a column for trees
+//                  temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
+//                  temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
+//                  doc<<svg::Rectangle(visualize_point(temp,dimensions), 
+//                  (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
+//                  (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
+//                  svg::Color::Red);
+//                }
+//              }
+//              else if(i == Grid_map_GT[Planning_plane].size()-1){ // bottom case 
+//                if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 || 
+//                  Grid_map_GT[Planning_plane][i][j+1] == 0 || Grid_map_GT[Planning_plane][i-1][j] == 0 ||
+//                  Grid_map_GT[Planning_plane][i-1][j-1] == 0 || Grid_map_GT[Planning_plane][i-1][j+1] == 0) ){
+//                  double temp[2];
+//                  // Add a column for trees
+//                  temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
+//                  temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
+//                  doc<<svg::Rectangle(visualize_point(temp,dimensions), 
+//                  (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
+//                  (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
+//                  svg::Color::Red);
+//                }
+//              }
+//              else if(j == 0){ // Left case
+//                if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j+1] == 0 || 
+//                  Grid_map_GT[Planning_plane][i-1][j] == 0 || Grid_map_GT[Planning_plane][i+1][j] == 0 ||
+//                  Grid_map_GT[Planning_plane][i-1][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j+1] == 0) ){
+//                  double temp[2];
+//                  // Add a column for trees
+//                  temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
+//                  temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
+//                  doc<<svg::Rectangle(visualize_point(temp,dimensions), 
+//                  (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
+//                  (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
+//                  svg::Color::Red);
 
-               }
-             }
-             else if(j == Grid_map_GT[Planning_plane][i].size()-1){ // right case
-               if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 || 
-                 Grid_map_GT[Planning_plane][i-1][j] == 0 || Grid_map_GT[Planning_plane][i+1][j] == 0 ||
-                 Grid_map_GT[Planning_plane][i-1][j-1] == 0 || Grid_map_GT[Planning_plane][i+1][j-1] == 0) ){
-                 double temp[2];
-                 // Add a column for trees
-                 temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
-                 temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
-                 doc<<svg::Rectangle(visualize_point(temp,dimensions), 
-                 (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
-                 (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
-                 svg::Color::Red);
-               }
-             }
-             else{
-               if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 || 
-                 Grid_map_GT[Planning_plane][i][j+1] == 0 || Grid_map_GT[Planning_plane][i-1][j] == 0 || Grid_map[Planning_plane][i+1][j] == 0 ||
-                 Grid_map_GT[Planning_plane][i-1][j-1] == 0 || Grid_map_GT[Planning_plane][i-1][j+1] == 0 ||
-                 Grid_map_GT[Planning_plane][i+1][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j-1] == 0) ){
-                 double temp[2];
-                 // Add a column for trees
-                 temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
-                 temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
-                 doc<<svg::Rectangle(visualize_point(temp,dimensions), 
-                 (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
-                 (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
-                 svg::Color::Red);
-               } 
-             }
-           }
-         }
+//                }
+//              }
+//              else if(j == Grid_map_GT[Planning_plane][i].size()-1){ // right case
+//                if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 || 
+//                  Grid_map_GT[Planning_plane][i-1][j] == 0 || Grid_map_GT[Planning_plane][i+1][j] == 0 ||
+//                  Grid_map_GT[Planning_plane][i-1][j-1] == 0 || Grid_map_GT[Planning_plane][i+1][j-1] == 0) ){
+//                  double temp[2];
+//                  // Add a column for trees
+//                  temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
+//                  temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
+//                  doc<<svg::Rectangle(visualize_point(temp,dimensions), 
+//                  (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
+//                  (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
+//                  svg::Color::Red);
+//                }
+//              }
+//              else{
+//                if(Grid_map_GT[Planning_plane][i][j] == 1 && (Grid_map_GT[Planning_plane][i][j-1] == 0 || 
+//                  Grid_map_GT[Planning_plane][i][j+1] == 0 || Grid_map_GT[Planning_plane][i-1][j] == 0 || Grid_map[Planning_plane][i+1][j] == 0 ||
+//                  Grid_map_GT[Planning_plane][i-1][j-1] == 0 || Grid_map_GT[Planning_plane][i-1][j+1] == 0 ||
+//                  Grid_map_GT[Planning_plane][i+1][j+1] == 0 || Grid_map_GT[Planning_plane][i+1][j-1] == 0) ){
+//                  double temp[2];
+//                  // Add a column for trees
+//                  temp[0] = (i*map_resolution) - (OBSTACLE_SIDES1/2)+x_offset;
+//                  temp[1] = (j*map_resolution) + (OBSTACLE_SIDES2/2)+y_offset;
+//                  doc<<svg::Rectangle(visualize_point(temp,dimensions), 
+//                  (OBSTACLE_SIDES1)/(MAX_X-MIN_X) * dimensions.width,
+//                  (OBSTACLE_SIDES2)/(MAX_Y-MIN_Y) * dimensions.height,
+//                  svg::Color::Red);
+//                } 
+//              }
+//            }
+//          }
 
-        double draw_c_pos[2];
-        double m_point[2]={start->as<ob::SE2StateSpace::StateType>()->getX(), 
-                   start->as<ob::SE2StateSpace::StateType>()->getY()};
-        draw_c_pos[0]= start_end_time[0]+(half_map_height/2);//start_end_pos[0][0];
-        draw_c_pos[1]= start_end_time[1]+(half_map_length/2);
-        svg::Circle circle(visualize_point(draw_c_pos,dimensions),
-                        4,svg::Fill( svg::Color(255,0,0) ));
-        doc<<circle;
-        draw_c_pos[0]= start_end_time[2]+(half_map_height/2);//start_end_pos[0][0];
-        draw_c_pos[1]= start_end_time[3]+(half_map_length/2);
-        svg::Circle circle2(visualize_point(draw_c_pos,dimensions),
-                        4,svg::Fill( svg::Color(0,255,0) ));
-        doc<<circle2;
+//         double draw_c_pos[2];
+//         double m_point[2]={start->as<ob::SE2StateSpace::StateType>()->getX(), 
+//                    start->as<ob::SE2StateSpace::StateType>()->getY()};
+//         draw_c_pos[0]= start_end_time[0]+(half_map_height/2);//start_end_pos[0][0];
+//         draw_c_pos[1]= start_end_time[1]+(half_map_length/2);
+//         svg::Circle circle(visualize_point(draw_c_pos,dimensions),
+//                         4,svg::Fill( svg::Color(255,0,0) ));
+//         doc<<circle;
+//         draw_c_pos[0]= start_end_time[2]+(half_map_height/2);//start_end_pos[0][0];
+//         draw_c_pos[1]= start_end_time[3]+(half_map_length/2);
+//         svg::Circle circle2(visualize_point(draw_c_pos,dimensions),
+//                         4,svg::Fill( svg::Color(0,255,0) ));
+//         doc<<circle2;
 
-        doc.save();
-      }
-    }
-    else{
-     fprintf(stderr, "No solution found \n"); 
-     buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "PATH_TYPE", 1));
-     buzzvm_pushi(m_tBuzzVM, -2);
-     buzzvm_gstore(m_tBuzzVM);
-    }    
-  return solution_nodes;
-}
+//         doc.save();
+//       }
+//     }
+//     else{
+//      fprintf(stderr, "No solution found \n"); 
+//      buzzvm_pushs(m_tBuzzVM, buzzvm_string_register(m_tBuzzVM, "PATH_TYPE", 1));
+//      buzzvm_pushi(m_tBuzzVM, -2);
+//      buzzvm_gstore(m_tBuzzVM);
+//     }    
+//   return solution_nodes;
+// }
 
 /************************************/
 /************************************/
@@ -1156,12 +1156,12 @@ svg::Point CConnectivityBuzzControllerKheperaIV::visualize_point_woScale(std::ve
   return svg::Point(x,y);
 }
 
-svg::Point CConnectivityBuzzControllerKheperaIV::visualize_point(ob::State* state, svg::Dimensions dims)
-{
-  double x = (((double)state->as<ob::SE2StateSpace::StateType>()->getX()-(half_map_height/2)) -MIN_X)/(MAX_X-MIN_X) * dims.width; 
-  double y = (((double)state->as<ob::SE2StateSpace::StateType>()->getY()-(half_map_length/2))-MIN_Y)/(MAX_Y-MIN_Y) * dims.height; 
-  return svg::Point(x,y);
-}
+// svg::Point CConnectivityBuzzControllerKheperaIV::visualize_point(ob::State* state, svg::Dimensions dims)
+// {
+//   double x = (((double)state->as<ob::SE2StateSpace::StateType>()->getX()-(half_map_height/2)) -MIN_X)/(MAX_X-MIN_X) * dims.width; 
+//   double y = (((double)state->as<ob::SE2StateSpace::StateType>()->getY()-(half_map_length/2))-MIN_Y)/(MAX_Y-MIN_Y) * dims.height; 
+//   return svg::Point(x,y);
+// }
 
 /****************************************/
 /****************************************/

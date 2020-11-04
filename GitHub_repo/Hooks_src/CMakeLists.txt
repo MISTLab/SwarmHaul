@@ -17,13 +17,13 @@ find_package(PkgConfig)
 pkg_check_modules(BUZZ REQUIRED buzz)
 
 # Find ompl for path planning
-find_package(ompl REQUIRED)
+#find_package(ompl REQUIRED)
 
 # Set ARGoS include dir
 include_directories(${CMAKE_SOURCE_DIR} ${ARGOS_INCLUDE_DIRS} ${GSL_INCLUDE_DIR} ${BUZZ_INCLUDE_DIR})
 
-include_directories(${OMPL_INCLUDE_DIRS})
-link_directories(${OMPL_LIBRARY_DIR})
+#include_directories(${OMPL_INCLUDE_DIRS})
+#link_directories(${OMPL_LIBRARY_DIR})
 
 # Find Lua
 find_package(Lua52)
@@ -49,7 +49,8 @@ target_link_libraries(connectivity_controller
   argos3plugin_simulator_genericrobot
   argos3plugin_simulator_media
   argos3plugin_simulator_buzz
-  ompl)
+  )
+ # ompl)
 
 # Install stuff
 install(TARGETS connectivity_controller DESTINATION ${ARGOS_PREFIX}/lib/argos3)

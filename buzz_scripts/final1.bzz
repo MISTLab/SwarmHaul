@@ -14,6 +14,7 @@ NORMAL_CAGE_ANGLE = 0.17
 TOUCHING_OBS_THRESH = 0.7
 INTER_WP_TOLERENCE = 0.4
 INTER_ROBOT_CAGING_DIS=0.45
+RANGE_OF_PROXMITY = 0.3
 total_bots = 50
 
 
@@ -292,7 +293,7 @@ function step(){
               var obs_orth = math.vec2.rotate(obs_vec_cur, math.pi/2)
               # var ortho_Limited = LimitAngle(math.vec2.angle(obs_orth)) 
               log("!!!![",id,"] Applying inter robot correction")              
-              if(obstacle_vector.ang <  -0.72 and obstacle_vector.ang >  -2.28 and BRANCH != 1){
+              if( (obstacle_vector.ang <  -0.72 and obstacle_vector.ang >  -2.28 and BRANCH != 1) or (obstacle_vector.ang < 0.72 and obstacle_vector.ang > -0.72 and BRANCH == -1) ){
                 obs_orth = math.vec2.rotate(obs_orth, math.pi*(6/4))
               }
               var rotated_obs_orth = math.vec2.rotate(obs_orth, -pose.orientation.yaw)
@@ -1088,8 +1089,8 @@ function check_for_nei_not_obs(c_obs){
 
     var nei_ang_diff = math.abs(global_nei_limited_ang - c_obs_limited_ang) 
      
-    log("[",id,"] nei",":", data.distance,":", nei_ang_diff )
-    if(data.distance < (INTER_ROBOT_CAGING_DIS*100) and nei_ang_diff < 0.2){
+    # log("[",id,"] nei",":", data.distance,":", nei_ang_diff )
+    if(data.distance < (RANGE_OF_PROXMITY*100) and nei_ang_diff < 0.5){
       ret.val=1
     }
   })
