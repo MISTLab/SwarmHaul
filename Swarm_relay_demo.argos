@@ -8,7 +8,7 @@
     <system threads="8" />
     <experiment length="0"
                 ticks_per_second="10"
-                random_seed="10" />
+                random_seed="27" />
   </framework>
 
   <!-- *************** -->
@@ -17,7 +17,7 @@
   <controllers>
 
   <buzz_connectivity_controller_kheperaiv id="khivbz"
-                                          library="Hooks_src/build/libconnectivity_controller">
+                                          library="GitHub_repo/Hooks_src/build/libconnectivity_controller">
       <actuators>
         <differential_steering implementation="default" />
         <leds                  implementation="default" medium="leds" />
@@ -29,9 +29,9 @@
         <range_and_bearing    implementation="medium" medium="rab" show_rays="false"  noise_std_dev="0" />
         <positioning          implementation="default" />
       </sensors>
-      <params bytecode_file="buzz_scripts/final.bo"
-              debug_file="buzz_scripts/final.bdb"
-              map_file="maps/Comparisions/comp_structure.map"
+      <params bytecode_file="buzz_scripts/final1.bo"
+              debug_file="buzz_scripts/final1.bdb"
+              map_file="GitHub_repo/maps/Comparisions/empty.map"
               map_option="0"
               save_svg_image ="1"
               map_resolution ="0.1" />
@@ -48,9 +48,9 @@
   <!-- ****************** -->
   <!-- * Loop functions * -->
   <!-- ****************** -->
-  <loop_functions library="Loop_fun_src/build/libplanning_exp.so" 
+  <loop_functions library="GitHub_repo/Loop_fun_src/build/libplanning_exp.so" 
                   label="Planning"
-                  map_file_name="maps/Comparisions/comp_structure.map" 
+                  map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
                   map_option="0"
                  />
      
@@ -59,8 +59,13 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="500, 500, 5" center="0,0,2.5">
-  	
-   <box id="push_object" size="2,1.2,0.3" mass="5" movable="true">
+  	<!-- 14 - 15 robots -->
+<!--    <box id="push_object" size="2,1.2,0.3" mass="5" movable="true">
+   <body position="0,0,0" orientation="0,0,0" />
+   </box> -->
+
+   <!-- 50 robots -->
+   <box id="push_object" size="6,3.6,0.3" mass="5" movable="true">
    <body position="0,0,0" orientation="0,0,0" />
    </box>
 
@@ -165,9 +170,9 @@
 
 
     <distribute>
-      <position method="uniform" min="-4,-4,0" max="-2,-2,0" />
+      <position method="uniform" min="-6,-6,0" max="-4,-4,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="25" max_trials="100">
+      <entity quantity="50" max_trials="100">
         <kheperaiv id="kh" rab_range="7" rab_data_size="500">
           <controller config="khivbz" />
         </kheperaiv>
