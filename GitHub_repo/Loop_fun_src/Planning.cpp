@@ -11,14 +11,15 @@ static const std::string FILE_PREFIX      = "conv_";
 static const std::string CHUNK_FILE_PREFIX= "chunk_";
 static const std::string P2PFILE_PREFIX   = "queuep2p_";
 static std::string POSTITIONFILE_PREFIX   = "pos_";
-static std::string FAULTFILE_PREFIX   = "fault_";
-static std::string ROLEFILE_PREFIX   = "role_";
-static std::string MSGFILE_PREFIX   = "msg_";
+static std::string EFFECTIVENESS_PREFIX   = "effec_";
+static std::string PERF_PREFIX   = "perf_";
+static const Real        RAB_RANGE        = 7.0f;
+static const UInt32 DATA_SIZE = 500;
+// static std::string MSGFILE_PREFIX   = "msg_";
      
 static const Real        FB_RADIUS        = 0.0704f;
 static const Real        FB_AREA          = ARGOS_PI * Square(0.0704f);
 static const std::string FB_CONTROLLER    = "khivbz";
-static const std::string SPIRI_CONTROLLER    = "bcs";
 static const UInt32      MAX_PLACE_TRIALS = 400;
 static const UInt32      MAX_ROBOT_TRIALS = 400;
 
@@ -68,28 +69,13 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
    try {
 
       /* Parse the configuration file */
-      // GetNodeAttribute(t_tree, "outfile", m_strOutFile);
-      // GetNodeAttribute(t_tree, "robots", unRobots);
-      // UInt32 flying_robot_number;
-      // GetNodeAttribute(t_tree, "flying_robots", flying_robot_number);
-      // UInt32 unDataSize;
-      // GetNodeAttribute(t_tree, "data_size", unDataSize);
-      // Real rab_range;
-      // GetNodeAttribute(t_tree, "rab_range", rab_range);
-      // std::string OUT_FNAME; 
-      // GetNodeAttribute(t_tree, "out_file", OUT_FNAME);
-      // POSTITIONFILE_PREFIX +=OUT_FNAME+".dat";
-      // FAULTFILE_PREFIX +=OUT_FNAME+".dat";
-      // ROLEFILE_PREFIX +=OUT_FNAME+".dat";
-      // MSGFILE_PREFIX +=OUT_FNAME+".dat";
+      GetNodeAttribute(t_tree, "robots", unRobots);
+      std::string OUT_FNAME; 
+      GetNodeAttribute(t_tree, "out_file", OUT_FNAME);
+      POSTITIONFILE_PREFIX +=OUT_FNAME+".dat";
+      EFFECTIVENESS_PREFIX +=OUT_FNAME+".dat";
+      PERF_PREFIX +=OUT_FNAME+".dat";
 
-      // GetNodeAttribute(t_tree, "fault_percent", m_fault_percent);
-      // GetNodeAttribute(t_tree, "faulty_number", faulty_number);
-
-      // GetNodeAttribute(t_tree, "Number_of_links", number_of_links);
-      // int number_of_faulty_robots = unRobots * m_fault_percent;
-      // printf("Number of robots %u Fault percent %f links %i num of faulty robots %i\n",unRobots,m_fault_percent,number_of_links,
-      //    number_of_faulty_robots);
 
       GetNodeAttribute(t_tree, "map_file_name", m_map_file_name);
       int map_option = 0;
@@ -102,40 +88,31 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
          LoadMapIntoArena(m_map_file_name);
       }
 
-      /* Get reference to buzz controllers and stack them up in a vec*/
-         /* Get the map of all kilobots from the space */
-       CSpace::TMapPerType& tKBMap = GetSpace().GetEntitiesByType("kheperaiv");
-       /* Go through them */
-       for(CSpace::TMapPerType::iterator it = tKBMap.begin();
-           it != tKBMap.end();
-           ++it) {
-          /* Create a pointer to the current kilobot */
-          CKheperaIVEntity* pcKB = any_cast<CKheperaIVEntity*>(it->second);
-          CConnectivityBuzzControllerKheperaIV* pcKBC = &dynamic_cast<CConnectivityBuzzControllerKheperaIV&>(pcKB->GetControllableEntity().GetController());
+      // Place the robots arounds the start point randomly
+      CRange<Real> c_range_(-6,-4);
+      PlaceUniformly(unRobots,
+                     DATA_SIZE,
+                     c_range_);
+
+      
+       for(int i=0; i< unRobots;++i) {
+          /* Create a pointer to the current kh4 */
+          CKheperaIVEntity& pcKB = *any_cast<CKheperaIVEntity *>(m_fbvec[i]);
+          CConnectivityBuzzControllerKheperaIV* pcKBC = &dynamic_cast<CConnectivityBuzzControllerKheperaIV&>(pcKB.GetControllableEntity().GetController());
+          m_vecControllers.push_back(pcKBC);
           buzzvm_t tBuzzVM = pcKBC->GetBuzzVM();
+          // Update the number of robots 
+          buzzvm_pushs(tBuzzVM, buzzvm_string_register(tBuzzVM, "total_bots", 1));
+          buzzvm_pushi(tBuzzVM, unRobots);
+          buzzvm_gstore(tBuzzVM);
+
+          // buzzvm_function_call(vm, "load_targets_from_loop_fun", 0);
+          // /*Clear the nil value returned*/
+          // buzzvm_pop(vm);
+     
           /* Append to list */
           m_buzz_ctrl.push_back(tBuzzVM);
        }
-
-
-      // Place the robots arounds the start point randomly
-      // CRange<Real> c_range_x(CRANGE_START_POS.GetMin() + Start_state.GetX(), 
-      //                        CRANGE_START_POS.GetMax() + Start_state.GetX());
-      // CRange<Real> c_range_y(CRANGE_START_POS.GetMin() + Start_state.GetY(), 
-      //                        CRANGE_START_POS.GetMax() + Start_state.GetY());
-
-      // CRange<Real> c_spiri_range_x(CRANGE_SPIRI_START_POS.GetMin() + Start_state.GetX(), 
-      //                        CRANGE_SPIRI_START_POS.GetMax() + Start_state.GetX());
-      // CRange<Real> c_spiri_range_y(CRANGE_SPIRI_START_POS.GetMin() + Start_state.GetY(), 
-      //                        CRANGE_SPIRI_START_POS.GetMax() + Start_state.GetY());
-      // PlaceUniformly(unRobots,
-      //                flying_robot_number,
-      //                unDataSize,
-      //                rab_range,
-      //                c_range_x,
-      //                c_range_y,
-      //                c_spiri_range_x,
-      //                c_spiri_range_y);
  
       /* Initialize the rest */
       Reset();
@@ -155,9 +132,23 @@ void Planningloop::PostStep() {
   os << "push_object";
   CEntity& c_entity = (GetSpace().GetEntity(os.str()));
   CBoxEntity* c_box_entity = (CBoxEntity*)&c_entity;
+  m_posFile << std::endl;
+  m_effecFile << std::endl;
+  m_posFile << GetSpace().GetSimulationClock();
+  m_effecFile << GetSpace().GetSimulationClock();
   // printf("Box pos  X %f, y %f\n",c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Position.GetX(),c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
   for(int i=0; i< m_buzz_ctrl.size();++i){
+    // Log position 
+    /* At first you get the footbot object */
+    CKheperaIVEntity& cEFootBot = *any_cast<CKheperaIVEntity *>(m_fbvec[i]);
+    m_posFile << "," << i
+          << "," << cEFootBot.GetEmbodiedEntity().GetOriginAnchor().Position.GetX()
+          << "," << cEFootBot.GetEmbodiedEntity().GetOriginAnchor().Position.GetY()
+          << "," << cEFootBot.GetEmbodiedEntity().GetOriginAnchor().Position.GetZ();
+
+
     buzzvm_t vm = m_buzz_ctrl[i];
+    // Update the position of the pushed object on the robot.
     buzzvm_pushs(vm, buzzvm_string_register(vm, "Pushed_obj_pos", 1));
     buzzvm_pusht(vm);
     buzzvm_dup(vm);
@@ -169,26 +160,42 @@ void Planningloop::PostStep() {
     buzzvm_pushf(vm, c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Position.GetY());
     buzzvm_tput(vm);
     buzzvm_gstore(vm);
+    // log the effective pushers.
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "effective_pusher", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << i << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
+    // Log current pushing wp. 
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "TASK_NUM", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
+    
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "EXPERIMENT_DONE", 1));
+    buzzvm_gload(vm);
+    if(buzzvm_stack_at(vm, 1)->i.value == 1){
+      m_bDone = true;
+    }
+    buzzvm_pop(vm);
   }
+  // Write the pushed object pos.
+  CQuaternion& c_quat = c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Orientation;
+  CRadians cYaw, cPitch, cRoll;
+  c_quat.ToEulerAngles(cYaw, cPitch, cRoll);
+  m_posFile << "," << c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Position.GetX()
+            << "," << c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Position.GetY()
+            << "," << cYaw.GetValue();
+
 }
 
 /****************************************/
 /****************************************/
 
 void Planningloop::Reset() {
-   /* Clear all flags in the 'done' vectors */
-   // m_vecDone.clear();
-   // m_vecDone.resize(m_vecControllers.size(), false);
-   // m_vecGetDone.clear();
-   // m_vecGetDone.resize(m_vecControllers.size(), false);
-
-   // OpenFile(m_posFile,      POSTITIONFILE_PREFIX);
-   // OpenFile(m_faultFile,      FAULTFILE_PREFIX);
-   // OpenFile(m_roleFile,      ROLEFILE_PREFIX);
-   // OpenFile(m_msgFile, MSGFILE_PREFIX);
    
-   PlanningDone=0;
-   // OpenFile(m_cQueueP2PFile,      P2PFILE_PREFIX);
+   OpenFile(m_posFile,      POSTITIONFILE_PREFIX);
+   OpenFile(m_effecFile,      EFFECTIVENESS_PREFIX);
+   OpenFile(m_perfFile,      PERF_PREFIX);
 }
 
 /****************************************/
@@ -197,10 +204,8 @@ void Planningloop::Reset() {
 void Planningloop::Destroy() {
 
    CloseFile(m_posFile);
-   CloseFile(m_faultFile);
-   CloseFile(m_roleFile);
-   CloseFile(m_msgFile);
-   // CloseFile(m_cQueueP2PFile);
+   CloseFile(m_effecFile);
+   CloseFile(m_perfFile);
 }
 
 /****************************************/
@@ -304,6 +309,56 @@ void Planningloop::CloseFile(std::ofstream& c_stream) {
    if(c_stream.is_open()) c_stream.close();
 }
 
+/****************************************/
+/****************************************/
+
+void Planningloop::PlaceUniformly(UInt32 un_robots,
+                            UInt32 un_data_size,
+                            CRange<Real> c_area_range) {
+  UInt32 unTrials;
+  CKheperaIVEntity* pcFB;
+  std::ostringstream cFBId;
+  CVector3 cFBPos;
+  CQuaternion cFBRot;
+  /* Create a RNG (it is automatically disposed of by ARGoS) */
+  CRandom::CRNG* pcRNG = CRandom::CreateRNG("argos");
+  /* For each robot */
+  for (size_t i = 0; i < un_robots; ++i) {
+    /* Make the id */
+    cFBId.str("");
+    cFBId << "fb" << i;
+    /* Create the robot in the origin and add it to ARGoS space */
+    pcFB = new CKheperaIVEntity(
+        cFBId.str(),
+        FB_CONTROLLER,
+        CVector3(),
+        CQuaternion(),
+        RAB_RANGE,
+        un_data_size);
+    AddEntity(*pcFB);
+    /* Add its controller to the list */
+    // m_vecControllers.push_back(
+    //     &dynamic_cast<CConnectivityBuzzControllerKheperaIV&>(
+    //         pcFB->GetControllableEntity().GetController()));
+    m_fbvec.push_back(pcFB);
+    /* Try to place it in the arena */
+    unTrials = 0;
+    bool bDone;
+    do {
+      /* Choose a random position */
+      ++unTrials;
+      cFBPos.Set(pcRNG->Uniform(c_area_range),
+                 pcRNG->Uniform(c_area_range),
+                 0.0f);
+      cFBRot.FromAngleAxis(pcRNG->Uniform(CRadians::UNSIGNED_RANGE),
+                           CVector3::Z);
+      bDone = MoveEntity(pcFB->GetEmbodiedEntity(), cFBPos, cFBRot);
+    } while (!bDone && unTrials <= MAX_PLACE_TRIALS);
+    if (!bDone) {
+      THROW_ARGOSEXCEPTION("Can't place " << cFBId.str());
+    }
+  }
+}
 /****************************************/
 /****************************************/
 

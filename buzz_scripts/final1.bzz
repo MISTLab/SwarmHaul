@@ -62,6 +62,10 @@ POS_DES={.x=0,.y=0}
 # Timer that makes the robot wait before going into next waypoint.
 Wait_time_for_next_task = 0
 
+# Logging data 
+effective_pusher = 0
+EXPERIMENT_DONE = 0
+
 
 function init() { 
   # Swarm containing all the robots, used to execute gardient algorithm. (Robots leave on joing cagers or pushers)
@@ -116,6 +120,7 @@ function init() {
   task.onconflict(function (k,local,remote) {	
   		# Resolving bid conficts
       if(local.data.pos.x == remote.data.pos.x and local.data.pos.y == remote.data.pos.y){
+        # log("[",id,"] Confict with same tas pos for task ", k)
         if(remote.data.bid <=local.data.bid){
           return remote
         }
@@ -124,22 +129,30 @@ function init() {
         }
       }
       else{
+        log("[",id,"] Conflict of different task ids")
         # Resolving Task id conflicts
         if(local.robot < remote.robot){
           if(id != remote.robot){
+          log("[",id,"] winner local for ",k," local robot ", local.robot)
+
             return local
           }
           else{
             task.put(k+1, remote.data)
+            log("[",id,"] winner local for ",k," local robot ", local.robot, " remote creted as new task")
             return local
           }
         }
         else{
           if(id != local.robot){
+            log("[",id,"] winner remote for ",k," local robot ", remote.robot)
+
             return remote
           }
           else{
             task.put(k+1, local.data)
+            log("[",id,"] winner remote for ",k," local robot ", local.robot, " remote creted as new task")
+
             return remote
           } 
         }
@@ -287,14 +300,25 @@ function step(){
             if( cur_inter_cage_dis > 0.06 and cur_inter_cage_dis < 0.5 and obstacle_vector.cnt > TOUCHING_OBS_THRESH){
               # I will not take it as a corner case, if I have 0 obs reading during inter distance correction.
               I_was_in_corner = -1
-              # TASK = 1
-              # Change pos_des to move along the circumference.
               var obs_vec_cur = math.vec2.newp(obstacle_vector.len, obstacle_vector.ang)
               var obs_orth = math.vec2.rotate(obs_vec_cur, math.pi/2)
-              # var ortho_Limited = LimitAngle(math.vec2.angle(obs_orth)) 
+              var obs_orth2 = math.vec2.rotate(obs_orth, math.pi*(6/4))
+              # var ortho_Limited = LimitAngle(math.vec2.angle(obs_orth))
+              var previous_point = {.x=0,.y=0}
+              if(BRANCH == 1 and size(left_branch) > 2){  
+                previous_point = left_branch[size(left_branch)-2]
+              }
+              else if(size(right_branch) > 2){
+                previous_point = right_branch[size(right_branch)-2]  
+              }
+              previous_point = math.vec2.sub(previous_point,pose.position)
+              # previous_point = math.vec2.rotate(previous_point,-pose.orientation.yaw)
               log("!!!![",id,"] Applying inter robot correction")              
-              if( (obstacle_vector.ang <  -0.72 and obstacle_vector.ang >  -2.28 and BRANCH != 1) or (obstacle_vector.ang < 0.72 and obstacle_vector.ang > -0.72 and BRANCH == -1) ){
-                obs_orth = math.vec2.rotate(obs_orth, math.pi*(6/4))
+              # var rotated_obs_orth = math.vec2.rotate(obs_orth, -pose.orientation.yaw)
+              # var rotated_obs_orth2 = math.vec2.rotate(obs_orth2, -pose.orientation.yaw)
+              if(math.vec2.dis(previous_point, obs_orth2) < math.vec2.dis(previous_point, obs_orth)){
+                obs_orth = obs_orth2
+                # rotated_obs_orth = rotated_obs_orth2
               }
               var rotated_obs_orth = math.vec2.rotate(obs_orth, -pose.orientation.yaw)
               debug.rays.add(100,0,0, rotated_obs_orth.x*100, rotated_obs_orth.y*100, 0.0)
@@ -340,6 +364,7 @@ function step(){
           set_wheels(0.0,0.0)
           TASK = 1
           pushers.leave()
+          effective_pusher = 0
           rotaters.join()  
           log("[",id,"] Put centroid val")
           centroid.put(id,{.x=pose.position.x,.y=pose.position.y})
@@ -366,6 +391,7 @@ function step(){
           yaw = barrier.get(TASK_NUM).yaw
           if(TASK_NUM == 22)
           {
+            EXPERIMENT_DONE = 1
             log("Over ....... ")
             pushers.leave()
           }
@@ -395,10 +421,12 @@ function step(){
           angle = math.acos(num/denom)
           if((angle > 2) or (angle < -2))
           {
+            effective_pusher = 0
             move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 1)
             vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
           }
           else{
+            effective_pusher = 1
             vector_to_target = math.vec2.scale(math.vec2.norm(move_vec), 3)
             move_in = math.vec2.scale(math.vec2.norm(move_in_wc), 2)
           }
@@ -791,8 +819,8 @@ function gradient()
       # }
 
     if(task.get(cnt).bid){
-      if( M_CAGING_TASK != -1 and task.get(cnt).id == id){
-        log("[",id,"] ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK ",M_CAGING_TASK," SECOND TASK ", cnt)      
+      if( M_CAGING_TASK != -1 and task.get(cnt).id == id and task.get(cnt).bid != nil){
+        log("[",id,"] FIRST ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK ",M_CAGING_TASK," SECOND TASK ", cnt)      
         task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=10000,.branch=task.get(cnt).branch})
       }
       if(M_CAGING_TASK == -1){
@@ -815,19 +843,16 @@ function gradient()
           # check_and_add(task.get(cnt).pos,right_branch)
         } 
         if ((not bidding_timer[cnt]%k) and M_CAGING_TASK == -1){
-          current_pose = math.vec2.new(pose.position.x,pose.position.y)
-          current_bid = task.get(cnt).bid
-          my_bid = math.vec2.dis(task.get(cnt).pos,current_pose)
-          branch = task.get(cnt).branch
+          var current_pose = math.vec2.new(pose.position.x,pose.position.y)
+          var current_bid = task.get(cnt).bid
+          var my_bid = math.vec2.dis(task.get(cnt).pos,current_pose)
           if (current_bid > my_bid){
-            task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=my_bid,.branch=branch})
+            task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=my_bid,.branch=task.get(cnt).branch})
           }
-          bidding_timer[cnt] = bidding_timer[cnt] + 1
-        }
-        else{
-          bidding_timer[cnt] = bidding_timer[cnt] + 1
         }
         
+        bidding_timer[cnt] = bidding_timer[cnt] + 1
+          
         if(bidding_timer[cnt] == bidding_time){
           if(task.get(cnt).id == id){
             if(M_CAGING_TASK == -1){
@@ -895,9 +920,8 @@ function gradient()
               print_array(target_array)
 
               if(target_array[2]){
-                POS_DES = {.x = target_array[2].x,.y = target_array[2].y}}
-              
-              
+                POS_DES = {.x = target_array[2].x,.y = target_array[2].y}
+              }
               task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=NIL,.branch=task.get(cnt).branch})
             }
             else{

@@ -1,5 +1,5 @@
 #include <argos3/core/simulator/loop_functions.h>
-// #include <argos3/plugins/robots/kheperaiv/control_interface/buzz_controller_kheperaiv.h>
+#include <argos3/plugins/robots/kheperaiv/control_interface/buzz_controller_kheperaiv.h>
 #include<../Hooks_src/controller.h>
 #include <buzz/argos/buzz_controller_spiri.h>
 #include <argos3/plugins/robots/kheperaiv/simulator/kheperaiv_entity.h>
@@ -29,13 +29,8 @@ private:
    void Load3DMapIntoArena(std::string m_map_file_name);
    
    void PlaceUniformly(UInt32 un_robots,
-                            UInt32 flying_robots,
-                            UInt32 un_data_size,
-                            Real rab_range,
-                            CRange<Real> c_range_x,
-                            CRange<Real> c_range_y,
-                            CRange<Real> c_spiri_range_x,
-                            CRange<Real> c_spiri_range_y);
+                       UInt32 un_data_size,
+                       CRange<Real> c_range_);
    
    void OpenFile(std::ofstream& c_stream,
                  const std::string& str_prefix);
@@ -130,35 +125,19 @@ private:
    double map_height;
    double map_length;
    bool m_bDone;
-   // std::ofstream m_cQueueOutFile;
-   std::ofstream m_cOutFile;
-   // std::ofstream m_cChunkFile;
+
    std::ofstream m_posFile;
-   std::ofstream m_roleFile;
-   std::ofstream m_msgFile;
-   std::ofstream m_faultFile;
-   int faulty_number;
-   int healing_time;
-   int healing_started_num[5];
-   int num_unresponsive;
-   // std::ofstream m_cQueueP2PFile;
-   // std::vector<CBuzzControllerKheperaIV*> m_vecControllers;
-   // std::vector<CBuzzControllerSpiri*> m_vecSpiriControllers;
+   std::ofstream m_effecFile;
+   std::ofstream m_perfFile;
+
+   std::vector<CConnectivityBuzzControllerKheperaIV*> m_vecControllers;
    std::vector<CKheperaIVEntity*> m_fbvec;
-   std::vector<CSpiriEntity*> m_spirivec;
    std::vector<buzzvm_t> m_buzz_ctrl;
-   std::vector<bool> m_vecDone;
-   std::vector<bool> m_vecGetDone;
-   int number_of_links;
-   Real m_fault_percent, m_fault_set;
-   std::vector<int> m_faulty_robots;
-   int m_targets_reached[4];
+
+   
    CVector2 Start_state;
    CVector2 Goal_state;
    UInt32 unRobots;
-   std::vector<int> robots_ids_faulty;
-   int PlanningDone;
-   int PlanTime;
 
 };
 

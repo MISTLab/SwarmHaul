@@ -8,7 +8,7 @@
     <system threads="8" />
     <experiment length="0"
                 ticks_per_second="10"
-                random_seed="1" />
+                random_seed="18" />
   </framework>
 
   <!-- *************** -->
@@ -17,7 +17,7 @@
   <controllers>
 
   <buzz_connectivity_controller_kheperaiv id="khivbz"
-                                          library="Hooks_src/build/libconnectivity_controller">
+                                          library="GitHub_repo/Hooks_src/build/libconnectivity_controller">
       <actuators>
         <differential_steering implementation="default" />
         <leds                  implementation="default" medium="leds" />
@@ -26,12 +26,12 @@
       <sensors>
         <!-- <kheperaiv_ground     implementation="rot_z_only" /> -->
         <kheperaiv_proximity  implementation="default" show_rays="false" />
-        <range_and_bearing    implementation="medium" medium="rab" show_rays="false" noise_std_dev="0" />
+        <range_and_bearing    implementation="medium" medium="rab" show_rays="false"  noise_std_dev="0" />
         <positioning          implementation="default" />
       </sensors>
-      <params bytecode_file="buzz_scripts/Connectivity_planning.bo"
-              debug_file="buzz_scripts/Connectivity_planning.bdb"
-              map_file="maps/Comparisions/comp_structure.map"
+      <params bytecode_file="buzz_scripts/final1.bo"
+              debug_file="buzz_scripts/final1.bdb"
+              map_file="GitHub_repo/maps/Comparisions/empty.map"
               map_option="0"
               save_svg_image ="1"
               map_resolution ="0.1" />
@@ -48,29 +48,37 @@
   <!-- ****************** -->
   <!-- * Loop functions * -->
   <!-- ****************** -->
-  <loop_functions library="Loop_fun_src/build/libplanning_exp.so" 
+  <loop_functions library="GitHub_repo/Loop_fun_src/build/libplanning_exp.so" 
                   label="Planning"
-                  map_file_name="maps/Comparisions/comp_structure.map" 
+                  map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
                   map_option="0"
+                  robots="25"
+                  out_file="OUT"
                  />
-
+     
+     
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="500, 500, 5" center="0,0,2.5">
-    <distribute>
-      <position method="uniform" min="-1,-1,0" max="1,1,0" />
-      <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="23" max_trials="100">
-        <kheperaiv id="kh" rab_range="2.5" rab_data_size="500">
-          <controller config="khivbz" />
-        </kheperaiv>
-      </entity>
-    </distribute>
+  	<!-- 14 - 15 robots -->
+   <box id="push_object" size="1.2,2,0.3" mass="5" movable="true">
+   <body position="0,0,0" orientation="0,0,0" />
+   </box>
+
   </arena>
   <!-- ******************* -->
   <!-- * Physics engines * -->
   <!-- ******************* -->
+     
+
+
+
+
+
+
+
+
   <physics_engines>
     <dynamics2d id="dyn2d" />
   </physics_engines>
@@ -89,14 +97,11 @@
   <!-- ****************** -->
   <visualization>
   <qt-opengl>
-     <!--  <camera>
-        <placement idx="0" position="0,0,30" look_at="0,0,0" lens_focal_length="20" />
-      </camera> -->
-      <!-- <frame_grabbing directory="frames" -->
-      <!--                 base_name="frame_" -->
-      <!--                 format="png" -->
-      <!--                 quality="100" /> -->
       <user_functions label="buzz_qt" />
+      <camera>
+        <placement idx="0" position="-1.59862,0,4.59862" look_at="0,0,0" lens_focal_length="20" />
+        <placement idx="1" position="-1.22369,0,9.18125" look_at="-1.1384,-0.000852933,8.1849" lens_focal_length="20" />
+      </camera>s
     </qt-opengl>
     <!-- <qt-opengl /> -->
   </visualization>
