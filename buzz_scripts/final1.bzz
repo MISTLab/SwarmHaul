@@ -68,6 +68,7 @@ barrier_broadcast = 0
 
 # Logging data 
 effective_pusher = 0
+effective_rotater = 0 
 EXPERIMENT_DONE = 0
 
 
@@ -367,7 +368,7 @@ function step(){
 
     if(barrier2.get(TASK_NUM)){
       check_and_add_barrier(barrier2.getrid(TASK_NUM),barrier_array)
-      if((size(barrier_array)-1)>= swarm_size*(0.8) or barrier_broadcast == 1){
+      if((size(barrier_array)-1)>= swarm_size*(0.7) or barrier_broadcast == 1){
         if(Wait_time_for_next_task == 0){
           Wait_time_for_next_task = time 
         }
@@ -384,7 +385,7 @@ function step(){
           rotaters.join()  
           log("[",id,"] Put centroid val")
           centroid.put(id,{.x=pose.position.x,.y=pose.position.y})
-          barrier_array = {.1=17}
+          barrier_array = {.1=100000}
           TASK_NUM = TASK_NUM + 1
           neighbors.broadcast("BB",1)
         }
@@ -396,22 +397,25 @@ function step(){
           rotaters.leave()
           pushers.join()
           TASK = 1
-          barrier_array = {.1=17}
+          barrier_array = {.1=10000000}
           TASK_NUM = TASK_NUM + 1
           neighbors.broadcast("BB",1)
           if(id == 0)
           {
             log((TASK_NUM-2)/2,":",Pushed_obj_pos.x,":",Pushed_obj_pos.y)
           }
-          POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Pushed_obj_pos.x,.y = barrier.get(TASK_NUM).y - Pushed_obj_pos.y},pose.position)
-          Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
-          n = find_nei_in_set()
-          yaw = barrier.get(TASK_NUM).yaw - barrier.get(TASK_NUM-3).yaw
+          
           if(TASK_NUM >= barrier.size()*2)
           {
             EXPERIMENT_DONE = 1
             log("Over ....... ")
             pushers.leave()
+          }
+          else { 
+            POS_DES = math.vec2.add({.x = barrier.get(TASK_NUM).x - Pushed_obj_pos.x,.y = barrier.get(TASK_NUM).y - Pushed_obj_pos.y},pose.position)
+            Prev_push_obj_pos = {.x = barrier.get(TASK_NUM).x,.y = barrier.get(TASK_NUM).y}
+            n = find_nei_in_set()
+            yaw = barrier.get(TASK_NUM).yaw - barrier.get(TASK_NUM-2).yaw
           }
         }
       }
@@ -510,6 +514,25 @@ function step(){
         var angle =0
         move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
         move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+
+        var num_rot = 0
+        var denom_rot = 0
+        var angle_rot =0 
+        move_in_wc = math.vec2.newp(obs_vec_1().len,obs_vec_1().ang)
+        num_rot = math.vec2.dot(move_per,move_in_wc)
+        denom_rot =  math.vec2.length(move_per) * math.vec2.length(move_in_wc) 
+        angle_rot = math.acos(num_rot/denom_rot)
+        log("[",id,"]",angle_rot)
+          if((angle_rot > 1.5) or (angle_rot < -1.5))
+            {effective_rotater = 1}
+          
+          else{
+            log("[",id,"]","Effective rotater")
+            effective_rotater = 0}
+        
+
+
+
         move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
         move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
         move_away = find_neighbours()
@@ -518,7 +541,7 @@ function step(){
         }
         vector_to_target = math.vec2.add(move_per,move_in) 
         vector_to_target = math.vec2.add(vector_to_target,move_away)
-        vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 9)
+        vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 15)
         goto(vector_to_target.x,vector_to_target.y)
         present_vec = math.vec2.sub(pose.position,Pushed_obj_pos)
         present_dis = math.vec2.dis(pose.position,Pushed_obj_pos)
@@ -530,6 +553,7 @@ function step(){
           set_wheels(0.0,0.0)
           if (barrier2.get(TASK_NUM)){
             barrier2.put(TASK_NUM,barrier2.get(TASK_NUM)+1)
+            log("push:",TASK_NUM,":",id,":",size(barrier_array))
           }
           else{
            barrier2.put(TASK_NUM,1)
@@ -1037,7 +1061,7 @@ while(i<siz)
 }
   if (id == 0)
   {
-   log(id,"not null ",count)
+   #log(id,"not null ",count)
   }
   return count 
 }
