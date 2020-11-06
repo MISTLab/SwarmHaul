@@ -8,7 +8,7 @@
     <system threads="8" />
     <experiment length="0"
                 ticks_per_second="10"
-                random_seed="18" />
+                random_seed="RANDOMSEED" />
   </framework>
 
   <!-- *************** -->
@@ -52,10 +52,10 @@
                   label="Planning"
                   map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
                   map_option="0"
-                  robots="25"
-                  out_file="OUT"
-                  path="straight"
-                  inter_cage_dist="0.45"
+                  robots="ROBOTS"
+                  out_file="OUTFILE"
+                  path="PATH"
+                  inter_cage_dist="INTER_CAGE_DIST"
                  />
      
      
@@ -64,7 +64,7 @@
   <!-- *********************** -->
   <arena size="500, 500, 5" center="0,0,2.5">
   	<!-- 14 - 15 robots -->
-   <box id="push_object" size="2,2,0.3" mass="5" movable="true">
+   <box id="push_object" size="2,2,0.3" mass="MASS_OF_OBJECT" movable="true">
    <body position="0,0,0" orientation="0,0,0" />
    </box>
 
@@ -72,15 +72,6 @@
   <!-- ******************* -->
   <!-- * Physics engines * -->
   <!-- ******************* -->
-     
-
-
-
-
-
-
-
-
   <physics_engines>
     <dynamics2d id="dyn2d" />
   </physics_engines>

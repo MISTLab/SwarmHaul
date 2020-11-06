@@ -88,6 +88,11 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
          LoadMapIntoArena(m_map_file_name);
       }
 
+      std::string path; 
+      GetNodeAttribute(t_tree, "path", path);
+
+      float inter_cage_dist; 
+      GetNodeAttribute(t_tree, "inter_cage_dist", inter_cage_dist);
       // Place the robots arounds the start point randomly
       CRange<Real> c_range_(-6,-4);
       PlaceUniformly(unRobots,
@@ -105,11 +110,30 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
           buzzvm_pushs(tBuzzVM, buzzvm_string_register(tBuzzVM, "total_bots", 1));
           buzzvm_pushi(tBuzzVM, unRobots);
           buzzvm_gstore(tBuzzVM);
-
-          // buzzvm_function_call(vm, "load_targets_from_loop_fun", 0);
-          // /*Clear the nil value returned*/
-          // buzzvm_pop(vm);
-     
+          // Update inter caging distance 
+          buzzvm_pushs(tBuzzVM, buzzvm_string_register(tBuzzVM, "INTER_ROBOT_CAGING_DIS", 1));
+          buzzvm_pushf(tBuzzVM, inter_cage_dist);
+          buzzvm_gstore(tBuzzVM);
+          if(path == "straight"){
+            buzzvm_function_call(tBuzzVM, "load_streight_path", 0);
+            /*Clear the nil value returned*/
+            buzzvm_pop(tBuzzVM);
+          }
+          else if(path == "zigzac"){
+            buzzvm_function_call(tBuzzVM, "load_zigzac_path", 0);
+            /*Clear the nil value returned*/
+            buzzvm_pop(tBuzzVM);
+          } 
+          else if(path == "straight_rot"){
+            buzzvm_function_call(tBuzzVM, "load_streight_rot_path", 0);
+            /*Clear the nil value returned*/
+            buzzvm_pop(tBuzzVM);
+          } 
+          else{
+            buzzvm_function_call(tBuzzVM, "load_default_path", 0);
+            /*Clear the nil value returned*/
+            buzzvm_pop(tBuzzVM);
+          } 
           /* Append to list */
           m_buzz_ctrl.push_back(tBuzzVM);
        }
