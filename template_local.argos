@@ -52,11 +52,20 @@
                   label="Planning"
                   map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
                   map_option="0"
-                  robots="25"
+                  robots="50"
                   out_file="OUT"
-                  path="straight"
+                  path="straight_rot"
                   inter_cage_dist="0.45"
+                  random_seed_set="18"
+                  object_type="5"
                  />
+  <!-- Object type enum 
+      0 - square object of size (2,2) for 25 robots
+      1 - square object of size (3.6,6) for 50 robots 
+      2 - square object of size (7.2,18) for 100 robots
+      3 - Cloud shape for caging tests
+      4 - box_rotation shape for caging tests
+      5 - clover shape for caging tests - needs 50 robots -->
      
      
   <!-- *********************** -->
@@ -64,9 +73,13 @@
   <!-- *********************** -->
   <arena size="500, 500, 5" center="0,0,2.5">
   	<!-- 14 - 15 robots -->
-   <box id="push_object" size="2,2,0.3" mass="5" movable="true">
+ <!--   <box id="push_object" size="7.2,18,0.3" mass="5" movable="true">
    <body position="0,0,0" orientation="0,0,0" />
-   </box>
+   </box> -->
+
+  <!--  <box id="push_object" size="2,2,0.3" mass="5" movable="true">
+   <body position="0,0,0" orientation="0,0,0" />
+   </box> -->
 
   </arena>
   <!-- ******************* -->

@@ -93,13 +93,27 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
 
       float inter_cage_dist; 
       GetNodeAttribute(t_tree, "inter_cage_dist", inter_cage_dist);
+
+      int random_seed; 
+      GetNodeAttribute(t_tree, "random_seed_set", random_seed);
+      int object_type;
+      GetNodeAttribute(t_tree, "object_type", object_type);
+
       // Place the robots arounds the start point randomly
-      CRange<Real> c_range_(-6,-4);
+      CRange<Real> c_range_;
+      if(unRobots <=50){
+        CRange<Real> c_range_50(-6,-4);
+        c_range_ = c_range_50;
+      }  
+      else{
+        CRange<Real> c_range_100(-10,-6);
+        c_range_ = c_range_100;
+      }
       PlaceUniformly(unRobots,
                      DATA_SIZE,
                      c_range_);
 
-      
+      PlacePushedObject(object_type);
        for(int i=0; i< unRobots;++i) {
           /* Create a pointer to the current kh4 */
           CKheperaIVEntity& pcKB = *any_cast<CKheperaIVEntity *>(m_fbvec[i]);
@@ -109,6 +123,11 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
           // Update the number of robots 
           buzzvm_pushs(tBuzzVM, buzzvm_string_register(tBuzzVM, "total_bots", 1));
           buzzvm_pushi(tBuzzVM, unRobots);
+          buzzvm_gstore(tBuzzVM);
+          // Update the random seed.
+          // Update the number of robots 
+          buzzvm_pushs(tBuzzVM, buzzvm_string_register(tBuzzVM, "RANDOM_SEED_SET", 1));
+          buzzvm_pushi(tBuzzVM, random_seed);
           buzzvm_gstore(tBuzzVM);
           // Update inter caging distance 
           buzzvm_pushs(tBuzzVM, buzzvm_string_register(tBuzzVM, "INTER_ROBOT_CAGING_DIS", 1));
@@ -188,6 +207,11 @@ void Planningloop::PostStep() {
     buzzvm_pushs(vm, buzzvm_string_register(vm, "effective_pusher", 1));
     buzzvm_gload(vm);
     m_effecFile << "," << i << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
+    // log the effective rotators.
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "effective_rotater", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
     buzzvm_pop(vm);
     // Log current pushing wp. 
     buzzvm_pushs(vm, buzzvm_string_register(vm, "TASK_NUM", 1));
@@ -380,6 +404,163 @@ void Planningloop::PlaceUniformly(UInt32 un_robots,
     } while (!bDone && unTrials <= MAX_PLACE_TRIALS);
     if (!bDone) {
       THROW_ARGOSEXCEPTION("Can't place " << cFBId.str());
+    }
+  }
+}
+
+void Planningloop::PlacePushedObject(int object_type){
+  /*Object type enum 
+    0 - square object of size (2,2) for 25 robots
+    1 - square object of size (3.6,6) for 50 robots 
+    2 - square object of size (7.2,18) for 100 robots
+    3 - Cloud shape for caging tests
+    4 - box_rotation shape for caging tests
+    5 - clover shape for caging tests
+  */
+  if(object_type == 0){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                true,
+                                CVector3(2, 2, 0.3)));
+  }
+  else if(object_type == 1){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                true,
+                                CVector3(3.6, 6, 0.3)));
+  }
+  else if(object_type == 2){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                true,
+                                CVector3(7.2, 18, 0.3)));
+  }
+  else if(object_type == 3){
+    // Add cube
+    AddEntity( *new CBoxEntity("push_object",
+                                  CVector3(0,0,0),
+                                  CQuaternion(),
+                                  false,
+                                  CVector3(2, 2, 0.3)));
+    std::vector<float> pos_vec;
+    pos_vec.push_back(-0.5);
+    pos_vec.push_back(0.5);
+    pos_vec.push_back(0.0);
+
+    // Top cylinder    
+    for(int i=0; i < pos_vec.size(); ++i){
+      AddEntity(
+      *new CCylinderEntity("col_"+std::to_string(i),
+                           CVector3( 1, pos_vec[i], 0),
+                           CQuaternion(),
+                           false,
+                           0.3,
+                           0.3));  
+    }
+      
+
+    // Top cylinder    
+    for(int i=0; i < pos_vec.size(); ++i){
+      AddEntity(
+      *new CCylinderEntity("colb_"+std::to_string(i),
+                           CVector3( -1, pos_vec[i], 0),
+                           CQuaternion(),
+                           false,
+                           0.3,
+                           0.3));  
+    }
+
+    // right cylinder  
+    for(int i=0; i < pos_vec.size(); ++i){
+      AddEntity(
+      *new CCylinderEntity("colr_"+std::to_string(i),
+                           CVector3(pos_vec[i], -1, 0),
+                           CQuaternion(),
+                           false,
+                           0.3,
+                           0.3));  
+    }
+ 
+
+    // left cylinder  
+    for(int i=0; i < pos_vec.size(); ++i){
+      AddEntity(
+      *new CCylinderEntity("coll_"+std::to_string(i),
+                           CVector3(pos_vec[i], 1, 0),
+                           CQuaternion(),
+                           false,
+                           0.3,
+                           0.3));  
+    }
+  }
+  else if(object_type == 4){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                false,
+                                CVector3(0.01, 0.01, 0.3)));
+    for(int i=0; i < 8; ++i){
+      CQuaternion m_orientation=CQuaternion();
+      CVector3 m_box_pos = CVector3(1,0,0);
+      m_orientation.FromEulerAngles(CRadians(0.785398*i),CRadians(0.0), CRadians(0.0));
+      m_box_pos.Rotate(m_orientation);
+      m_orientation.FromEulerAngles(CRadians(0.785398),CRadians(0.0), CRadians(0.0));
+      AddEntity( *new CBoxEntity("push_object"+std::to_string(i),
+                                m_box_pos,
+                                m_orientation,
+                                false,
+                                CVector3(0.8, 0.8, 0.3)));
+    }
+
+  }
+  else if(object_type == 4){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                false,
+                                CVector3(0.01, 0.01, 0.3)));
+    for(int i=0; i < 8; ++i){
+      CQuaternion m_orientation=CQuaternion();
+      CVector3 m_box_pos = CVector3(1,0,0);
+      m_orientation.FromEulerAngles(CRadians(0.785398*i),CRadians(0.0), CRadians(0.0));
+      m_box_pos.Rotate(m_orientation);
+      m_orientation.FromEulerAngles(CRadians(0.785398),CRadians(0.0), CRadians(0.0));
+      AddEntity( *new CBoxEntity("push_object"+std::to_string(i),
+                                m_box_pos,
+                                m_orientation,
+                                false,
+                                CVector3(0.8, 0.8, 0.3)));
+    }
+  }
+  else if(object_type == 5){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                false,
+                                CVector3(2, 2, 0.3)));
+    for(int i=0; i < 4; ++i){
+      CQuaternion m_orientation=CQuaternion();
+      CVector3 m_box_pos = CVector3(1.2,0,0);
+      m_orientation.FromEulerAngles(CRadians(1.5708*i),CRadians(0.0), CRadians(0.0));
+      m_box_pos.Rotate(m_orientation);
+      m_orientation.FromEulerAngles(CRadians(0.0), CRadians(0.0), CRadians(0.0));
+
+      // AddEntity( *new CBoxEntity("push_object"+std::to_string(i),
+      //                           m_box_pos,
+      //                           m_orientation,
+      //                           false,
+      //                           CVector3(0.8, 0.8, 0.3)));
+
+      AddEntity(
+      *new CCylinderEntity("coll_"+std::to_string(i),
+                           m_box_pos,
+                           m_orientation,
+                           false,
+                           1,
+                           0.3));
     }
   }
 }

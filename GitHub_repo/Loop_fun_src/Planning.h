@@ -31,6 +31,8 @@ private:
    void PlaceUniformly(UInt32 un_robots,
                        UInt32 un_data_size,
                        CRange<Real> c_range_);
+
+   void PlacePushedObject(int object_type);
    
    void OpenFile(std::ofstream& c_stream,
                  const std::string& str_prefix);

@@ -13,10 +13,12 @@ LEFT_TARGET_CONE_ANGLE = 0.03
 RIGHT_TARGET_CONE_ANGLE = 0.03
 NORMAL_CAGE_ANGLE = 0.17
 TOUCHING_OBS_THRESH = 0.7
-INTER_WP_TOLERENCE = 0.4
+INTER_WP_TOLERENCE = 0.5
 INTER_ROBOT_CAGING_DIS=0.45
 RANGE_OF_PROXMITY = 0.3
 total_bots = 50
+RANDOM_SEED_SET=0
+RANDOM_SEED_SET_VAR=0
 
 
 # Global Vaiables 
@@ -227,6 +229,10 @@ function init() {
 
 
 function step(){
+  if(RANDOM_SEED_SET != 0 and RANDOM_SEED_SET_VAR == 0){
+    RANDOM_SEED_SET_VAR = 1
+    math.rng.setseed(RANDOM_SEED_SET)
+  }
   time = time + 1 
   var obstacle_vector = obs_vec()
   
@@ -468,7 +474,7 @@ function step(){
 
 
         goto(vector_to_target.x, vector_to_target.y)
-        if(math.vec2.dis(POS_DES,pose.position)<0.03)
+        if(math.vec2.dis(POS_DES,pose.position)<0.08)
         {
           TASK = 0
           set_wheels(0.0,0.0)
@@ -522,17 +528,14 @@ function step(){
         num_rot = math.vec2.dot(move_per,move_in_wc)
         denom_rot =  math.vec2.length(move_per) * math.vec2.length(move_in_wc) 
         angle_rot = math.acos(num_rot/denom_rot)
-        log("[",id,"]",angle_rot)
-          if((angle_rot > 1.5) or (angle_rot < -1.5))
-            {effective_rotater = 1}
-          
-          else{
-            log("[",id,"]","Effective rotater")
-            effective_rotater = 0}
-        
-
-
-
+        # log("[",id,"]",angle_rot)
+        if((angle_rot > 1.5) or (angle_rot < -1.5)){
+          effective_rotater = 1
+        }
+        else{
+          # log("[",id,"]","Effective rotater")
+          effective_rotater = 0
+        }
         move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
         move_in = math.vec2.scale(math.vec2.norm(move_in), 25)
         move_away = find_neighbours()
@@ -541,14 +544,14 @@ function step(){
         }
         vector_to_target = math.vec2.add(move_per,move_in) 
         vector_to_target = math.vec2.add(vector_to_target,move_away)
-        vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 15)
+        vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 20)
         goto(vector_to_target.x,vector_to_target.y)
         present_vec = math.vec2.sub(pose.position,Pushed_obj_pos)
         present_dis = math.vec2.dis(pose.position,Pushed_obj_pos)
         num = math.vec2.dot(present_vec,init_vector)
         denom = present_dis * init_distance
         angle = math.acos(num/denom)
-        if ((angle > (yaw - 0.02)) and (angle < (yaw + 0.02))){
+        if ((angle > (yaw - 0.05)) and (angle < (yaw + 0.05))){
           TASK = 0
           set_wheels(0.0,0.0)
           if (barrier2.get(TASK_NUM)){
@@ -770,7 +773,7 @@ function next_task_update(obs, nei_in_previous_point){
    log ("[",id,"]", "target_checker" , math.vec2.dis(next_target,previous_point_opp_branch))
  
 
-   if (math.vec2.dis(next_target,previous_point_opp_branch)<(INTER_ROBOT_CAGING_DIS + 0.5*INTER_ROBOT_CAGING_DIS) and small==0){
+   if (math.vec2.dis(next_target,previous_point_opp_branch)<(INTER_ROBOT_CAGING_DIS + 0.85*INTER_ROBOT_CAGING_DIS) and small==0){
    	barrier_cage.put(id,1)
    	log("barrier")
    	return 0
