@@ -780,9 +780,9 @@ function next_task_update(obs, nei_in_previous_point){
     #log ("[",id,"]", "size" , size(right_branch))
 
   }
-   log ("[",id,"]", "target_checker_next_target" , next_target.x,":",next_target.y)
-   log ("[",id,"]", "target_checker_next_target" , previous_point_opp_branch.x,":",previous_point_opp_branch.y) 
-   log ("[",id,"]", "target_checker" , math.vec2.dis(next_target,previous_point_opp_branch))
+   #log ("[",id,"]", "target_checker_next_target" , next_target.x,":",next_target.y)
+   #log ("[",id,"]", "target_checker_next_target" , previous_point_opp_branch.x,":",previous_point_opp_branch.y) 
+   #log ("[",id,"]", "target_checker" , math.vec2.dis(next_target,previous_point_opp_branch))
  
 
    if (math.vec2.dis(next_target,previous_point_opp_branch)<(INTER_ROBOT_CAGING_DIS + 0.85*INTER_ROBOT_CAGING_DIS) and small==0){

@@ -64,11 +64,7 @@
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
-  <arena size="500, 500, 5" center="0,0,2.5">
-  	<!-- 14 - 15 robots -->
-   <box id="push_object" size="2,2,0.3" mass="MASS_OF_OBJECT" movable="true">
-   <body position="0,0,0" orientation="0,0,0" />
-   </box>
+  <arena size="50, 50, 5" center="0,0,2.5">
 
   </arena>
   <!-- ******************* -->

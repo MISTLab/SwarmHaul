@@ -20,13 +20,13 @@ OBJECT_SHAPE=0
 
 for SEED in $(seq 1 30)
 do
-    for PATH in "straight" "zigzac" "straight_rot"
+    for ROBOT_PATH in "straight" #"zigzac" "straight_rot"
     do
         
         for ROBOTS in 25 50 100 
         do
             
-            for INTER_CAGE_DIST in 0.45 0.65 0.85
+            for INTER_CAGE_DIST in 0.45 #0.65 0.85
             do
                 if [[ ROBOTS -eq 50 ]]
                 then
@@ -36,12 +36,13 @@ do
                 then
                     OBJECT_SHAPE=2
                 fi
-                
-                RUNID="${ROBOTS}_${PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}"
-                echo "RUNID: $RUNID" 
-                # sbatch --job-name=${RUNID} run_job.sh $ROBOTS $PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
-                # sleep 1
+                RUNID="${ROBOTS}_${ROBOT_PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}"
+                echo "RUNID:${RUNID}" 
+                echo "$ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED"
+		# sbatch --job-name=${RUNID} run_job.sh $ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
+                sleep 1
             done
         done
     done
 done
+

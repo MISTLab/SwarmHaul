@@ -72,9 +72,9 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
       GetNodeAttribute(t_tree, "robots", unRobots);
       std::string OUT_FNAME; 
       GetNodeAttribute(t_tree, "out_file", OUT_FNAME);
-      POSTITIONFILE_PREFIX +=OUT_FNAME+".dat";
-      EFFECTIVENESS_PREFIX +=OUT_FNAME+".dat";
-      PERF_PREFIX +=OUT_FNAME+".dat";
+      POSTITIONFILE_PREFIX +=OUT_FNAME;
+      EFFECTIVENESS_PREFIX +=OUT_FNAME;
+      PERF_PREFIX +=OUT_FNAME;
 
 
       GetNodeAttribute(t_tree, "map_file_name", m_map_file_name);

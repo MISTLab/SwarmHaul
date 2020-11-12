@@ -2,7 +2,7 @@
 #include "virtual_stigmergy2.h"
 #include <argos3/core/utility/logging/argos_log.h>
 // #include <ompl/geometric/planners/rrt/RRTstar.h>
-#include <boost/program_options.hpp>
+//#include <boost/program_options.hpp>
 
 // path planning Constants
 static const char free_space = '.';
