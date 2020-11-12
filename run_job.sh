@@ -18,17 +18,16 @@ mkdir -p ${DATADIR}
 #export ARGOS_PLUGIN_PATH=${HOMEDIR}/build
 #export LD_LIBRARY_PATH=${ARGOS_PLUGIN_PATH}:$LD_LIBRARY_PATH
 
-
 # Script parameters
 ROBOTS=${1}
 PATH=${2}
 INTER_CAGE_DIST=${3}
 MASS=${4}
-RANDOMSEED=${5}
-
+OBJECT_SHAPE=${5}
+RANDOMSEED=${6}
 
 # Run id, used as base file name
-RUNID=${ROBOTS}_${PATH}_${INTER_CAGE_DIST}_${MASS}_${RANDOMSEED}
+RUNID=${ROBOTS}_${PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${RANDOMSEED}
 
 echo "${RUNID}"
 
@@ -58,10 +57,11 @@ cp ${HOMEDIR}/GitHub_repo/maps/Comparisions/empty.map ${WORKDIR}/GitHub_repo/map
 # Set up experiment file
 sed -e "s|RANDOMSEED|${RANDOMSEED}|g" \
     -e "s|PATH|${PATH}|g" \
-    -e "s|INTER_CAGE_DIST|${INTER_CAGE_DIST}|g" \
+    -e "s|INTERCAGEDIST|${INTER_CAGE_DIST}|g" \
     -e "s|MASS_OF_OBJECT|${MASS}|g" \
     -e "s|OUTFILE|${OUTFILE}|g" \
     -e "s|ROBOTS|${ROBOTS}|g" \
+    -e "s|OBJECTTYPE|${OBJECT_SHAPE}|g" \
     ${HOMEDIR}/template.argos > ${EXPERIMENT}
 
 # Launch ARGoS

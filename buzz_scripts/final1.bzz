@@ -263,6 +263,9 @@ function step(){
           yaw = barrier.get(TASK_NUM).yaw-barrier.get(TASK_NUM-2).yaw
         }
       }
+      else if(size(right_branch_list) > 3 and size(left_branch_list) > 3){
+        var m_ret = task_checker(pose.position)
+      }
     }
 
     if(s.in()){
@@ -328,11 +331,20 @@ function step(){
               var obs_orth2 = math.vec2.rotate(obs_orth, math.pi*(6/4))
               # var ortho_Limited = LimitAngle(math.vec2.angle(obs_orth))
               var previous_point = {.x=0,.y=0}
-              if(BRANCH == 1 and size(left_branch) > 2){  
-                previous_point = left_branch[size(left_branch)-2]
+              if(BRANCH == 1){
+                if(size(left_branch) > 2)  
+                  previous_point = left_branch[size(left_branch)-2]
+                else{
+                  previous_point = task.get(1).pos
+                }
               }
-              else if(size(right_branch) > 2){
-                previous_point = right_branch[size(right_branch)-2]  
+              else {
+                if(size(right_branch) > 2){
+                  previous_point = right_branch[size(right_branch)-2]  
+                }
+                else{
+                  previous_point = task.get(1).pos
+                }
               }
               previous_point = math.vec2.sub(previous_point,pose.position)
               # previous_point = math.vec2.rotate(previous_point,-pose.orientation.yaw)
@@ -782,8 +794,6 @@ function next_task_update(obs, nei_in_previous_point){
    	return 1
 	
 
-
-
  }
 
 
@@ -870,25 +880,26 @@ function gradient()
         log("[",id,"] FIRST ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK ",M_CAGING_TASK," SECOND TASK ", cnt)      
         task.put(cnt,{.id=id,.pos=task.get(cnt).pos,.bid=10000,.branch=task.get(cnt).branch})
       }
+      if(task.get(cnt).branch == 1){
+        if(not (branch_list_check[cnt] != nil) ){
+          left_branch_list[size(left_branch_list)] = cnt
+          branch_list_check[cnt] = 1
+        }
+        # check_and_add(task.get(cnt).pos,left_branch)
+      } 
+      if(task.get(cnt).branch == -1){
+        if(not (branch_list_check[cnt] != nil)){
+          right_branch_list[size(right_branch_list)] = cnt
+          branch_list_check[cnt] = 1
+        }
+        # check_and_add(task.get(cnt).pos,right_branch)
+      }
       if(M_CAGING_TASK == -1){
   
         if(task.get(cnt).bid >= 10000){
           bidding_timer[cnt] = 0
         }
-        if(task.get(cnt).branch == 1){
-          if(not (branch_list_check[cnt] != nil) ){
-            left_branch_list[size(left_branch_list)] = cnt
-            branch_list_check[cnt] = 1
-          }
-          # check_and_add(task.get(cnt).pos,left_branch)
-        } 
-        if(task.get(cnt).branch == -1){
-          if(not (branch_list_check[cnt] != nil)){
-            right_branch_list[size(right_branch_list)] = cnt
-            branch_list_check[cnt] = 1
-          }
-          # check_and_add(task.get(cnt).pos,right_branch)
-        } 
+        
         if ((not bidding_timer[cnt]%k) and M_CAGING_TASK == -1){
           var current_pose = math.vec2.new(pose.position.x,pose.position.y)
           var current_bid = task.get(cnt).bid

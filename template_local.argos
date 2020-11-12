@@ -52,12 +52,12 @@
                   label="Planning"
                   map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
                   map_option="0"
-                  robots="50"
-                  out_file="OUT"
-                  path="straight_rot"
+                  robots="30"
+                  out_file="OUT1"
+                  path="straight"
                   inter_cage_dist="0.45"
                   random_seed_set="18"
-                  object_type="5"
+                  object_type="0"
                  />
   <!-- Object type enum 
       0 - square object of size (2,2) for 25 robots
@@ -71,31 +71,17 @@
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
-  <arena size="500, 500, 5" center="0,0,2.5">
-  	<!-- 14 - 15 robots -->
- <!--   <box id="push_object" size="7.2,18,0.3" mass="5" movable="true">
-   <body position="0,0,0" orientation="0,0,0" />
-   </box> -->
-
-  <!--  <box id="push_object" size="2,2,0.3" mass="5" movable="true">
-   <body position="0,0,0" orientation="0,0,0" />
-   </box> -->
+  <arena size="50, 50, 5" center="0,0,2.5">
+    
 
   </arena>
   <!-- ******************* -->
   <!-- * Physics engines * -->
   <!-- ******************* -->
-     
-
-
-
-
-
-
-
 
   <physics_engines>
     <dynamics2d id="dyn2d" />
+
   </physics_engines>
 
   <!-- ********* -->
@@ -114,7 +100,7 @@
   <qt-opengl>
       <user_functions label="buzz_qt" />
       <camera>
-        <placement idx="0" position="-1.59862,0,4.59862" look_at="0,0,0" lens_focal_length="20" />
+        <placement idx="0" position="-1.59862,0,4.59862" look_at="0,0,0" lens_focal_length="1" />
         <placement idx="1" position="-1.22369,0,9.18125" look_at="-1.1384,-0.000852933,8.1849" lens_focal_length="20" />
       </camera>s
     </qt-opengl>

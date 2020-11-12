@@ -18,29 +18,23 @@ OBJECT_SHAPE=0
 
 # Submit jobs for transport
 
+# Submit jobs for cageing
 for SEED in $(seq 1 30)
 do
-    for PATH in "straight" "zigzac" "straight_rot"
+
+    for OBJECT_SHAPE in 3 4 5 
     do
-        
-        for ROBOTS in 25 50 100 
+        PATH="none"
+
+        for ROBOTS in 30 
         do
-            
             for INTER_CAGE_DIST in 0.45 0.65 0.85
             do
-                if [[ ROBOTS -eq 50 ]]
-                then
-                    OBJECT_SHAPE=1
-
-                elif [[ ROBOTS -eq 100 ]]
-                then
-                    OBJECT_SHAPE=2
-                fi
-                
-                RUNID="${ROBOTS}_${PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}"
+                       
+                RUNID=${ROBOTS}_${PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}
                 echo "RUNID: $RUNID" 
                 # sbatch --job-name=${RUNID} run_job.sh $ROBOTS $PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
-                # sleep 1
+                # sleep 0.1
             done
         done
     done

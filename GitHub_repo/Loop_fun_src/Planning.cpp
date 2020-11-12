@@ -412,17 +412,21 @@ void Planningloop::PlacePushedObject(int object_type){
   /*Object type enum 
     0 - square object of size (2,2) for 25 robots
     1 - square object of size (3.6,6) for 50 robots 
-    2 - square object of size (7.2,18) for 100 robots
+    2 - square object of size (7.2,12) for 100 robots
     3 - Cloud shape for caging tests
     4 - box_rotation shape for caging tests
     5 - clover shape for caging tests
   */
   if(object_type == 0){
+    // height 0.000001
+    // Mass of the object M = v * rho = 0.000004 cubic meter * 1.39 kilogram/cubic centimeter
+    // Rho of plastic 1.39kilogram/cubic centimeter
     AddEntity( *new CBoxEntity("push_object",
                                 CVector3(0,0,0),
                                 CQuaternion(),
                                 true,
-                                CVector3(2, 2, 0.3)));
+                                CVector3(2, 2, 0.3),
+                                5.56));
   }
   else if(object_type == 1){
     AddEntity( *new CBoxEntity("push_object",
@@ -436,7 +440,7 @@ void Planningloop::PlacePushedObject(int object_type){
                                 CVector3(0,0,0),
                                 CQuaternion(),
                                 true,
-                                CVector3(7.2, 18, 0.3)));
+                                CVector3(7.2, 12, 0.3)));
   }
   else if(object_type == 3){
     // Add cube
@@ -540,10 +544,10 @@ void Planningloop::PlacePushedObject(int object_type){
                                 CVector3(0,0,0),
                                 CQuaternion(),
                                 false,
-                                CVector3(2, 2, 0.3)));
+                                CVector3(0.5, 0.5, 0.3)));
     for(int i=0; i < 4; ++i){
       CQuaternion m_orientation=CQuaternion();
-      CVector3 m_box_pos = CVector3(1.2,0,0);
+      CVector3 m_box_pos = CVector3(0.7,0,0);
       m_orientation.FromEulerAngles(CRadians(1.5708*i),CRadians(0.0), CRadians(0.0));
       m_box_pos.Rotate(m_orientation);
       m_orientation.FromEulerAngles(CRadians(0.0), CRadians(0.0), CRadians(0.0));
@@ -559,7 +563,7 @@ void Planningloop::PlacePushedObject(int object_type){
                            m_box_pos,
                            m_orientation,
                            false,
-                           1,
+                           0.6,
                            0.3));
     }
   }
