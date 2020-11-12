@@ -433,14 +433,16 @@ void Planningloop::PlacePushedObject(int object_type){
                                 CVector3(0,0,0),
                                 CQuaternion(),
                                 true,
-                                CVector3(3.6, 6, 0.3)));
+                                CVector3(3.6, 6, 0.3),
+                                30.024));
   }
   else if(object_type == 2){
     AddEntity( *new CBoxEntity("push_object",
                                 CVector3(0,0,0),
                                 CQuaternion(),
                                 true,
-                                CVector3(7.2, 12, 0.3)));
+                                CVector3(7.2, 12, 0.3),
+                                120.096));
   }
   else if(object_type == 3){
     // Add cube

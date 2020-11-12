@@ -9,9 +9,14 @@ set -e
 
 # Basic variables
 ME=$(whoami)
-BASEWORKDIR=${SCRATCH}/run_dir
-HOMEDIR=${SCRATCH}/collaborative_transport
-DATADIR=${SCRATCH}/data
+# niagra
+# BASEWORKDIR=${SCRATCH}/run_dir
+# HOMEDIR=${SCRATCH}/collaborative_transport
+# DATADIR=${SCRATCH}/data
+# Cedar and graham
+BASEWORKDIR=${HOME}/scratch/run_dir
+HOMEDIR=${HOME}/scratch/collaborative_transport
+DATADIR=${HOME}/scratch/data
 mkdir -p ${DATADIR}
 
 # Other useful variables

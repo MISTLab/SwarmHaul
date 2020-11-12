@@ -39,7 +39,7 @@ do
                 RUNID="${ROBOTS}_${ROBOT_PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}"
                 echo "RUNID:${RUNID}" 
                 echo "$ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED"
-		# sbatch --job-name=${RUNID} run_job.sh $ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
+		        # sbatch --job-name=${RUNID} run_job_for_10seed.sh $ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
                 sleep 1
             done
         done
