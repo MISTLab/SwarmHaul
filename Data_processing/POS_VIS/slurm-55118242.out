@@ -1,0 +1,4051 @@
+50_straight_0.45_5_1_18
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_buzz.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_footbot.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_dynamics3d.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3core_simulator.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_qtopengl.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_pointmass3d.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_kheperaiv.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_genericrobot.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_entities.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_epuck.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_spiri.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_dynamics2d.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_media.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_prototype.so
+[INFO] Loaded library /home/viveks/scratch/software/lib/argos3/libargos3plugin_simulator_eyebot.so
+[INFO] Using 8 parallel threads
+[INFO]   Chosen method "balance_quantity": threads will be assigned the same
+[INFO]   number of tasks, independently of the task length.
+[INFO] Using random seed = 18
+[INFO] Using simulation clock tick = 0.1
+[INFO] Total experiment length in clock ticks = unlimited
+[INFO] Loaded library ./GitHub_repo/Hooks_src/build/libconnectivity_controller.so
+[INFO] Loaded library ./GitHub_repo/Loop_fun_src/build/libplanning_exp.so
+[INFO] The physics engine dyn2d" will perform 10 iterations per tick (dt = 0.01 sec)
+[INFO] No visualization selected.
+BUZZ: [49] Task assigned to me 1 BRANCH 0
+BUZZ: TAR array id49:i1:0:0
+BUZZ: [49]:0:0
+BUZZ: [49]obs.len:0.153003obs.ang:-0.0137073 cnt 1
+BUZZ: [49] curcum dist 4.89225 with 41
+BUZZ: [49] Nei Is OBSTACLE 0
+BUZZ: target x:4 y:4
+BUZZ: [49]  Y increment 
+BUZZ: [49] Leaving s swarm and joining cagers
+BUZZ: [41] Task assigned to me 2 BRANCH 1
+BUZZ: [41] left_branch K2 -> (-1.91069,-1.01177)
+BUZZ: TAR array id41:i1:-1.91069:-1.46177
+BUZZ: TAR array id41:i2:-1.91069:-1.01177
+BUZZ: [41] FIRST ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK 2 SECOND TASK 3
+BUZZ: [41] FIRST ERROR!!!! I WAS ASSIGNED TWO TASKS FIRST TASK 2 SECOND TASK 3
+BUZZ: [17] Task assigned to me 3 BRANCH -1
+BUZZ: [17] right_branch K3 -> (-1.91069,-1.91177)
+BUZZ: TAR array id17:i1:-1.91069:-1.46177
+BUZZ: TAR array id17:i2:-1.91069:-1.91177
+BUZZ: 2:41: x-1.91069: y-1.01177
+BUZZ: [41] last point -1.91069,-1.46177
+BUZZ: [41] ang diff with 49 is 0.0233421
+BUZZ: [41]:-1.91069:-1.01177
+BUZZ: [41]obs.len:0.0264846obs.ang:-0.114071 cnt 0.19872
+BUZZ: [41] curcum dist 0.476668 with 49
+BUZZ: [41] Nei Is OBSTACLE 0
+BUZZ: [41] last point -1.91069,-1.46177
+BUZZ: [41] ang diff with 49 is 0.021363
+BUZZ: [41]:0:0
+BUZZ: [41]obs.len:0.0919352obs.ang:0.00776002 cnt 0.488519
+BUZZ: [41] curcum dist 0.469656 with 49
+BUZZ: [41] Nei Is OBSTACLE 0
+BUZZ: [41] last point -1.91069,-1.46177
+BUZZ: [41] ang diff with 49 is 0.0195093
+BUZZ: [41]:0:0
+BUZZ: [41]obs.len:0.22854obs.ang:0.0877999 cnt 1
+BUZZ: [41] curcum dist 0.463529 with 49
+BUZZ: [41] Nei Is OBSTACLE 0
+BUZZ: [41] NEI ROTATING 180 DEG
+BUZZ: [41] Adding task: 4 Branch 1 Stig branch: 1
+BUZZ: [41] Leaving s swarm and joining cagers
+BUZZ: 2:17: x-1.91069: y-1.91177
+BUZZ: [17] last point -1.91069,-1.46177
+BUZZ: [17] ang diff with 49 is 0.017898
+BUZZ: [17]:-1.91069:-1.91177
+BUZZ: [17]obs.len:0.0173223obs.ang:0.182099 cnt 0.138578
+BUZZ: [17] curcum dist 0.509231 with 49
+BUZZ: [17] Nei Is OBSTACLE 0
+BUZZ: [17] last point -1.91069,-1.46177
+BUZZ: [17] ang diff with 49 is 0.0197484
+BUZZ: [17]:0:0
+BUZZ: [17]obs.len:0.0768744obs.ang:-0.0223444 cnt 0.551589
+BUZZ: [17] curcum dist 0.474108 with 49
+BUZZ: [17] Nei Is OBSTACLE 0
+BUZZ: [17] last point -1.91069,-1.46177
+BUZZ: [17] ang diff with 49 is 0.0214016
+BUZZ: [17]:0:0
+BUZZ: [17]obs.len:0.23097obs.ang:-0.0983496 cnt 1
+BUZZ: [17] curcum dist 0.450748 with 49
+BUZZ: [17] Nei Is OBSTACLE 0
+BUZZ: [17] NEI ROTATING 180 DEG
+BUZZ: [17] Adding task: 5 Branch -1 Stig branch: -1
+BUZZ: [17] Leaving s swarm and joining cagers
+BUZZ: [12] Task assigned to me 4 BRANCH 1
+BUZZ: [12] left_branch K2 -> (-1.89871,-0.99114)
+BUZZ: [12] left_branch K4 -> (-1.88726,-0.541286)
+BUZZ: TAR array id12:i1:-1.91069:-1.46177
+BUZZ: TAR array id12:i2:-1.89871:-0.99114
+BUZZ: TAR array id12:i3:-1.88726:-0.541286
+BUZZ: [15] Task assigned to me 5 BRANCH -1
+BUZZ: [15] right_branch K3 -> (-1.8969,-1.89812)
+BUZZ: [15] right_branch K5 -> (-1.88268,-2.3479)
+BUZZ: TAR array id15:i1:-1.91069:-1.46177
+BUZZ: TAR array id15:i2:-1.8969:-1.89812
+BUZZ: TAR array id15:i3:-1.88268:-2.3479
+BUZZ: 2:12: x-1.89871: y-0.99114
+BUZZ: 3:12: x-1.88726: y-0.541286
+BUZZ: 2:15: x-1.8969: y-1.89812
+BUZZ: 3:15: x-1.88268: y-2.3479
+BUZZ: [12] last point -1.89871,-0.99114
+BUZZ: [12] ang diff with 41 is 0.0281098
+BUZZ: [12]:-1.88726:-0.541286
+BUZZ: [12]obs.len:0.0821283obs.ang:0.0082991 cnt 0.492053
+BUZZ: [12] curcum dist 0.474396 with 41
+BUZZ: [12] Nei Is OBSTACLE 0
+BUZZ: [12] last point -1.89871,-0.99114
+BUZZ: [12] ang diff with 41 is 0.0264288
+BUZZ: [12]:0:0
+BUZZ: [12]obs.len:0.223177obs.ang:0.0397198 cnt 1
+BUZZ: [12] curcum dist 0.465542 with 41
+BUZZ: [12] Nei Is OBSTACLE 0
+BUZZ: [12] NEI ROTATING 180 DEG
+BUZZ: [12] Adding task: 6 Branch 1 Stig branch: 1
+BUZZ: [12] Leaving s swarm and joining cagers
+BUZZ: [15] last point -1.8969,-1.89812
+BUZZ: [15] ang diff with 17 is 0.0336723
+BUZZ: [15] ang diff with 49 is 0.028615
+BUZZ: [15]:-1.88268:-2.3479
+BUZZ: [15]obs.len:0.132425obs.ang:0.0192893 cnt 0.885425
+BUZZ: [15] curcum dist 0.427744 with 17
+BUZZ: [15] Nei Is OBSTACLE 0
+BUZZ: [15] NEI ROTATING 180 DEG
+BUZZ: [15] Adding task: 7 Branch -1 Stig branch: -1
+BUZZ: [15] Leaving s swarm and joining cagers
+BUZZ: [35] Task assigned to me 6 BRANCH 1
+BUZZ: [35] left_branch K2 -> (-1.89871,-0.99114)
+BUZZ: [35] left_branch K4 -> (-1.90184,-0.534162)
+BUZZ: [35] left_branch K6 -> (-1.90492,-0.0841722)
+BUZZ: TAR array id35:i1:-1.91069:-1.46177
+BUZZ: TAR array id35:i2:-1.89871:-0.99114
+BUZZ: TAR array id35:i3:-1.90184:-0.534162
+BUZZ: TAR array id35:i4:-1.90492:-0.0841722
+BUZZ: [10] Task assigned to me 7 BRANCH -1
+BUZZ: [10] right_branch K3 -> (-1.8969,-1.89812)
+BUZZ: [10] right_branch K5 -> (-1.91426,-2.29402)
+BUZZ: [10] right_branch K7 -> (-1.93397,-2.74359)
+BUZZ: TAR array id10:i1:-1.91069:-1.46177
+BUZZ: TAR array id10:i2:-1.8969:-1.89812
+BUZZ: TAR array id10:i3:-1.91426:-2.29402
+BUZZ: TAR array id10:i4:-1.93397:-2.74359
+BUZZ: 2:10: x-1.8969: y-1.89812
+BUZZ: 3:10: x-1.91426: y-2.29402
+BUZZ: 4:10: x-1.93397: y-2.74359
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0590734
+BUZZ: [10]:-1.93397:-2.74359
+BUZZ: [10]obs.len:0.0887947obs.ang:0.0826349 cnt 0.710358
+BUZZ: [10] curcum dist 0.217642 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0571177
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00685046obs.ang:0.556066 cnt 0.0548037
+BUZZ: [10] curcum dist 0.24136 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0549684
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.264556 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0549684
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00800446obs.ang:0.542601 cnt 0.0640357
+BUZZ: [10] curcum dist 0.264556 with 15
+BUZZ: 2:35: x-1.89871: y-0.99114
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0549685
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0279358obs.ang:0.379232 cnt 0.223487
+BUZZ: [10] curcum dist 0.264556 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0523421
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0253361obs.ang:0.0788677 cnt 0.202689
+BUZZ: [10] curcum dist 0.256662 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0472343
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0294806obs.ang:0.0604062 cnt 0.235845
+BUZZ: [10] curcum dist 0.231284 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0417669
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0236802obs.ang:0.0604062 cnt 0.189441
+BUZZ: [10] curcum dist 0.231418 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0369096
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00485082obs.ang:0.126778 cnt 0.0388065
+BUZZ: [10] curcum dist 0.252187 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0317031
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.274023 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0247862
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00768758obs.ang:-0.278206 cnt 0.0615006
+BUZZ: [10] curcum dist 0.305943 with 15
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0193861
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.340642 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0153589
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.381866 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0113952
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.420401 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00742102
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.449251 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00357628
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.467802 with 15
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.000110388
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.438113 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00363052
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.396237 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00686145
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.354223 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00969088
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.312204 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: 3:35: x-1.90184: y-0.534162
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0113888
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0319701obs.ang:0.409608 cnt 0.255761
+BUZZ: [10] curcum dist 0.283051 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0125513
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.253457 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0129271
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0802957obs.ang:0.141566 cnt 0.642365
+BUZZ: [10] curcum dist 0.229427 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0127497
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0591886obs.ang:0.327333 cnt 0.473509
+BUZZ: [10] curcum dist 0.209606 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0123436
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0108534obs.ang:-0.349683 cnt 0.0868275
+BUZZ: [10] curcum dist 0.19728 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0120101
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.034206obs.ang:-0.295108 cnt 0.273648
+BUZZ: [10] curcum dist 0.210311 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.011651
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0413789obs.ang:-0.221638 cnt 0.331031
+BUZZ: [10] curcum dist 0.225944 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0109658
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0260032obs.ang:-0.214025 cnt 0.208026
+BUZZ: [10] curcum dist 0.255267 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0104039
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133114obs.ang:-0.214025 cnt 0.106491
+BUZZ: [10] curcum dist 0.281397 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0100205
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00385349obs.ang:-0.146395 cnt 0.0308279
+BUZZ: [10] curcum dist 0.300717 with 17
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00962424
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.320379 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00900745
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.353362 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.008322
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.394807 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00808883
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.431205 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00828338
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.456175 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0086875
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.470289 with 17
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00915813
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.44795 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: 4:35: x-1.90492: y-0.0841722
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00963259
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.405602 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0100453
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.3632 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0102999
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.33248 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0103662
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.323639 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0101571
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0226088obs.ang:0.60804 cnt 0.18087
+BUZZ: [10] curcum dist 0.313349 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00966573
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0128774obs.ang:0.768983 cnt 0.103019
+BUZZ: [10] curcum dist 0.304984 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00909019
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00346298obs.ang:0.18301 cnt 0.0277039
+BUZZ: [10] curcum dist 0.30357 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00864244
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0088142obs.ang:0.317023 cnt 0.0705136
+BUZZ: [10] curcum dist 0.30778 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00803375
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.320267 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00772047
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.327451 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00762439
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.313189 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.0076406
+BUZZ: [10] ang diff with 17 is 0.285036
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.277847 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 15 is 0.00779772
+BUZZ: [10] ang diff with 17 is 0.258948
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00388497obs.ang:0.051301 cnt 0.0310798
+BUZZ: [10] curcum dist 0.255904 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.236148
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00400836obs.ang:0.102937 cnt 0.0320669
+BUZZ: [10] curcum dist 0.258693 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.225685
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00136035obs.ang:0.110248 cnt 0.0108828
+BUZZ: [10] curcum dist 0.259914 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.218028
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.261397 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [35] last point -1.90184,-0.534162
+BUZZ: [35] ang diff with 41 is 0.0231278
+BUZZ: [35] ang diff with 12 is 0.0272195
+BUZZ: [35]:-1.90492:-0.0841722
+BUZZ: [35]obs.len:0.0517283obs.ang:-0.0242794 cnt 0.329939
+BUZZ: [35] curcum dist 0.4824 with 12
+BUZZ: [35] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.207307
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0259524obs.ang:-0.443314 cnt 0.207619
+BUZZ: [10] curcum dist 0.264808 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [35] last point -1.90184,-0.534162
+BUZZ: [35] ang diff with 12 is 0.0255046
+BUZZ: [35]:0:0
+BUZZ: [35]obs.len:0.158691obs.ang:0.0126859 cnt 0.757217
+BUZZ: [35] curcum dist 0.473868 with 12
+BUZZ: [35] Nei Is OBSTACLE 0
+BUZZ: [35] NEI ROTATING 180 DEG
+BUZZ: [35] Adding task: 8 Branch 1 Stig branch: 1
+BUZZ: [35] Leaving s swarm and joining cagers
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.196088
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0344932obs.ang:-0.24183 cnt 0.275945
+BUZZ: [10] curcum dist 0.272058 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.180477
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0163296obs.ang:-0.704295 cnt 0.130637
+BUZZ: [10] curcum dist 0.290492 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0168019obs.ang:-0.477477 cnt 0.134415
+BUZZ: [10] curcum dist 0.314391 with 49
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.165952
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.342493 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.164488
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.375324 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.164071
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.387931 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.157145
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.40087 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.142667
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.41228 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.127629
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.414116 with 49
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.112877
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.380029 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.098748
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.337786 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0926208
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00397998obs.ang:0.683446 cnt 0.0318399
+BUZZ: [10] curcum dist 0.318779 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0926208
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0167944obs.ang:0.846814 cnt 0.134355
+BUZZ: [10] curcum dist 0.318779 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0926207
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0171438obs.ang:1.01018 cnt 0.13715
+BUZZ: [10] curcum dist 0.318779 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0958571
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000887935obs.ang:1.16424 cnt 0.00710348
+BUZZ: [10] curcum dist 0.32704 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.102919
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.346207 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.112116
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.37039 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.115072
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.378153 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.115072
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.378153 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.11089
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.360003 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.105371
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.33787 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.10072
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0167403obs.ang:0.614296 cnt 0.133922
+BUZZ: [10] curcum dist 0.319392 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0141544obs.ang:0.961693 cnt 0.113235
+BUZZ: [10] curcum dist 0.291279 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0924103
+BUZZ: [10] ang diff with 49 is 0.283331
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0520737obs.ang:0.405254 cnt 0.41659
+BUZZ: [10] curcum dist 0.274585 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0922897
+BUZZ: [10] ang diff with 49 is 0.279919
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0720837obs.ang:0.598478 cnt 0.57667
+BUZZ: [10] curcum dist 0.267331 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.093291
+BUZZ: [10] ang diff with 49 is 0.28114
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0454079obs.ang:0.684613 cnt 0.363263
+BUZZ: [10] curcum dist 0.263065 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0951126
+BUZZ: [10] ang diff with 49 is 0.28505
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0106878obs.ang:0.692063 cnt 0.0855025
+BUZZ: [10] curcum dist 0.260074 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0964959
+BUZZ: [10] ang diff with 49 is 0.287899
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00290735obs.ang:-0.0492804 cnt 0.0232588
+BUZZ: [10] curcum dist 0.258034 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0974379
+BUZZ: [10] ang diff with 49 is 0.289974
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0184526obs.ang:0.000700941 cnt 0.147621
+BUZZ: [10] curcum dist 0.257238 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 17 is 0.0990727
+BUZZ: [10] ang diff with 49 is 0.293915
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0178881obs.ang:0.00571059 cnt 0.143105
+BUZZ: [10] curcum dist 0.25716 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.296716
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0175945obs.ang:0.0502663 cnt 0.140756
+BUZZ: [10] curcum dist 0.257237 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0124385obs.ang:0.0552168 cnt 0.0995077
+BUZZ: [10] curcum dist 0.258024 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0101859obs.ang:0.0777599 cnt 0.0814869
+BUZZ: [10] curcum dist 0.258452 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00741162obs.ang:0.058141 cnt 0.059293
+BUZZ: [10] curcum dist 0.259113 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0013857obs.ang:-0.0344899 cnt 0.0110856
+BUZZ: [10] curcum dist 0.260424 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.264777 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.268474 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.296108
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.284357 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.268097
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.300071 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.251149
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.303928 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.232249
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00673815obs.ang:-0.383677 cnt 0.0539052
+BUZZ: [10] curcum dist 0.306428 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.207489
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.321166 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00233725obs.ang:-0.578813 cnt 0.018698
+BUZZ: [10] curcum dist 0.348372 with 41
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.182327
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.385571 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.179049
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.404539 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.17076
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.416928 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.151675
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.426068 with 41
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.130618
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.390553 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.109447
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.349096 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.0961188
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.323072 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.0933046
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.317599 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.0933049
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0110173obs.ang:0.782971 cnt 0.0881388
+BUZZ: [10] curcum dist 0.317599 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.0933048
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0184255obs.ang:0.946339 cnt 0.147404
+BUZZ: [10] curcum dist 0.317599 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.0991563
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00505975obs.ang:1.1345 cnt 0.040478
+BUZZ: [10] curcum dist 0.32708 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.107659
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.342283 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.120472
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.365253 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.133718
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.387701 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.137632
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.394302 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.137631
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.394302 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.132213
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.375934 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.117512
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.010254obs.ang:0.725083 cnt 0.0820319
+BUZZ: [10] curcum dist 0.336259 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.110468
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0195829obs.ang:0.6425 cnt 0.156663
+BUZZ: [10] curcum dist 0.317512 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.110468
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0203058obs.ang:0.805868 cnt 0.162446
+BUZZ: [10] curcum dist 0.317512 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.110468
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00755527obs.ang:0.969236 cnt 0.0604422
+BUZZ: [10] curcum dist 0.317512 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.11746
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.330029 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.130794
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.356773 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.14028
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.374636 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.142164
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.378093 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.142164
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.378093 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.136962
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.359805 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [18] Task assigned to me 8 BRANCH 1
+BUZZ: [18] left_branch K2 -> (-1.89871,-0.99114)
+BUZZ: [18] left_branch K4 -> (-1.90184,-0.534162)
+BUZZ: [18] left_branch K6 -> (-1.91197,-0.0745708)
+BUZZ: [18] left_branch K8 -> (-1.92188,0.37532)
+BUZZ: TAR array id18:i1:-1.91069:-1.46177
+BUZZ: TAR array id18:i2:-1.89871:-0.99114
+BUZZ: TAR array id18:i3:-1.90184:-0.534162
+BUZZ: TAR array id18:i4:-1.91197:-0.0745708
+BUZZ: TAR array id18:i5:-1.92188:0.37532
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.132884
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.344843 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.132884
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000811509obs.ang:0.716585 cnt 0.00649208
+BUZZ: [10] curcum dist 0.344843 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.132884
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00369722obs.ang:0.553217 cnt 0.0295778
+BUZZ: [10] curcum dist 0.344843 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.135887
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.354787 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.142571
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.373868 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.14442
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.378975 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.14442
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.378975 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.137756
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.373022 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.12079
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00421obs.ang:0.832085 cnt 0.03368
+BUZZ: [10] curcum dist 0.350346 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.112397
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00847095obs.ang:0.888984 cnt 0.0677676
+BUZZ: [10] curcum dist 0.338729 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.112397
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00713173obs.ang:0.725615 cnt 0.0570538
+BUZZ: [10] curcum dist 0.338729 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.112397
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.338729 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.112397
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.338729 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.115656
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.002649obs.ang:0.977287 cnt 0.021192
+BUZZ: [10] curcum dist 0.342103 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.121356
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.346036 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.128834
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.351788 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.134102
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.357466 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.137483
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.361871 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.145389
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.372868 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.147983
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.376567 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.147983
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.376567 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.13961
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.353982 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.127656
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.323968 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.11889
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0194135obs.ang:0.355529 cnt 0.155308
+BUZZ: [10] curcum dist 0.300953 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.114159
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0328908obs.ang:0.556668 cnt 0.263126
+BUZZ: [10] curcum dist 0.286324 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.112057
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0221662obs.ang:0.67811 cnt 0.17733
+BUZZ: [10] curcum dist 0.278438 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.109932
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.268852 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0365386obs.ang:0.131384 cnt 0.292308
+BUZZ: [10] curcum dist 0.259912 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.107409
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.06136obs.ang:0.26221 cnt 0.49088
+BUZZ: [10] curcum dist 0.252643 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 49 is 0.106829
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.059449obs.ang:0.34207 cnt 0.475592
+BUZZ: [10] curcum dist 0.241439 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0247806obs.ang:0.486099 cnt 0.198245
+BUZZ: [10] curcum dist 0.235309 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000623946obs.ang:-0.216489 cnt 0.00499156
+BUZZ: [10] curcum dist 0.229813 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0257992obs.ang:-0.13652 cnt 0.206394
+BUZZ: [10] curcum dist 0.226858 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0330115obs.ang:-0.0746386 cnt 0.264092
+BUZZ: [10] curcum dist 0.225813 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0175481obs.ang:-0.157423 cnt 0.140385
+BUZZ: [10] curcum dist 0.223832 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.01241obs.ang:-0.167285 cnt 0.0992804
+BUZZ: [10] curcum dist 0.239645 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.011093obs.ang:-0.145162 cnt 0.0887442
+BUZZ: [10] curcum dist 0.249574 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0055487obs.ang:-0.186758 cnt 0.0443896
+BUZZ: [10] curcum dist 0.26806 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00222922obs.ang:-0.213539 cnt 0.0178337
+BUZZ: [10] curcum dist 0.282943 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.313786 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.329025 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.329025 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.327148 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.292003
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00541637obs.ang:-0.459825 cnt 0.0433309
+BUZZ: [10] curcum dist 0.31365 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.27174
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0109439obs.ang:-0.262146 cnt 0.0875512
+BUZZ: [10] curcum dist 0.303757 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.268757
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00703551obs.ang:-0.205158 cnt 0.0562841
+BUZZ: [10] curcum dist 0.302157 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.268757
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.302157 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.270736
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00245188obs.ang:-0.656053 cnt 0.019615
+BUZZ: [10] curcum dist 0.311659 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.277281
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.332279 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.285272
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.358471 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.366547 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.287599
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.366547 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.270663
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.367999 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.239158
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.358969 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.224114
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.352932 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.223669
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.352692 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.223669
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.352692 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.226412
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.372982 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.227787
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.383832 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.227787
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.383832 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.211498
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.379014 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.181949
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.361081 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.167152
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.351129 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.166277
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.350528 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.166277
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.350528 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.166277
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.350528 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.171797
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000949033obs.ang:-0.925356 cnt 0.00759226
+BUZZ: [10] curcum dist 0.359128 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.179419
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.36925 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.180757
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.37101 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.180757
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.371011 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.170613
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.38068 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.147347
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.351308 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.136497
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00137655obs.ang:1.22717 cnt 0.0110124
+BUZZ: [10] curcum dist 0.332226 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.136497
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.332226 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.136497
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.332226 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.145349
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00385224obs.ang:1.06525 cnt 0.030818
+BUZZ: [10] curcum dist 0.34235 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.156313
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.357205 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.167241
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.37239 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169593
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.375659 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169593
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.375659 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169593
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.375659 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.156412
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.362162 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.129877
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.331022 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.117653
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.316486 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.117653
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00758246obs.ang:1.03209 cnt 0.0606597
+BUZZ: [10] curcum dist 0.316486 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.117653
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00925474obs.ang:1.19546 cnt 0.0740379
+BUZZ: [10] curcum dist 0.316486 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.126805
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.323384 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.146116
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.343403 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.163313
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.363285 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.186668
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.39262 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.197456
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.406484 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.197456
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.406484 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.197456
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.406484 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.183005
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.384478 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.157044
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00371331obs.ang:0.969602 cnt 0.0297065
+BUZZ: [10] curcum dist 0.348507 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.14409
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00862059obs.ang:0.867135 cnt 0.0689648
+BUZZ: [10] curcum dist 0.331 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.143374
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00776537obs.ang:0.840746 cnt 0.062123
+BUZZ: [10] curcum dist 0.330038 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.143374
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.330038 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.143374
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.330038 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.143374
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00525751obs.ang:1.13604 cnt 0.0420601
+BUZZ: [10] curcum dist 0.330038 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.150741
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00934366obs.ang:0.912754 cnt 0.0747493
+BUZZ: [10] curcum dist 0.335559 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.158655
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00835142obs.ang:0.905304 cnt 0.0668113
+BUZZ: [10] curcum dist 0.338886 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.165986
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0054764obs.ang:0.905304 cnt 0.0438112
+BUZZ: [10] curcum dist 0.341628 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.171277
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.343689 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.175328
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.345909 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.182752
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.351373 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.192348
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.359044 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.200013
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.367878 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.201496
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.369752 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.201496
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.369752 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.201496
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.369752 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.188963
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.348242 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.178325
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.330144 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.178117
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.329824 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.178117
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.329824 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.177552
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00533792obs.ang:0.671442 cnt 0.0427033
+BUZZ: [10] curcum dist 0.322011 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.177329
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.318965 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.177329
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.318965 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.184928
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.33548 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.193132
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.35413 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.206119
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.381206 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.210704
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.390489 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.210704
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.390489 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.202723
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.383225 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.183204
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000876248obs.ang:0.738523 cnt 0.00700998
+BUZZ: [10] curcum dist 0.360258 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.170931
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00477598obs.ang:0.651244 cnt 0.0382078
+BUZZ: [10] curcum dist 0.345172 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169214
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00368676obs.ang:0.611276 cnt 0.0294941
+BUZZ: [10] curcum dist 0.343006 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169214
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00728384obs.ang:0.774644 cnt 0.0582707
+BUZZ: [10] curcum dist 0.343006 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169214
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00178098obs.ang:0.938013 cnt 0.0142479
+BUZZ: [10] curcum dist 0.343005 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.169214
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.343006 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.175976
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.353428 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.186089
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.370181 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.188391
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.373999 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.188391
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.373999 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.185373
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.378227 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.170979
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.370998 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.149086
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.351077 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: 2:18: x-1.89871: y-0.99114
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.138534
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.341482 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.341482 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.138534
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00297129obs.ang:1.03812 cnt 0.0237703
+BUZZ: [10] curcum dist 0.341482 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.138534
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000243126obs.ang:1.20148 cnt 0.001945
+BUZZ: [10] curcum dist 0.341482 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.150078
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.358224 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.154831
+BUZZ: [10] ang diff with 18 is 0.294565
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.365074 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.154832
+BUZZ: [10] ang diff with 18 is 0.278281
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.365074 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.146746
+BUZZ: [10] ang diff with 18 is 0.274036
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.359242 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.124377
+BUZZ: [10] ang diff with 18 is 0.28284
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00520007obs.ang:-0.92317 cnt 0.0416006
+BUZZ: [10] curcum dist 0.320329 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.112596
+BUZZ: [10] ang diff with 18 is 0.278131
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00261528obs.ang:-0.808433 cnt 0.0195533
+BUZZ: [10] curcum dist 0.302874 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.11241
+BUZZ: [10] ang diff with 18 is 0.259443
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00221579obs.ang:-0.76379 cnt 0.015781
+BUZZ: [10] curcum dist 0.302648 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: 3:18: x-1.90184: y-0.534162
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 18 is 0.240328
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000340007obs.ang:0.0804938 cnt 0.00272006
+BUZZ: [10] curcum dist 0.302648 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.11241
+BUZZ: [10] ang diff with 18 is 0.225824
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0098943obs.ang:-1.32693 cnt 0.0791544
+BUZZ: [10] curcum dist 0.302648 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.122033
+BUZZ: [10] ang diff with 18 is 0.203426
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00835465obs.ang:-1.02431 cnt 0.0668372
+BUZZ: [10] curcum dist 0.321236 with 12
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.140551
+BUZZ: [10] ang diff with 18 is 0.175489
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.348732 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.155037
+BUZZ: [10] ang diff with 18 is 0.169628
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.366685 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.158458
+BUZZ: [10] ang diff with 18 is 0.200175
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.370762 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.158458
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.370762 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.158458
+BUZZ: [10] ang diff with 18 is 0.293059
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.370762 with 12
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.143363
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.354936 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.115625
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00479076obs.ang:1.02504 cnt 0.038326
+BUZZ: [10] curcum dist 0.317692 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.10316
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0073855obs.ang:1.03281 cnt 0.059084
+BUZZ: [10] curcum dist 0.301243 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.103159
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00137264obs.ang:0.0840434 cnt 0.0109811
+BUZZ: [10] curcum dist 0.301243 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.10316
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00140088obs.ang:-0.079325 cnt 0.011207
+BUZZ: [10] curcum dist 0.301243 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.10316
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0105763obs.ang:1.3281 cnt 0.0846105
+BUZZ: [10] curcum dist 0.301243 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.112744
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00964262obs.ang:1.04125 cnt 0.077141
+BUZZ: [10] curcum dist 0.309686 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.121408
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0115318obs.ang:1.02472 cnt 0.0922544
+BUZZ: [10] curcum dist 0.314946 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: 4:18: x-1.91197: y-0.0745708
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.123111
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.01199obs.ang:1.02472 cnt 0.0959199
+BUZZ: [10] curcum dist 0.315882 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.128325
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0129393obs.ang:1.04661 cnt 0.106232
+BUZZ: [10] curcum dist 0.318653 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0131711obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.12953
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0133501obs.ang:1.04904 cnt 0.1068
+BUZZ: [10] curcum dist 0.319301 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.140035
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.32552 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.15023
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00384907obs.ang:0.707565 cnt 0.0307926
+BUZZ: [10] curcum dist 0.331831 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.157374
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00717284obs.ang:0.804172 cnt 0.0573827
+BUZZ: [10] curcum dist 0.34014 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: 5:18: x-1.92188: y0.37532
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.172087
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000864358obs.ang:0.90447 cnt 0.00691486
+BUZZ: [10] curcum dist 0.358582 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.190119
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.382961 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.196432
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.391623 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.196432
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.391623 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.196432
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.391623 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.184718
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.378481 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.160472
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00475509obs.ang:0.858766 cnt 0.0380407
+BUZZ: [10] curcum dist 0.347859 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.1492
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00914223obs.ang:0.851 cnt 0.0731379
+BUZZ: [10] curcum dist 0.333545 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.1492
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00864642obs.ang:1.01437 cnt 0.0691714
+BUZZ: [10] curcum dist 0.333545 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.148363
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00323665obs.ang:0.628674 cnt 0.0258932
+BUZZ: [10] curcum dist 0.322908 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.151718
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0200582obs.ang:0.897375 cnt 0.160466
+BUZZ: [10] curcum dist 0.317085 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.159754
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.319284 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.173562
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00227207obs.ang:0.412645 cnt 0.0181766
+BUZZ: [10] curcum dist 0.331279 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.186115
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000717242obs.ang:0.412645 cnt 0.00573793
+BUZZ: [10] curcum dist 0.343951 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.194513
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.352852 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [18] last point -1.91197,-0.0745708
+BUZZ: [18] ang diff with 12 is 0.0201442
+BUZZ: [18] ang diff with 35 is 0.0271449
+BUZZ: [18]:-1.92188:0.37532
+BUZZ: [18]obs.len:0.0238222obs.ang:-0.144192 cnt 0.189823
+BUZZ: [18] curcum dist 0.48693 with 35
+BUZZ: [18] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.196383
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.354879 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.196383
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.354879 with 35
+BUZZ: [18] last point -1.91197,-0.0745708
+BUZZ: [18] ang diff with 35 is 0.0253913
+BUZZ: [18]:0:0
+BUZZ: [18]obs.len:0.08419obs.ang:0.00404633 cnt 0.44104
+BUZZ: [18] curcum dist 0.481058 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [18] Nei Is OBSTACLE 0
+BUZZ: [18] last point -1.91197,-0.0745708
+BUZZ: [18] ang diff with 35 is 0.0237797
+BUZZ: [18]:0:0
+BUZZ: [18]obs.len:0.207404obs.ang:-0.0985691 cnt 1
+BUZZ: [18] curcum dist 0.46926 with 35
+BUZZ: [18] Nei Is OBSTACLE 0
+BUZZ: [18] NEI ROTATING 180 DEG
+BUZZ: [18] Adding task: 9 Branch 1 Stig branch: 1
+BUZZ: [18] Leaving s swarm and joining cagers
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.186971
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.332698 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.172107
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.301023 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.167499
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0057213obs.ang:0.141589 cnt 0.0457704
+BUZZ: [10] curcum dist 0.291585 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.167499
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0221653obs.ang:0.519312 cnt 0.177322
+BUZZ: [10] curcum dist 0.291585 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.167499
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00544102obs.ang:0.68268 cnt 0.0435282
+BUZZ: [10] curcum dist 0.291585 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.167499
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.291585 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.171318
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.015389obs.ang:0.231785 cnt 0.123112
+BUZZ: [10] curcum dist 0.292598 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.179085
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.29846 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.187842
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.309958 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.192513
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.317225 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.19302
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.318059 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.19302
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.318059 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.19302
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.318059 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.181963
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00580929obs.ang:0.215393 cnt 0.0464743
+BUZZ: [10] curcum dist 0.295688 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.17299
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0139195obs.ang:0.160261 cnt 0.111356
+BUZZ: [10] curcum dist 0.277384 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.17299
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0123869obs.ang:0.323629 cnt 0.0990955
+BUZZ: [10] curcum dist 0.277384 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.26885 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00301217obs.ang:-0.0733075 cnt 0.0240973
+BUZZ: [10] curcum dist 0.264113 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00175595obs.ang:-0.0658576 cnt 0.0140476
+BUZZ: [10] curcum dist 0.262467 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000997767obs.ang:-0.073624 cnt 0.00798214
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000997767obs.ang:-0.073624 cnt 0.00798214
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0027281obs.ang:0.0897443 cnt 0.0218248
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0027281obs.ang:0.0897443 cnt 0.0218248
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0027281obs.ang:0.0897443 cnt 0.0218248
+BUZZ: [10] curcum dist 0.26212 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.265705 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.266103 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.266103 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.266103 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.280529 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.285596 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.285596 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.285596 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000553915obs.ang:0.156378 cnt 0.00443132
+BUZZ: [10] curcum dist 0.263757 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00687991obs.ang:0.142384 cnt 0.0550393
+BUZZ: [10] curcum dist 0.245163 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00742309obs.ang:0.166536 cnt 0.0593847
+BUZZ: [10] curcum dist 0.241824 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00665953obs.ang:0.182353 cnt 0.0532762
+BUZZ: [10] curcum dist 0.241504 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.241504 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00665953obs.ang:0.182353 cnt 0.0532762
+BUZZ: [10] curcum dist 0.241504 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0116986obs.ang:0.0189846 cnt 0.0935892
+BUZZ: [10] curcum dist 0.241504 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.255024 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.26151 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.272787 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.291702 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.311901 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.317044 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.317044 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.317044 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.305996 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.17316
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00167909obs.ang:-0.021375 cnt 0.0134327
+BUZZ: [10] curcum dist 0.2784 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 41 is 0.164886
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00726476obs.ang:-0.0291414 cnt 0.058118
+BUZZ: [10] curcum dist 0.265365 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0248539obs.ang:0.134227 cnt 0.198831
+BUZZ: [10] curcum dist 0.265365 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0135336obs.ang:0.425218 cnt 0.108269
+BUZZ: [10] curcum dist 0.256019 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.250443 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.249667 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0171919obs.ang:-0.0173548 cnt 0.137535
+BUZZ: [10] curcum dist 0.251634 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00921198obs.ang:-0.0685022 cnt 0.0736959
+BUZZ: [10] curcum dist 0.255807 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.267614 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.284585 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.300006 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.305153 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.305153 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.282444 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.265212 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.260421 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.257726 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00245663obs.ang:-0.334892 cnt 0.019653
+BUZZ: [10] curcum dist 0.254165 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0186523obs.ang:-0.204643 cnt 0.149218
+BUZZ: [10] curcum dist 0.25035 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [42] Task assigned to me 9 BRANCH 1
+BUZZ: [42] left_branch K2 -> (-1.89871,-0.99114)
+BUZZ: [42] left_branch K4 -> (-1.90184,-0.534162)
+BUZZ: [42] left_branch K6 -> (-1.91197,-0.0745708)
+BUZZ: [42] left_branch K8 -> (-1.90073,0.401929)
+BUZZ: [42] left_branch K9 -> (-1.89013,0.851804)
+BUZZ: TAR array id42:i1:-1.91069:-1.46177
+BUZZ: TAR array id42:i2:-1.89871:-0.99114
+BUZZ: TAR array id42:i3:-1.90184:-0.534162
+BUZZ: TAR array id42:i4:-1.91197:-0.0745708
+BUZZ: TAR array id42:i5:-1.90073:0.401929
+BUZZ: TAR array id42:i6:-1.89013:0.851804
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0211101obs.ang:-0.172788 cnt 0.168881
+BUZZ: [10] curcum dist 0.249723 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0187452obs.ang:-0.00941919 cnt 0.149962
+BUZZ: [10] curcum dist 0.249723 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00309005obs.ang:0.153949 cnt 0.0247204
+BUZZ: [10] curcum dist 0.249723 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.249723 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0209775obs.ang:-0.0604045 cnt 0.16782
+BUZZ: [10] curcum dist 0.249723 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0189949obs.ang:-0.223773 cnt 0.151959
+BUZZ: [10] curcum dist 0.249723 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.26356 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.281149 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.317058 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.337546 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.337546 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.328055 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.302801 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.288104 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000492567obs.ang:-0.036452 cnt 0.00394053
+BUZZ: [10] curcum dist 0.286406 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0158497obs.ang:-0.444128 cnt 0.126798
+BUZZ: [10] curcum dist 0.286406 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0193738obs.ang:-0.280759 cnt 0.154991
+BUZZ: [10] curcum dist 0.286406 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00980321obs.ang:-0.117391 cnt 0.0784257
+BUZZ: [10] curcum dist 0.286406 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00146904obs.ang:-0.623249 cnt 0.0117523
+BUZZ: [10] curcum dist 0.293996 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00927497obs.ang:-0.537801 cnt 0.0741998
+BUZZ: [10] curcum dist 0.305274 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00784506obs.ang:-0.48578 cnt 0.0627605
+BUZZ: [10] curcum dist 0.320249 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00281787obs.ang:-0.436809 cnt 0.0225429
+BUZZ: [10] curcum dist 0.338174 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.360754 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.291899
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.367481 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.2771
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.375729 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.246166
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.3752 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.213485
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.360383 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.192119
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.346873 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.178554
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00692096obs.ang:-0.904345 cnt 0.0553676
+BUZZ: [10] curcum dist 0.340169 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.17582
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0057898obs.ang:-0.847357 cnt 0.0463184
+BUZZ: [10] curcum dist 0.338931 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.17582
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.338931 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.180218
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.349323 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.188349
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.364305 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.194948
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.375172 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.195959
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.376826 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.195959
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.376826 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.183189
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.382923 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.155822
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.380753 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.126418
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000153211obs.ang:0.950231 cnt 0.00122569
+BUZZ: [10] curcum dist 0.342283 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.113236
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000460958obs.ang:0.91374 cnt 0.00368767
+BUZZ: [10] curcum dist 0.325212 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.113236
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.325212 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.113236
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.325212 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.113236
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00559078obs.ang:1.20903 cnt 0.0447263
+BUZZ: [10] curcum dist 0.325212 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.120713
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00634465obs.ang:1.11304 cnt 0.0507572
+BUZZ: [10] curcum dist 0.330466 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.135035
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.339334 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.154138
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.354022 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.171634
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.370551 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.177229
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.376068 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.177229
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.376068 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.177229
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.376068 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162151
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00276878obs.ang:0.875242 cnt 0.0221502
+BUZZ: [10] curcum dist 0.35458 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.149126
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00919368obs.ang:0.925847 cnt 0.0735495
+BUZZ: [10] curcum dist 0.336367 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.148745
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00904059obs.ang:0.94085 cnt 0.0723247
+BUZZ: [10] curcum dist 0.335905 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.148745
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.335905 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.148744
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.335905 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.153438
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00541755obs.ang:0.713252 cnt 0.0433404
+BUZZ: [10] curcum dist 0.339934 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.158575
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00459793obs.ang:0.721813 cnt 0.0367835
+BUZZ: [10] curcum dist 0.345404 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.170784
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00178127obs.ang:0.76574 cnt 0.0142502
+BUZZ: [10] curcum dist 0.358914 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.180524
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.370125 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182295
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.37219 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182295
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37219 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182295
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37219 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.171311
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.363891 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162022
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.357101 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162022
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00180546obs.ang:0.803297 cnt 0.0144437
+BUZZ: [10] curcum dist 0.357101 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162022
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000295223obs.ang:0.966666 cnt 0.00236178
+BUZZ: [10] curcum dist 0.357101 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.167892
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.359727 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.174932
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.365057 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.185851
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.374875 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.188871
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.377663 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.188871
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.377663 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.188871
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.377663 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.174426
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00169524obs.ang:0.713852 cnt 0.0135619
+BUZZ: [10] curcum dist 0.358592 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162557
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00623404obs.ang:0.690892 cnt 0.0498723
+BUZZ: [10] curcum dist 0.342989 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162557
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.342989 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162557
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.342989 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.169759
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.353475 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.177146
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.363141 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182805
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.370349 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.183576
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.37133 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.183576
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37133 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.183576
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37133 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.172385
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.362331 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162935
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.354969 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162935
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.354969 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162934
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.354969 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.17542
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.372481 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.181319
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.380727 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.181319
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.380727 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.181153
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.390923 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.170346
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.3945 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.149747
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.355817 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.123957
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00625303obs.ang:-1.02644 cnt 0.0500243
+BUZZ: [10] curcum dist 0.317214 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.111696
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00824681obs.ang:-1.00578 cnt 0.0659744
+BUZZ: [10] curcum dist 0.299974 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.111696
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00057752obs.ang:-0.057011 cnt 0.00462016
+BUZZ: [10] curcum dist 0.299974 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.111696
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00030175obs.ang:0.106358 cnt 0.002414
+BUZZ: [10] curcum dist 0.299974 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.120308
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00739016obs.ang:-1.12112 cnt 0.0591213
+BUZZ: [10] curcum dist 0.317825 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.139739
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.347502 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.157859
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.374221 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.163615
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.382909 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.163615
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.382909 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.163615
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.382909 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.147145
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37114 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.117842
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.340464 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.104538
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00130435obs.ang:-0.0153069 cnt 0.0104348
+BUZZ: [10] curcum dist 0.327116 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.104538
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.000192379obs.ang:-0.178675 cnt 0.00153903
+BUZZ: [10] curcum dist 0.327116 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.104538
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0029228obs.ang:1.22875 cnt 0.0233824
+BUZZ: [10] curcum dist 0.327116 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.116549
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.333989 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.131157
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.346129 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.134581
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.349211 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.134581
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.349211 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.134581
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.349211 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.122548
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00258685obs.ang:-1.05435 cnt 0.0206948
+BUZZ: [10] curcum dist 0.326461 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.11232
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00330222obs.ang:-0.994691 cnt 0.0264178
+BUZZ: [10] curcum dist 0.307847 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.11232
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0106432obs.ang:-1.15806 cnt 0.0851459
+BUZZ: [10] curcum dist 0.307847 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.11232
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00768812obs.ang:-1.32143 cnt 0.0615049
+BUZZ: [10] curcum dist 0.307847 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.11232
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.307847 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.118386
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.320876 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.12607
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.340866 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.138936
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.356612 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.14397
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.357475 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.146013
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.348754 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.14819
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.337879 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.154241
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00445663obs.ang:0.995581 cnt 0.0356531
+BUZZ: [10] curcum dist 0.331944 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162929
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.334909 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.172068
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00289788obs.ang:0.522157 cnt 0.023183
+BUZZ: [10] curcum dist 0.342528 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.178349
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00266obs.ang:0.551634 cnt 0.02128
+BUZZ: [10] curcum dist 0.348622 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.189359
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.360043 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.199221
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.371684 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.201329
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.37424 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.201329
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37424 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.201329
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.37424 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.19206
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.367174 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.170708
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00325345obs.ang:0.581349 cnt 0.0260276
+BUZZ: [10] curcum dist 0.34589 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.16046
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00556602obs.ang:0.589116 cnt 0.0445282
+BUZZ: [10] curcum dist 0.335611 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.16046
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.335611 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.16046
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.335611 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.169092
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00346938obs.ang:0.842227 cnt 0.027755
+BUZZ: [10] curcum dist 0.347666 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.185138
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.367951 with 18
+BUZZ: 2:42: x-1.89871: y-0.99114
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.190536
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.374741 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.190536
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.374741 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.190535
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.374741 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.179917
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.366283 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.169358
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.357321 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.166075
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.354172 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.165746
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.353861 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.165746
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.353861 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.165746
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00162774obs.ang:0.908856 cnt 0.013022
+BUZZ: [10] curcum dist 0.353861 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.17724
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.368329 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182066
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.374431 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: 3:42: x-1.90184: y-0.534162
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182067
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.374431 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.182067
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.374431 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.167277
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00294519obs.ang:0.755966 cnt 0.0235616
+BUZZ: [10] curcum dist 0.354644 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.153103
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00301395obs.ang:0.636161 cnt 0.0241116
+BUZZ: [10] curcum dist 0.336741 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.151763
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.335229 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.151763
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00952362obs.ang:0.755875 cnt 0.0761889
+BUZZ: [10] curcum dist 0.335229 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.151763
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00938398obs.ang:0.919244 cnt 0.0750718
+BUZZ: [10] curcum dist 0.335229 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.151763
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.335229 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.162015
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.349425 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.176245
+BUZZ: [10] ang diff with 42 is 0.156359
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.371135 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.180097
+BUZZ: [10] ang diff with 42 is 0.149054
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.377021 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.180097
+BUZZ: [10] ang diff with 42 is 0.143791
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.377021 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.176403
+BUZZ: [10] ang diff with 42 is 0.147422
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.382186 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.160656
+BUZZ: [10] ang diff with 42 is 0.162634
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.377936 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.137698
+BUZZ: [10] ang diff with 42 is 0.193278
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.363068 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: 4:42: x-1.91197: y-0.0745708
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.111028
+BUZZ: [10] ang diff with 42 is 0.235826
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.321014 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.096402
+BUZZ: [10] ang diff with 42 is 0.281901
+BUZZ: [10] ang diff with 35 is 0.285896
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00645299obs.ang:-0.960669 cnt 0.0426955
+BUZZ: [10] curcum dist 0.302003 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.0951653
+BUZZ: [10] ang diff with 35 is 0.281773
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00789484obs.ang:-1.07225 cnt 0.057436
+BUZZ: [10] curcum dist 0.300494 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.0951654
+BUZZ: [10] ang diff with 35 is 0.281774
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00960329obs.ang:-0.875537 cnt 0.0692772
+BUZZ: [10] curcum dist 0.300494 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.106464
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00999268obs.ang:-0.981665 cnt 0.0764838
+BUZZ: [10] curcum dist 0.294716 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.126473
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0186456obs.ang:-1.27354 cnt 0.149165
+BUZZ: [10] curcum dist 0.296202 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.146521
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:-0 cnt 0
+BUZZ: [10] curcum dist 0.307724 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.165303
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0129912obs.ang:-0.881054 cnt 0.10393
+BUZZ: [10] curcum dist 0.322785 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.183397
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00566595obs.ang:-0.990983 cnt 0.0453276
+BUZZ: [10] curcum dist 0.341886 with 35
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.194219
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.355116 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.203417
+BUZZ: [10] ang diff with 42 is 0.278223
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.367403 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.205138
+BUZZ: [10] ang diff with 42 is 0.272815
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.369738 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.205138
+BUZZ: [10] ang diff with 42 is 0.272178
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.369738 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.205138
+BUZZ: [10] ang diff with 42 is 0.269791
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.369738 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.187609
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.357947 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.172442
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.347002 with 35
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.172008
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.304505 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.172008
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0109305obs.ang:-2.11732 cnt 0.0874442
+BUZZ: [10] curcum dist 0.296144 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.171133
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00485356obs.ang:-1.77484 cnt 0.0388284
+BUZZ: [10] curcum dist 0.307817 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.17723
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.33706 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.180291
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.398872 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.180291
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.398872 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.165105
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.375947 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.136829
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0052346obs.ang:0.895478 cnt 0.0418768
+BUZZ: [10] curcum dist 0.338518 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.122587
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0128903obs.ang:0.968981 cnt 0.103122
+BUZZ: [10] curcum dist 0.320694 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.121748
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0136999obs.ang:0.989843 cnt 0.1096
+BUZZ: [10] curcum dist 0.319712 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.121748
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0107808obs.ang:1.15321 cnt 0.0862467
+BUZZ: [10] curcum dist 0.319712 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.121748
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.319712 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: 5:42: x-1.90073: y0.401929
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.132399
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00288213obs.ang:0.772451 cnt 0.023057
+BUZZ: [10] curcum dist 0.328806 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.153455
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.316287 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.179997
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0286837obs.ang:-1.75755 cnt 0.229469
+BUZZ: [10] curcum dist 0.270566 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.196753
+BUZZ: [10] ang diff with 42 is 0.287497
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0591853obs.ang:-1.8365 cnt 0.473483
+BUZZ: [10] curcum dist 0.239361 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.210942
+BUZZ: [10] ang diff with 42 is 0.212579
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0600043obs.ang:-1.93347 cnt 0.480034
+BUZZ: [10] curcum dist 0.214838 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.226666
+BUZZ: [10] ang diff with 42 is 0.143533
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0715629obs.ang:-1.29407 cnt 0.572503
+BUZZ: [10] curcum dist 0.185896 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.242271
+BUZZ: [10] ang diff with 42 is 0.108258
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.125obs.ang:-1.39716 cnt 1
+BUZZ: [10] curcum dist 0.169339 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.253131
+BUZZ: [10] ang diff with 42 is 0.138417
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.125obs.ang:-1.40693 cnt 1
+BUZZ: [10] curcum dist 0.173809 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.261435
+BUZZ: [10] ang diff with 42 is 0.181325
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.084457obs.ang:-1.34092 cnt 0.675656
+BUZZ: [10] curcum dist 0.188697 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.267777
+BUZZ: [10] ang diff with 42 is 0.219247
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.034301obs.ang:-1.33359 cnt 0.274408
+BUZZ: [10] curcum dist 0.205809 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 12 is 0.276979
+BUZZ: [10] ang diff with 42 is 0.195959
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.053264obs.ang:-1.64857 cnt 0.426112
+BUZZ: [10] curcum dist 0.21808 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 42 is 0.173902
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.238963 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.277357 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 42 is 0.206003
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.291422 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 42 is 0.238988
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.314756 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.343886 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.349722 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.345564 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.34624 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.283629 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.280145 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.280145 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.275057 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.355103 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:3.14159 cnt 0
+BUZZ: [10] curcum dist 0.330788 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00931149obs.ang:-1.87247 cnt 0.0744919
+BUZZ: [10] curcum dist 0.311223 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0158913obs.ang:-2.02418 cnt 0.12713
+BUZZ: [10] curcum dist 0.305313 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0246467obs.ang:-2.0837 cnt 0.197174
+BUZZ: [10] curcum dist 0.302953 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.017515obs.ang:-2.21358 cnt 0.14012
+BUZZ: [10] curcum dist 0.317808 with 42
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.345738 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.375909 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.383858 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.406715 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.423569 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.297108
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.365921 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.264358
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0obs.ang:0 cnt 0
+BUZZ: [10] curcum dist 0.334056 with 18
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.244473
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00596659obs.ang:-0.745285 cnt 0.0477327
+BUZZ: [10] curcum dist 0.315048 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.224481
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0307987obs.ang:-0.50625 cnt 0.24639
+BUZZ: [10] curcum dist 0.298964 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.197296
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0281543obs.ang:-0.911143 cnt 0.225235
+BUZZ: [10] curcum dist 0.283635 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.165046
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0587381obs.ang:-0.598121 cnt 0.469905
+BUZZ: [10] curcum dist 0.276546 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.144874
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0262208obs.ang:-1.18029 cnt 0.209766
+BUZZ: [10] curcum dist 0.279256 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.128536
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0307912obs.ang:-1.16108 cnt 0.24633
+BUZZ: [10] curcum dist 0.291029 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: 6:42: x-1.89013: y0.851804
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.106972
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00922695obs.ang:-1.27101 cnt 0.0738156
+BUZZ: [10] curcum dist 0.310838 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.0889752
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00222566obs.ang:-1.19006 cnt 0.0177281
+BUZZ: [10] curcum dist 0.324377 with 18
+BUZZ: [10] Nei Is OBSTACLE 1
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.0750532
+BUZZ: [10] ang diff with 18 is 0.288263
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.00621777obs.ang:0.243845 cnt 0.0497422
+BUZZ: [10] curcum dist 0.350825 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.0576732
+BUZZ: [10] ang diff with 18 is 0.21796
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.019423obs.ang:-0.162419 cnt 0.150068
+BUZZ: [10] curcum dist 0.357316 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.0342273
+BUZZ: [10] ang diff with 18 is 0.137258
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.0675355obs.ang:0.00426872 cnt 0.400514
+BUZZ: [10] curcum dist 0.357989 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] last point -1.91426,-2.29402
+BUZZ: [10] ang diff with 35 is 0.00694978
+BUZZ: [10] ang diff with 18 is 0.0507377
+BUZZ: [10]:0:0
+BUZZ: [10]obs.len:0.170572obs.ang:-0.00890251 cnt 1
+BUZZ: [10] curcum dist 0.35344 with 42
+BUZZ: [10] Nei Is OBSTACLE 0
+BUZZ: [10] NEI ROTATING 180 DEG
+BUZZ: barrier
+BUZZ: [10] Leaving s swarm and joining cagers
+BUZZ: [42] last point -1.90073,0.401929
+BUZZ: [42] ang diff with 10 is 0.0724568
+BUZZ: [42] ang diff with 18 is 0.0219071
+BUZZ: [42]:-1.89013:0.851804
+BUZZ: [42]obs.len:0.139692obs.ang:-0.0341664 cnt 0.930605
+BUZZ: [42] curcum dist 0.264745 with 10
+BUZZ: [42] Nei Is OBSTACLE 0
+BUZZ: [42] NEI ROTATING 180 DEG
+BUZZ: barrier
+BUZZ: [42] Leaving s swarm and joining cagers
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: caging_done
+BUZZ: push:2:17:4
+BUZZ: push:2:49:4
+BUZZ: push:2:35:6
+BUZZ: push:2:10:6
+BUZZ: push:2:15:8
+BUZZ: push:2:18:9
+BUZZ: [15] Put centroid val
+BUZZ: [17] Put centroid val
+BUZZ: [35] Put centroid val
+BUZZ: [18] Put centroid val
+BUZZ: [10] Put centroid val
+BUZZ: [41] Put centroid val
+BUZZ: [42] Put centroid val
+BUZZ: [49] Put centroid val
+BUZZ: [12] Put centroid val
+BUZZ: push:3:12:7
+BUZZ: push:3:15:8
+BUZZ: push:3:10:8
+BUZZ: push:4:35:4
+BUZZ: push:4:42:4
+BUZZ: push:4:49:4
+BUZZ: push:4:12:4
+BUZZ: push:4:17:8
+BUZZ: push:4:18:8
+BUZZ: push:4:10:10
+BUZZ: push:4:15:10
+BUZZ: [15] Put centroid val
+BUZZ: [41] Put centroid val
+BUZZ: [35] Put centroid val
+BUZZ: [10] Put centroid val
+BUZZ: [17] Put centroid val
+BUZZ: [42] Put centroid val
+BUZZ: [18] Put centroid val
+BUZZ: [49] Put centroid val
+BUZZ: [12] Put centroid val
+BUZZ: push:6:17:7
+BUZZ: push:6:18:7
+BUZZ: push:6:15:9
+BUZZ: [15] Put centroid val
+BUZZ: [35] Put centroid val
+BUZZ: [10] Put centroid val
+BUZZ: [41] Put centroid val
+BUZZ: [17] Put centroid val
+BUZZ: [42] Put centroid val
+BUZZ: [18] Put centroid val
+BUZZ: [12] Put centroid val
+BUZZ: [49] Put centroid val
+BUZZ: push:7:35:8
+BUZZ: push:7:42:8
+BUZZ: push:8:15:9
+BUZZ: push:8:35:9
+BUZZ: push:8:42:10
+BUZZ: [15] Put centroid val
+BUZZ: [17] Put centroid val
+BUZZ: [35] Put centroid val
+BUZZ: [41] Put centroid val
+BUZZ: [10] Put centroid val
+BUZZ: [49] Put centroid val
+BUZZ: [18] Put centroid val
+BUZZ: [42] Put centroid val
+BUZZ: [12] Put centroid val
+BUZZ: push:9:12:8
+BUZZ: push:9:35:9
+slurmstepd: error: *** JOB 55118242 ON cdr596 CANCELLED AT 2020-11-12T07:58:29 ***

@@ -100,18 +100,32 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
       GetNodeAttribute(t_tree, "object_type", object_type);
 
       // Place the robots arounds the start point randomly
-      CRange<Real> c_range_;
-      if(unRobots <=50){
-        CRange<Real> c_range_50(-6,-4);
-        c_range_ = c_range_50;
+      CRange<Real> c_range_x;
+      CRange<Real> c_range_y;
+      if(unRobots < 50){
+        CRange<Real> c_range_50_x(-4,-2);
+        CRange<Real> c_range_50_y(-4,-2);
+        c_range_x = c_range_50_x;
+        c_range_y = c_range_50_y;
+
+      }
+      else if(unRobots == 50){
+        CRange<Real> c_range_50_x(-6,-2);
+        CRange<Real> c_range_50_y(-6,-4);
+        c_range_x = c_range_50_x;
+        c_range_y = c_range_50_y;
       }  
       else{
-        CRange<Real> c_range_100(-10,-6);
-        c_range_ = c_range_100;
+        CRange<Real> c_range_100_x(-10,-5);
+        CRange<Real> c_range_100_y(-10,-6);
+        c_range_x = c_range_100_x;
+        c_range_y = c_range_100_y;
       }
       PlaceUniformly(unRobots,
                      DATA_SIZE,
-                     c_range_);
+                     c_range_x,
+                     c_range_y
+                     );
 
       PlacePushedObject(object_type);
        for(int i=0; i< unRobots;++i) {
@@ -218,6 +232,29 @@ void Planningloop::PostStep() {
     buzzvm_gload(vm);
     m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
     buzzvm_pop(vm);
+    // Log Cagers_Swarm size.
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "Cagers_SwarmSize", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
+    
+    // Log Pushers_Swarm size.
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "Pushers_SwarmSize", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
+    
+    // Log Rotators_Swarm size.
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "Rotators_SwarmSize", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
+
+    // Log swarm size.
+    buzzvm_pushs(vm, buzzvm_string_register(vm, "swarm_size", 1));
+    buzzvm_gload(vm);
+    m_effecFile << "," << buzzvm_stack_at(vm, 1)->i.value;
+    buzzvm_pop(vm);
     
     buzzvm_pushs(vm, buzzvm_string_register(vm, "EXPERIMENT_DONE", 1));
     buzzvm_gload(vm);
@@ -225,6 +262,48 @@ void Planningloop::PostStep() {
       m_bDone = true;
     }
     buzzvm_pop(vm);
+  }
+
+  if(m_bDone){
+    m_perfFile <<GetSpace().GetSimulationClock();
+    // write the centroid table 
+    for(int i=0; i< m_buzz_ctrl.size();++i){
+      // Log id 
+      m_perfFile << "," << i;
+      buzzvm_t vm = m_buzz_ctrl[i];
+      buzzvm_pushs(vm, buzzvm_string_register(vm, "centroid_table", 1));
+      buzzvm_gload(vm);
+      // int type_ret = buzzvm_type_assert(vm, 1, BUZZTYPE_TABLE); 
+      // if(type_ret < 0 ){
+      //   printf("Type assert failed in cenrtroid table expected table got nil \n");
+      // }
+      buzzobj_t t = buzzvm_stack_at(vm, 1);
+      float x = 0, y = 0; 
+      int ts = buzzdict_size(t->t.value);
+      m_perfFile << "," << ts;
+      // printf("[%i]center table size: %i\t ", i,ts);
+      for (int32_t i = 0; i < ts; ++i)
+      {
+        buzzvm_dup(vm);
+        buzzvm_pushi(vm, i);
+        buzzvm_tget(vm);
+
+        buzzvm_dup(vm);
+        buzzvm_pushs(vm, buzzvm_string_register(vm, "x", 1));
+        buzzvm_tget(vm);
+        x = buzzvm_stack_at(vm, 1)->f.value;
+        buzzvm_pop(vm);
+
+        buzzvm_dup(vm);
+        buzzvm_pushs(vm, buzzvm_string_register(vm, "y", 1));
+        buzzvm_tget(vm);
+        y = buzzvm_stack_at(vm, 1)->f.value;
+        buzzvm_pop(vm);
+        m_perfFile << "," << x <<"," << y;
+        // printf("(%f,%f)\n", x,y);
+        buzzvm_pop(vm);
+      }
+    }
   }
   // Write the pushed object pos.
   CQuaternion& c_quat = c_box_entity->GetEmbodiedEntity().GetOriginAnchor().Orientation;
@@ -362,7 +441,8 @@ void Planningloop::CloseFile(std::ofstream& c_stream) {
 
 void Planningloop::PlaceUniformly(UInt32 un_robots,
                             UInt32 un_data_size,
-                            CRange<Real> c_area_range) {
+                            CRange<Real> c_area_range_x,
+                            CRange<Real> c_area_range_y) {
   UInt32 unTrials;
   CKheperaIVEntity* pcFB;
   std::ostringstream cFBId;
@@ -395,8 +475,8 @@ void Planningloop::PlaceUniformly(UInt32 un_robots,
     do {
       /* Choose a random position */
       ++unTrials;
-      cFBPos.Set(pcRNG->Uniform(c_area_range),
-                 pcRNG->Uniform(c_area_range),
+      cFBPos.Set(pcRNG->Uniform(c_area_range_x),
+                 pcRNG->Uniform(c_area_range_y),
                  0.0f);
       cFBRot.FromAngleAxis(pcRNG->Uniform(CRadians::UNSIGNED_RANGE),
                            CVector3::Z);

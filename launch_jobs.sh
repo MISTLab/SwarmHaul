@@ -35,6 +35,9 @@ do
                 elif [[ ROBOTS -eq 100 ]]
                 then
                     OBJECT_SHAPE=2
+                else
+                then 
+                    OBJECT_SHAPE=0
                 fi
                 RUNID="${ROBOTS}_${ROBOT_PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}"
                 echo "RUNID:${RUNID}" 

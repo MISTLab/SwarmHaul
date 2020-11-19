@@ -30,7 +30,8 @@ private:
    
    void PlaceUniformly(UInt32 un_robots,
                        UInt32 un_data_size,
-                       CRange<Real> c_range_);
+                       CRange<Real> c_area_range_x,
+                       CRange<Real> c_area_range_y);
 
    void PlacePushedObject(int object_type);
    

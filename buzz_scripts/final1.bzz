@@ -21,6 +21,7 @@ RANDOM_SEED_SET=0
 RANDOM_SEED_SET_VAR=0
 
 
+
 # Global Vaiables 
 # Step time variable 
 time = 0 
@@ -72,6 +73,7 @@ barrier_broadcast = 0
 effective_pusher = 0
 effective_rotater = 0 
 EXPERIMENT_DONE = 0
+centroid_table ={}
 
 
 
@@ -512,6 +514,7 @@ function step(){
         init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
         init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
         centre = calc_centroid()
+        centroid_table[size(centroid_table)]={.x=centre.x,.y=centre.y}
         if (id == 0){
           log(id,":","centre",centre.x,":",centre.y)
           log(id,":","real",Pushed_obj_pos.x,":",Pushed_obj_pos.y)

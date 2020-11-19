@@ -8,7 +8,7 @@
     <system threads="8" />
     <experiment length="0"
                 ticks_per_second="10"
-                random_seed="18" />
+                random_seed="7" />
   </framework>
 
   <!-- *************** -->
@@ -52,12 +52,12 @@
                   label="Planning"
                   map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
                   map_option="0"
-                  robots="30"
-                  out_file="OUT1"
+                  robots="100"
+                  out_file="OUT"
                   path="straight"
                   inter_cage_dist="0.45"
-                  random_seed_set="18"
-                  object_type="0"
+                  random_seed_set="7"
+                  object_type="2"
                  />
   <!-- Object type enum 
       0 - square object of size (2,2) for 25 robots
@@ -100,9 +100,14 @@
   <qt-opengl>
       <user_functions label="buzz_qt" />
       <camera>
-        <placement idx="0" position="-1.59862,0,4.59862" look_at="0,0,0" lens_focal_length="1" />
-        <placement idx="1" position="-1.22369,0,9.18125" look_at="-1.1384,-0.000852933,8.1849" lens_focal_length="20" />
-      </camera>s
+        <placements>
+          <placement index="0" position="2,2,2" look_at="1,1,1" />
+          <placement index="1" position="1,0,7" look_at="1,0,0" />
+          <placement index="2" position="3,3,4" look_at="1,6,0" />
+          <placement index="3" position="2,3,2" look_at="0,1,0" />
+        </placements>
+
+      </camera>
     </qt-opengl>
     <!-- <qt-opengl /> -->
   </visualization>
