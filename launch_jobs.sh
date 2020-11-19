@@ -15,12 +15,13 @@ set -e
 # INTER_CAGING_DIST=(0.45 0.65 0.85)
 MASS=5
 OBJECT_SHAPE=0
+ROBOT_PATH_ENUM=0
 
 # Submit jobs for transport
 
 for SEED in $(seq 1 30)
 do
-    for ROBOT_PATH in "straight" #"zigzac" "straight_rot"
+    for ROBOT_PATH in "straight" "zigzac" "straight_rot"
     do
         
         for ROBOTS in 25 50 100 
@@ -36,14 +37,23 @@ do
                 then
                     OBJECT_SHAPE=2
                 else
-                then 
                     OBJECT_SHAPE=0
                 fi
-                RUNID="${ROBOTS}_${ROBOT_PATH}_${INTER_CAGE_DIST}_${MASS}_${OBJECT_SHAPE}_${SEED}"
+		if [[ "$ROBOT_PATH" == "straight" ]]
+                then
+                    ROBOT_PATH_ENUM=1
+
+                elif [[ "$ROBOT_PATH" == "zigzac" ]]
+                then
+                    ROBOT_PATH_ENUM=2
+                else
+                    ROBOT_PATH_ENUM=3
+                fi
+                RUNID="${ROBOTS}_${ROBOT_PATH_ENUM}_${SEED}"
                 echo "RUNID:${RUNID}" 
                 echo "$ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED"
-		        # sbatch --job-name=${RUNID} run_job_for_10seed.sh $ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
-                sleep 1
+	        sbatch --job-name=${RUNID} run_job.sh $ROBOTS $ROBOT_PATH $INTER_CAGE_DIST $MASS $OBJECT_SHAPE $SEED
+                sleep 2
             done
         done
     done
