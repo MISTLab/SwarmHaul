@@ -13,7 +13,7 @@ ROBOT=[25,50,100]
 OBJ_SIZE=[[2,2],[3.6, 6],[7.2, 12]]
 offset_bots = 0.1
 
-setting =1
+setting =2
 
 
 # file_name = 'pos_300_2'
