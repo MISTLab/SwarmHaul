@@ -1,0 +1,63 @@
+function load_streight_path(){
+  barrier.put(0,{.x=0.0,.y=0.0,.yaw = 0.01})
+  barrier.put(2,{.x=-1,.y=0.0,.yaw = 0.01})
+  barrier.put(4,{.x=-2,.y=0.0,.yaw = 0.01})
+  barrier.put(6,{.x=-3,.y=0.0,.yaw = 0.01})
+  barrier.put(8,{.x=-4,.y=0.0,.yaw = 0.01})
+  barrier.put(10,{.x=-5,.y=0.0,.yaw = 0.01})
+  barrier.put(12,{.x=-6,.y=0.0,.yaw = 0.01})
+  barrier.put(14,{.x=-7,.y=0.0,.yaw = 0.01})
+  barrier.put(16,{.x=-8,.y=0.0.,.yaw = 0.01})
+  barrier.put(18,{.x=-9,.y=0.0,.yaw = 0.01})
+  barrier.put(20,{.x=-10,.y=0.0,.yaw = 0.01})
+}
+
+function load_zigzac_path(){
+  barrier.put(0,{.x=0.0,.y=0.0,.yaw = 0.01})
+  barrier.put(2,{.x=-1,.y=-2,.yaw = 0.01})
+  barrier.put(4,{.x=-2,.y=0.0,.yaw = 0.01})
+  barrier.put(6,{.x=-3,.y=-2,.yaw = 0.01})
+  barrier.put(8,{.x=-4,.y=0.0,.yaw = 0.01})
+  barrier.put(10,{.x=-5,.y=0.0,.yaw = 0.01})
+  barrier.put(12,{.x=-6,.y=-2,.yaw = 0.01})
+  barrier.put(14,{.x=-7,.y=0,.yaw = 0.01})
+  barrier.put(16,{.x=-8,.y=-2.,.yaw = 0.01})
+  barrier.put(18,{.x=-9,.y=0.0,.yaw = 0.01})
+  barrier.put(20,{.x=-10,.y=-2,.yaw = 0.01})	
+}
+
+function load_streight_rot_path(){
+  barrier.put(0,{.x=0.0,.y=0.0,.yaw = 0.01})
+  barrier.put(2,{.x=-1,.y=0.0,.yaw = 0.01})
+  barrier.put(4,{.x=-2,.y=0.0,.yaw = 1.5708})
+  barrier.put(6,{.x=-3,.y=0.0,.yaw = 1.5708})
+  barrier.put(8,{.x=-4,.y=0.0,.yaw = 1.5708})
+  barrier.put(10,{.x=-5,.y=0.0,.yaw = 1.5708})
+  barrier.put(12,{.x=-6,.y=0.0,.yaw = 3.14})
+  barrier.put(14,{.x=-7,.y=0.0,.yaw = 3.14})
+  barrier.put(16,{.x=-8,.y=0.0.,.yaw = 3.14})
+  barrier.put(18,{.x=-9,.y=0.0,.yaw = 3.14})
+  barrier.put(20,{.x=-10,.y=0.0,.yaw = 3.14})	
+}
+
+function load_default_path(){
+  barrier.put(0,{.x=0.0,.y=0.0,.yaw = 0.01})
+}
+
+function load_streight_path_real(){
+  barrier.put(0,{.x=0.0,.y=0.0,.yaw = 0.01})
+  barrier.put(2,{.x=0.3,.y=0.0,.yaw = 0.01})
+  barrier.put(4,{.x=0.6,.y=0.0,.yaw = 0.01})
+  barrier.put(6,{.x=0.9,.y=0.0,.yaw = 0.01})
+}
+
+function load_streight_rot_path_real(){
+  barrier.put(0,{.x=0.0,.y=0.0,.yaw = 0.01})
+  barrier.put(2,{.x=0.3,.y=0.0,.yaw = 0.01})
+  barrier.put(4,{.x=0.6,.y=0.0,.yaw = 0.01})
+  barrier.put(6,{.x=0.9,.y=0.0,.yaw = 1.5708})
+  barrier.put(8,{.x=0.9,.y=0.3,.yaw = 1.5708})
+  barrier.put(10,{.x=0.9,.y=0.6,.yaw = 1.5708})
+  barrier.put(12,{.x=0.9,.y=0.9,.yaw = 1.5708})
+  
+}

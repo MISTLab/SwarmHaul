@@ -1,0 +1,30 @@
+
+function init(){
+	# Only avilable in ARGOS
+	# debug.trajectory.enable(10000,0,0,255)
+	# Listening to a (key,value) pair
+	neighbors.listen("key",
+	   function(vid, value, rid) {
+	      log("Got (", vid, ",", value, ") from robot #", rid)
+	   }
+	)
+}
+
+function step(){
+	 log("Pos(",pose.position.x,",",pose.position.y,") yaw: ",pose.orientation.yaw)
+	neighbors.foreach(
+	  function(rid, data) {
+	    log("robot ", rid, ": ",
+	        "distance  = ", data.distance, ", ",
+	        "azimuth   = ", data.azimuth, ", ",
+	        "elevation = ", data.elevation) })
+	neighbors.broadcast("key", "I am good")
+}
+
+function reset(){
+	
+}
+
+function destroy(){
+	
+}

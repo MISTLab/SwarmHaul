@@ -1,0 +1,152 @@
+include "includes/vec2.bzz"
+include "includes/vec3.bzz"
+
+timer= 0
+function init(){
+	# Only avilable in ARGOS
+	# debug.trajectory.enable(10000,0,0,255)
+}
+
+target_Reached = 0
+function step(){
+	log("[",id,"] Pos(",pose.position.x,",",pose.position.y,") yaw: ",pose.orientation.yaw)
+	if(id <= 8){
+		var m_target = math.vec2.new(0.0,0.0)
+	    var m_pos = math.vec2.new(pose.position.x,pose.position.y)
+	    m_target = math.vec2.sub(m_target,m_pos)
+	    m_target = math.vec2.rotate(m_target,-pose.orientation.yaw)
+	    move_vec = math.vec2.scale(m_target,10000)
+        goto(move_vec.x,move_vec.y)
+	}
+	else if(id == 11){
+		if(timer == 10){
+			CF_TAKE_OFF(1.1)
+			log("SENDING TAKEOFF")
+		}
+		else if(timer > 10 and (not target_Reached)){
+			TARGET = math.vec2.new(3.2,-1.6)
+		    var m_pos = math.vec2.new(pose.position.x,pose.position.y)
+		    m_target = math.vec2.sub(TARGET,m_pos)
+		    if(math.vec2.length(m_target) > 0.05){
+		    	m_target = math.vec3.new(m_target.x,m_target.y,1.1)
+				log("GOTO ",m_target.x," , ",m_target.y)
+				CF_GO_TO(m_target)
+		  #   	m_target = math.vec2.add(m_pos,m_target)
+				# move_to(id,m_target.x,m_target.y,1.1)
+			}
+			else{
+				log("TARGET REACHED LAND")
+				CF_LAND()
+				# land(id)
+				target_Reached = 1
+			}
+		}
+	}
+	else if(id == 10 or id == 17){
+		if(timer == 10){
+			CF_TAKE_OFF(1.1)
+			log("SENDING TAKEOFF")
+		}
+		else if(timer > 10 and (not target_Reached)){
+			TARGET = math.vec2.new(1.0,-1.0)
+		    var m_pos = math.vec2.new(pose.position.x,pose.position.y)
+		    m_target = math.vec2.sub(TARGET,m_pos)
+		    if(math.vec2.length(m_target) > 0.05){
+		    	m_target = math.vec3.new(m_target.x,m_target.y,1.1)
+				log("[",id,"]GOTO ",m_target.x," , ",m_target.y)
+				CF_GO_TO(m_target)
+		  #   	m_target = math.vec2.add(m_pos,m_target)
+				# move_to(id,m_target.x,m_target.y,1.1)
+			}
+			else{
+				log("TARGET REACHED LAND")
+				CF_LAND()
+				# land(id)
+				target_Reached = 1
+			}
+		}
+	}
+	else if(id == 19){
+		if(timer == 9){
+			CF_TAKE_OFF(1.1)
+			log("SENDING TAKEOFF")
+		}
+		else if(timer > 10 and (not target_Reached)){
+			TARGET = math.vec2.new(1.5,-1.9)
+		    var m_pos = math.vec2.new(pose.position.x,pose.position.y)
+		    m_target = math.vec2.sub(TARGET,m_pos)
+		    if(math.vec2.length(m_target) > 0.05){
+		    	m_target = math.vec3.new(m_target.x,m_target.y,1.1)
+				log("GOTO ",m_target.x," , ",m_target.y)
+				CF_GO_TO(m_target)
+		  #   	m_target = math.vec2.add(m_pos,m_target)
+				# move_to(id,m_target.x,m_target.y,1.1)
+			}
+			else{
+				log("TARGET REACHED LAND")
+				CF_LAND()
+				# land(id)
+				target_Reached = 1
+			}
+		}
+	}
+	else if(id == 16 or id == 14){
+		if(timer == 9){
+			CF_TAKE_OFF(1.1)
+			log("SENDING TAKEOFF")
+		}
+		else if(timer > 10 and (not target_Reached)){
+			TARGET = math.vec2.new(3.2,-1.6)
+		    var m_pos = math.vec2.new(pose.position.x,pose.position.y)
+		    m_target = math.vec2.sub(TARGET,m_pos)
+		    if(math.vec2.length(m_target) > 0.05){
+		    	m_target = math.vec3.new(m_target.x,m_target.y,1.1)
+				log("[",id,"]GOTO ",m_target.x," , ",m_target.y)
+				CF_GO_TO(m_target)
+		  #   	m_target = math.vec2.add(m_pos,m_target)
+				# move_to(id,m_target.x,m_target.y,1.1)
+			}
+			else{
+				log("TARGET REACHED LAND")
+				CF_LAND()
+				# land(id)
+				target_Reached = 1
+			}
+		}
+	}
+	else{
+	 	CF_TAKE_OFF(0.5)
+	}
+	timer = timer+1
+
+}
+
+function reset(){
+	
+}
+
+function destroy(){
+	
+}
+
+function CF_TAKE_OFF(alt){
+  move_to(id,pose.position.x,pose.position.y,alt)
+  log("SENDING TAKEOFF")
+}
+
+function CF_GO_TO(m_goto){
+  var m_temp_target = math.vec3.scale(m_goto,0.1)
+  var mt_target = math.vec3.add(pose.position,m_temp_target)
+  log("[",id,"]CF goto scaled down : ",m_temp_target.x,",",m_temp_target.y,",",m_temp_target.z)
+  # log("m_pos ", pose.position.x,",",pose.position.y,",",pose.position.z)
+  if(m_goto.z < 1.1){
+    m_goto.z = 1.1
+  }
+  if(math.vec3.length(m_goto) > 0.0){
+    move_to(id,mt_target.x,mt_target.y,m_goto.z)
+  } 
+}
+
+function CF_LAND(){
+  move_to(id,pose.position.x,pose.position.y,0.09)
+}

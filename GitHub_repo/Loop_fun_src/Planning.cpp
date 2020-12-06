@@ -111,7 +111,7 @@ void Planningloop::Init(TConfigurationNode& t_tree) {
       }
       else if(unRobots == 50){
         CRange<Real> c_range_50_x(-6,-2);
-        CRange<Real> c_range_50_y(-6,-4);
+        CRange<Real> c_range_50_y(-7,-4);
         c_range_x = c_range_50_x;
         c_range_y = c_range_50_y;
       }  
@@ -496,6 +496,7 @@ void Planningloop::PlacePushedObject(int object_type){
     3 - Cloud shape for caging tests
     4 - box_rotation shape for caging tests
     5 - clover shape for caging tests
+    6 - square object of size (0.44,0.3) for 4 robots
   */
   if(object_type == 0){
     // height 0.000001
@@ -648,6 +649,14 @@ void Planningloop::PlacePushedObject(int object_type){
                            0.6,
                            0.3));
     }
+  }
+  else if(object_type == 6){
+    AddEntity( *new CBoxEntity("push_object",
+                                CVector3(0,0,0),
+                                CQuaternion(),
+                                true,
+                                CVector3(0.44, 0.3, 0.3),
+                                5.56));
   }
 }
 /****************************************/
