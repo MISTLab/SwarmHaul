@@ -1,0 +1,45 @@
+include "includes/vec2.bzz"
+
+function init() {
+target = math.vec2.new(1.0,1.0)
+}
+
+function step(){
+
+    #set_wheels(-400.0,-400.0)
+    obs_vec()
+    log("x:",pose.position.x,"y:",pose.position.y,"z:",pose.orientation.yaw)
+    vec_target = obtain_local_vec_to_target(target,pose.position,pose.orientation.yaw)
+    vec_target = math.vec2.scale(math.vec2.norm(vec_target), 150)
+	goto(vec_target.x,vec_target.y)
+}
+
+function obtain_local_vec_to_target(coord1,coord2,yaw)
+{
+    m_target = math.vec2.new(coord1.x,coord1.y)
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_target = math.vec2.sub(m_target,m_pos)
+    m_target = math.vec2.rotate(m_target,-yaw)
+    
+    return m_target
+}
+
+
+function obs_vec()
+{
+  var accum = {}
+  accum.x = 0.0
+  accum.y = 0.0
+  var i = 0
+  log(size(proximity))
+  while(i < size(proximity)) {
+    accum.x = accum.x + proximity[i].value * math.cos(proximity[i].angle)
+    accum.y = accum.y + proximity[i].value * math.sin(proximity[i].angle)
+    i = i + 1
+  }
+  accum.x = accum.x / size(proximity)
+  accum.y = accum.y / size(proximity)
+  var len = math.sqrt(accum.x * accum.x + accum.y * accum.y)
+  var ang = math.atan(accum.y, accum.x)
+  log("len and ang", len,ang)
+}

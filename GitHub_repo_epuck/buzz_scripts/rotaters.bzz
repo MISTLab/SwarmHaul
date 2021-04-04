@@ -1,0 +1,131 @@
+include "includes/vec2.bzz"
+include "includes/RVO.bzz"
+include "includes/debug.bzz"
+
+
+Pushed_obj_pos = {.x = 0,.y = 0}
+function init()
+{
+rotaters=swarm.create(7)
+rotaters.join()
+TASK = 1
+init_vector = {.x = 0,.y=0}
+init_distance = 0
+yaw = 1.57
+TIME_STEP = 1
+}
+
+function step()
+{
+
+    
+
+    if (TIME_STEP == 1)
+    {
+    n = set_desired_angles()
+    init_vector = math.vec2.sub(pose.position,Pushed_obj_pos)
+    init_distance = math.vec2.dis(pose.position,Pushed_obj_pos)
+    }
+    if (TIME_STEP > 1)
+    {
+    if(rotaters.in())
+    {
+      
+      if (TASK)
+      {
+      #log(id,"pose",pose.position.x,":",pose.position.y,":",pose.orientation.yaw)
+      show_colored_trajectory()
+      move_per=obtain_perpendicular(Pushed_obj_pos,pose.position)
+      move_in=obtain_local_vec_to_target(Pushed_obj_pos,pose.position,pose.orientation.yaw)
+      move_per = math.vec2.scale(math.vec2.norm(move_per), 30)
+      move_in = math.vec2.scale(math.vec2.norm(move_in), 5)
+      move_away = find_neighbours()
+      if (math.vec2.dis(move_away,{.x=0,.y=0})>0){
+      #log(id)
+      move_away = math.vec2.scale(math.vec2.norm(move_away), +25)}
+      vector_to_target = math.vec2.add(move_per,move_in) 
+      #log(id, "vec",vector_to_target.x,":",vector_to_target.x)
+      vector_to_target = math.vec2.add(vector_to_target,move_away)
+      vector_to_target = math.vec2.scale(math.vec2.norm(vector_to_target), 5)
+      #log(id, "vec_tot",vector_to_target.x,":",vector_to_target.y)
+      goto(vector_to_target.x,vector_to_target.y)
+      present_vec = math.vec2.sub(pose.position,Pushed_obj_pos)
+      present_dis = math.vec2.dis(pose.position,Pushed_obj_pos)
+      num = math.vec2.dot(present_vec,init_vector)
+      denom = present_dis * init_distance
+      angle = math.acos(num/denom)
+      #log(id,":",angle)
+      if ((angle > (yaw - 0.02)) and (angle < (yaw + 0.02)))
+      {
+       TASK = 0
+       set_wheels(0.0,0.0)
+       rotaters.leave()
+       log(id," : rotated")
+      }
+      }
+    }
+    
+    }
+        TIME_STEP = TIME_STEP + 1
+    
+}
+
+
+function obtain_perpendicular(coord1,coord2)
+{
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_object = math.vec2.new(coord1.x,coord1.y)
+    m_target = math.vec2.sub(m_object,m_pos)
+    m_target = math.vec2.rotate(m_target,1.57 - pose.orientation.yaw)
+
+    return m_target
+
+}
+
+function obtain_local_vec_to_target(coord1,coord2,yaw)
+{
+    m_target = math.vec2.new(coord1.x,coord1.y)
+    m_pos = math.vec2.new(coord2.x,coord2.y)
+    m_target = math.vec2.sub(m_target,m_pos)
+    m_target = math.vec2.rotate(m_target,-yaw)
+    return m_target
+}
+
+function find_neighbours()
+{
+             Accum ={.x=0,.y=0}
+             neighbors.foreach(
+                function(rid, data) {
+                    var error = ((data.distance - 25)/data.distance)
+                    var angular_error = 0
+                    if(n[rid]) angular_error=(data.azimuth - n[rid].a)/3.14 
+                    
+                    #Accum.error = Accum.error + math.abs(error)
+                    if((n[rid]) or (data.distance < 30)){
+                        var my_vec = math.vec2.newp(data.distance, data.azimuth)
+                        Accum.x= Accum.x + ( error * (my_vec.x - math.cos(angular_error)))
+                        Accum.y= Accum.y + ( error * (my_vec.y - math.sin(angular_error)))
+                        # log("[",id,"] -> ",rid," Accum : (", Accum.x,",",Accum.y,") Error", error,"Ang error ",angular_error," Ang Target ", Rigid_nei[nei_in_set].value.azimuth ," Cur", data.azimuth ," dist ", data.distance)
+                    }
+                }
+            )
+            return Accum
+
+}
+
+
+
+function set_desired_angles()
+{
+  var neighbours = {}
+  neighbors.foreach(
+  function(rid, data) 
+  {
+    if (data.distance<30)
+      {
+        log(id," : ",rid," : ",data.distance," : ",data.azimuth)
+        neighbours[rid] = {.a = data.azimuth}
+      }
+  })
+  return neighbours
+}
