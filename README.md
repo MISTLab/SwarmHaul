@@ -45,3 +45,9 @@ argos3 -c experiment.argos
   <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/50.gif?ref_type=heads" width="49%"/>
 </p>
 
+## Hardware GIF's 
+
+<p align="center">
+  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/hardware.gif?ref_type=heads" width="49%"/>
+</p>
+
