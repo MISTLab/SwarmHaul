@@ -40,5 +40,8 @@ argos3 -c experiment.argos
 ```
 
 ## SIMULATION GIF's
-![25](https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/25.gif?ref_type=heads)
+<p align="center">
+  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/25.gif?ref_type=heads" width="150"/>
+  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/50.gif?ref_type=heads" width="150"/>
+</p>
 
