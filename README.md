@@ -40,5 +40,5 @@ argos3 -c experiment.argos
 ```
 
 ## SIMULATION GIF's
-![25](collaborative_transport/videos/25.gif)
+![25](./collaborative_transport/videos/25.gif)
 
