@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="8" />
+    <experiment length="0"
+                ticks_per_second="10"
+                random_seed="7" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+  <buzz_connectivity_controller_kheperaiv id="khivbz"
+                                          library="GitHub_repo/Hooks_src/build/libconnectivity_controller">
+      <actuators>
+        <differential_steering implementation="default" />
+        <leds                  implementation="default" medium="leds" />
+        <range_and_bearing     implementation="default" />
+      </actuators>
+      <sensors>
+        <!-- <kheperaiv_ground     implementation="rot_z_only" /> -->
+        <kheperaiv_proximity  implementation="default" show_rays="false" />
+        <range_and_bearing    implementation="medium" medium="rab" show_rays="false"  noise_std_dev="0" />
+        <positioning          implementation="default" />
+      </sensors>
+      <params bytecode_file="buzz_scripts/simulation.bo"
+              debug_file="buzz_scripts/simulation.bdb"
+              map_file="GitHub_repo/maps/Comparisions/empty.map"
+              map_option="0"
+              save_svg_image ="1"
+              map_resolution ="0.1" />
+      <params>
+        <wheel_turning hard_turn_angle_threshold="90"
+                       soft_turn_angle_threshold="70"
+                       no_turn_angle_threshold="10"
+                       max_speed="100" />
+      </params>
+    </buzz_connectivity_controller_kheperaiv>
+
+  </controllers>
+
+  <!-- ****************** -->
+  <!-- * Loop functions * -->
+  <!-- ****************** -->
+  <loop_functions library="GitHub_repo/Loop_fun_src/build/libplanning_exp.so" 
+                  label="Planning"
+                  map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
+                  map_option="0"
+                  robots="25"
+                  out_file="OUT.txt"
+                  path="straight"
+                  inter_cage_dist="0.45"
+                  random_seed_set="7"
+                  object_type="0"
+                 />
+  <!-- Object type enum 
+      0 - square object of size (2,2) for 25 robots
+      1 - square object of size (3.6,6) for 50 robots 
+      2 - square object of size (7.2,18) for 100 robots
+      3 - Cloud shape for caging tests
+      4 - box_rotation shape for caging tests
+      5 - clover shape for caging tests - needs 50 robots -->
+     
+     
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="50, 50, 5" center="0,0,2.5">
+    
+
+  </arena>
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" check_occlusions="false"/>
+    <led id="leds" />
+    <led id="light" />
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+  <qt-opengl>
+      <user_functions label="buzz_qt" />
+      <camera>
+        <placements>
+          <placement index="0" position="2,2,2" look_at="1,1,1" />
+          <placement index="1" position="1,0,7" look_at="1,0,0" />
+          <placement index="2" position="3,3,4" look_at="1,6,0" />
+          <placement index="3" position="2,3,2" look_at="0,1,0" />
+        </placements>
+
+      </camera>
+    </qt-opengl>
+    <!-- <qt-opengl /> -->
+  </visualization>
+
+</argos-configuration>

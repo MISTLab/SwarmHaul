@@ -1,7 +1,0 @@
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/rebuild_cache.dir
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/install.dir
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/list_install_components.dir
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/Collab_tras_loop.dir
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/install/strip.dir
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/install/local.dir
-/home/vivek/Vivek/Projects/Collobrative_transport/build/CMakeFiles/edit_cache.dir

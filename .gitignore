@@ -1,2 +1,7 @@
-*/build
-
+build/
+Buzz/
+argos3/
+argos3-kheperaiv/
+*.bo
+*.bdb
+*.txt

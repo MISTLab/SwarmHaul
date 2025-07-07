@@ -6,7 +6,7 @@ set(CMAKE_MACOSX_RPATH 0)
 
 # Find the ARGoS package
 find_package(PkgConfig)
-pkg_check_modules(ARGOS REQUIRED argos3_simulator)
+pkg_check_modules(ARGOS REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ARGOS_PREFIX}/share/argos3/cmake)
 
 # Find the GSL package
@@ -16,20 +16,21 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ARGOS_PREFIX}/share/argos3/cmake)
 find_package(PkgConfig)
 pkg_check_modules(BUZZ REQUIRED buzz)
 
+find_package(Lua 5.3 REQUIRED)
+
 # Find ompl for path planning
 #find_package(ompl REQUIRED)
 
 # Set ARGoS include dir
-include_directories(${CMAKE_SOURCE_DIR} ${ARGOS_INCLUDE_DIRS} ${GSL_INCLUDE_DIR} ${BUZZ_INCLUDE_DIR})
+include_directories(${CMAKE_SOURCE_DIR} ${ARGoS_INCLUDE_DIRS} ${BUZZ_INCLUDE_DIR} ${LUA_INCLUDE_DIR})
+# link_directories(${ARGoS_LIBRARY_DIRS} ${BUZZ_LIBRARY_DIRS})
+# include_directories(${CMAKE_SOURCE_DIR} ${ARGOS_INCLUDE_DIRS} ${GSL_INCLUDE_DIR} ${BUZZ_INCLUDE_DIR})
 
 #include_directories(${OMPL_INCLUDE_DIRS})
 #link_directories(${OMPL_LIBRARY_DIR})
 
 # Find Lua
-find_package(Lua52)
-if(Lua52_FOUND)
-  include_directories(${LUA_INCLUDE_DIR})
-endif(Lua52_FOUND)
+
 
 # Set ARGoS link dir
 link_directories(${ARGOS_LIBRARY_DIRS} ${BUZZ_LIBRARY_DIRS})
@@ -42,13 +43,7 @@ add_library(connectivity_controller SHARED virtual_stigmergy2.c virtual_stigmerg
 
 target_link_libraries(connectivity_controller
   buzz
-  argos3core_simulator
-  argos3plugin_simulator_dynamics2d
-  argos3plugin_simulator_entities
-  argos3plugin_simulator_footbot
-  argos3plugin_simulator_genericrobot
-  argos3plugin_simulator_media
-  argos3plugin_simulator_buzz
+  ${ARGoS_LIBRARIES}
   )
  # ompl)
 
