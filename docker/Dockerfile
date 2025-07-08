@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Prevent interactive prompts during package installs
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,6 +12,7 @@ RUN apt-get update && \
         git \
         bash \
         build-essential \
+        pkg-config \
         ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -74,4 +75,7 @@ RUN cd /home/docker/SwarmHaul/src/Hooks_src &&\
     cd build &&\
     cmake ../ &&\
     make 
+
+RUN cd /home/docker/SwarmHaul/scripts &&\
+    bzzc -I includes/ simulation.bzz
         
