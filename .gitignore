@@ -4,5 +4,5 @@ argos3/
 argos3-kheperaiv/
 *.bo
 *.bdb
-*.txt
 *.out
+*_OUT.txt

@@ -24,14 +24,17 @@ This repository presents decentralized control rules for swarm-based object mani
 + 🧪 Real-world experiments with 6 differential-drive robots
 + 🧩 Extensible to heterogeneous swarms with onboard path planning (e.g., drones, AMRs)
 
-## Install the Argos3 simulator and Buzz
+## ⚙️ Installation
+For installation, you can either install everything from source or use the Docker installations
+
+### Install the Argos3 simulator and Buzz
 Follow the instructions in this page to install/build the programming language Buzz and Argos3 [github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md](https://github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md)
 
-## Install the Khepera Plugin 
+### Install the Khepera Plugin 
 Install the khepera robot plugin for Argos3. These are the robots that will perform the collective transport
 https://github.com/ilpincy/argos3-kheperaiv
 
-## Install the Collective Transport
+### Install SwarmHaul repository
 
 The order is important build `Hooks_src` before `Loop_fun_src`. 
 
@@ -41,17 +44,16 @@ git clone http://git.mistlab.ca/vvaradharajan/collaborative_transport.git
 cd collaborative_transport/src/Hooks_src/
 mkdir build
 cd build
-cmake ..
+cmake ../
 make 
 
 cd collaborative_transport/src/Loop_fun_src/
 mkdir build
 cd build
-cmake ..
+cmake ../
 make 
 ```
-## Running the experiments
-
+## ▶️ Running experiments
 
 1. Compile the buzz script:
 
@@ -85,19 +87,21 @@ Object type enum
 5 - clover shape for caging tests - needs 50 robots
 ```
 
-## Simulation GIF's
+## 🎥 Demos
+
+### Simulation GIF's
 <p align="center">
   <img src="https://git.mistlab.ca/vvaradharajan/SwarmHaul/-/raw/master/media/25.gif?ref_type=heads" width="49%"/>
   <img src="https://git.mistlab.ca/vvaradharajan/SwarmHaul/-/raw/master/media/50.gif?ref_type=heads" width="49%"/>
 </p>
 
-## Hardware GIF's 
+### Hardware GIF's 
 
 <p align="center">
   <img src="https://git.mistlab.ca/vvaradharajan/SwarmHaul/-/raw/master/media/hardware.gif?ref_type=heads" width="49%"/>
 </p>
 
-## Cite us
+## 📜 Citation
 
 If you use this work, kindly consider citing us.
 
