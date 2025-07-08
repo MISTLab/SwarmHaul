@@ -3,8 +3,8 @@
 **SwarmHaul** is a biologically inspired multi-robot system for collective object transport, motivated by the efficiency of ant colonies. Ants are known to move objects significantly larger than themselves with remarkable coordination — often outperforming humans. In contrast, many current multi-robot systems depend on extensive prior information such as object shape, precise initial formations, or centralized planning, limiting their real-world applicability.
 
 <p align="center">
-  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/ants.gif?ref_type=heads" width="49%"/>
-    <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/title.png?ref_type=heads" width="49%"/>
+  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/Ants.gif?ref_type=heads" width="49%"/>
+  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/title.png?ref_type=heads" width="49%"/>
 </p>
 
 
