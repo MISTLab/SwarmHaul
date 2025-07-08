@@ -17,7 +17,7 @@
   <controllers>
 
   <buzz_connectivity_controller_kheperaiv id="khivbz"
-                                          library="GitHub_repo/Hooks_src/build/libconnectivity_controller">
+                                          library="src/Hooks_src/build/libconnectivity_controller">
       <actuators>
         <differential_steering implementation="default" />
         <leds                  implementation="default" medium="leds" />
@@ -31,7 +31,7 @@
       </sensors>
       <params bytecode_file="buzz_scripts/simulation.bo"
               debug_file="buzz_scripts/simulation.bdb"
-              map_file="GitHub_repo/maps/Comparisions/empty.map"
+              map_file="src/maps/Comparisions/empty.map"
               map_option="0"
               save_svg_image ="1"
               map_resolution ="0.1" />
@@ -48,9 +48,9 @@
   <!-- ****************** -->
   <!-- * Loop functions * -->
   <!-- ****************** -->
-  <loop_functions library="GitHub_repo/Loop_fun_src/build/libplanning_exp.so" 
+  <loop_functions library="src/Loop_fun_src/build/libplanning_exp.so" 
                   label="Planning"
-                  map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
+                  map_file_name="src/maps/Comparisions/empty.map" 
                   map_option="0"
                   robots="ROBOTS"
                   out_file="OUTFILE"

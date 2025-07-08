@@ -12,13 +12,13 @@ https://github.com/ilpincy/argos3-kheperaiv
 ```
 git clone http://git.mistlab.ca/vvaradharajan/collaborative_transport.git
 
-cd collaborative_transport/GitHub_repo/Hooks_src/
+cd collaborative_transport/src/Hooks_src/
 mkdir build
 cd build
 cmake ..
 make 
 
-cd collaborative_transport/GitHub_repo/Loop_fun_src/
+cd collaborative_transport/src/Loop_fun_src/
 mkdir build
 cd build
 cmake ..
@@ -39,9 +39,9 @@ cd ..
 argos3 -c experiment.argos
 
 # How to control the arguments in the experiment
-<loop_functions library="GitHub_repo/Loop_fun_src/build/libplanning_exp.so" 
+<loop_functions library="src/Loop_fun_src/build/libplanning_exp.so" 
  label="Planning"
- map_file_name="GitHub_repo/maps/Comparisions/empty.map" 
+ map_file_name="src/maps/Comparisions/empty.map" 
  map_option="0"
  robots="ROBOTS" # No of robots check below
  out_file="OUTFILE" # suffix to add to out files containg data for plotting
