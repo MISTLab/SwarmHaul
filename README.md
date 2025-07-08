@@ -9,6 +9,8 @@ https://github.com/ilpincy/argos3-kheperaiv
 
 ## Install the Collective Transport
 
+The order is important build `Hooks_src` before `Loop_fun_src`. 
+
 ```
 git clone http://git.mistlab.ca/vvaradharajan/collaborative_transport.git
 
@@ -30,7 +32,7 @@ make
 1. Compile the buzz script:
 
 ```
-cd buzz_scripts
+cd scripts
 bzzc -I includes/ Simulation.bzz
 cd ..
 ```

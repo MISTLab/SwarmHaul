@@ -46,19 +46,19 @@ EXPERIMENT=run_${RUNID}.argos
 # Create directory
 rm -rf ${WORKDIR}
 mkdir -p ${WORKDIR}
-mkdir -p ${WORKDIR}/buzz_scripts
-mkdir -p ${WORKDIR}/GitHub_repo/Loop_fun_src/build/
-mkdir -p ${WORKDIR}/GitHub_repo/Hooks_src/build/
-mkdir -p ${WORKDIR}/GitHub_repo/maps/Comparisions/
+mkdir -p ${WORKDIR}/scripts
+mkdir -p ${WORKDIR}/src/Loop_fun_src/build/
+mkdir -p ${WORKDIR}/src/Hooks_src/build/
+mkdir -p ${WORKDIR}/src/maps/Comparisions/
 
 cd ${WORKDIR}
 
-# Copy script files # REVIEW removed since they'll just be there anyway?
-cp ${HOMEDIR}/buzz_scripts/final1.bo ${WORKDIR}/buzz_scripts
-cp ${HOMEDIR}/buzz_scripts/final1.bdb ${WORKDIR}/buzz_scripts
-cp ${HOMEDIR}/GitHub_repo/Loop_fun_src/build/libplanning_exp.so  ${WORKDIR}/GitHub_repo/Loop_fun_src/build/
-cp ${HOMEDIR}/GitHub_repo/Hooks_src/build/libconnectivity_controller.so ${WORKDIR}/GitHub_repo/Hooks_src/build/
-cp ${HOMEDIR}/GitHub_repo/maps/Comparisions/empty.map ${WORKDIR}/GitHub_repo/maps/Comparisions/
+# Build them if needed, or copy from local they are not to be pushed to the repository
+cp ${HOMEDIR}/scripts/simulation.bo ${WORKDIR}/scripts
+cp ${HOMEDIR}/scripts/simulation.bdb ${WORKDIR}/scripts
+cp ${HOMEDIR}/src/Loop_fun_src/build/libplanning_exp.so  ${WORKDIR}/src/Loop_fun_src/build/
+cp ${HOMEDIR}/src/Hooks_src/build/libconnectivity_controller.so ${WORKDIR}/src/Hooks_src/build/
+cp ${HOMEDIR}/src/maps/Comparisions/empty.map ${WORKDIR}/src/maps/Comparisions/
 
 cd ${WORKDIR}
 
