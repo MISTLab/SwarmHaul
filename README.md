@@ -1,4 +1,28 @@
-### SwarmHaul 
+# 🐜 SwarmHaul: Decentralized Caging and Transport by Robot Swarms
+
+**SwarmHaul** is a biologically inspired multi-robot system for collective object transport, motivated by the efficiency of ant colonies. Ants are known to move objects significantly larger than themselves with remarkable coordination — often outperforming humans. In contrast, many current multi-robot systems depend on extensive prior information such as object shape, precise initial formations, or centralized planning, limiting their real-world applicability.
+
+<p align="center">
+  <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/ants.gif?ref_type=heads" width="49%"/>
+    <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/title.png?ref_type=heads" width="49%"/>
+</p>
+
+
+## 🔍 What SwarmHaul Does
+
+This repository presents decentralized control rules for swarm-based object manipulation that require minimal assumptions:
+
++ Only **one robot** (a "seed") needs to know the direction in which the object is located.
++ The seed robot **attaches to the object** and recruits only two other robots through **virtual stigmergy**, starting two growing branches around the object.
++ This process continue iteratively, where each robot in a branch recruits one another robot sequentially, eventually this process leads to **caging the object completely**.
++ Once caged, robots cooperatively **translate and rotate** the object by maintaining a shared estimate of the object’s centroid — purely via local interactions (no external measurements or global coordinates required).
+
+## 🧠 Key Features
++ ✅ Theoretical guarantees for caging any arbitrary convex objects
++ 🤖 Decentralized coordination with no global position tracking
++ 🔄 Simulations with up to 100 robots
++ 🧪 Real-world experiments with 6 differential-drive robots
++ 🧩 Extensible to heterogeneous swarms with onboard path planning (e.g., drones, AMRs)
 
 ## Install the Argos3 simulator and Buzz
 Follow the instructions in this page to install/build the programming language Buzz and Argos3 [github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md](https://github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md)
