@@ -1,4 +1,4 @@
-To use this repo first clone the repo and build using the following commands: 
+### SwarmHaul 
 
 ## Install the Argos3 simulator and Buzz
 Follow the instructions in this page to install/build the programming language Buzz and Argos3 [github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md](https://github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md)
@@ -61,7 +61,7 @@ Object type enum
 5 - clover shape for caging tests - needs 50 robots
 ```
 
-## SIMULATION GIF's
+## Simulation GIF's
 <p align="center">
   <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/25.gif?ref_type=heads" width="49%"/>
   <img src="https://git.mistlab.ca/vvaradharajan/collaborative_transport/-/raw/master/videos/50.gif?ref_type=heads" width="49%"/>
