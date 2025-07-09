@@ -114,6 +114,14 @@ Object type enum
   <img src="./media/hardware.gif" width="49%"/>
 </p>
 
+## 🚧 Work in Progress
+- [ ] Improve readablity of ``simulation.bzz`` file
+- [ ] Make PyBuzz extension 
+- [ ] Support E-puck 
+- [ ] Support rolling spheres to be transported
+
+
+
 ## 📜 Citation
 
 If you use this work, kindly consider citing us.
