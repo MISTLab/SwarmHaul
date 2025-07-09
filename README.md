@@ -3,8 +3,8 @@
 **SwarmHaul** is a biologically inspired multi-robot system for collective object transport, motivated by the efficiency of ant colonies. Ants are known to move objects significantly larger than themselves with remarkable coordination — often outperforming humans. In contrast, many current multi-robot systems depend on extensive prior information such as object shape, precise initial formations, or centralized planning, limiting their real-world applicability.
 
 <p align="center">
-  <img src="./media/Ants.gif?ref_type=heads" width="47%"/>
-  <img src="./media/title.png?ref_type=heads" width="49%"/>
+  <img src="./media/Ants.gif" width="47%"/>
+  <img src="./media/title.png" width="49%"/>
 </p>
 
 
@@ -25,7 +25,7 @@ This repository presents decentralized control rules for swarm-based object mani
 + 🧩 Extensible to heterogeneous swarms with onboard path planning (e.g., drones, AMRs)
 
 ## ⚙️ Installation
-For installation, you can either install everything from source or use the Docker installations
+For installation, you can either install everything from source or use the Docker installation
 
 ### Install the Argos3 simulator and Buzz
 Follow the instructions in this page to install/build the programming language Buzz and Argos3 [github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md](https://github.com/buzz-lang/Buzz/blob/master/doc/argos-integration.md)
@@ -53,6 +53,11 @@ cd build
 cmake ../
 make 
 ```
+
+### Docker
+
+You can build the docker in the docker `docker` folder. There is a `build.sh` that let's you do that. Finally you can run an interactive shell with sharing the display between the host computer for the gui with the `run.sh`
+
 ## ▶️ Running experiments
 
 1. Compile the buzz script:
@@ -91,14 +96,22 @@ Object type enum
 
 ### Simulation GIF's
 <p align="center">
-  <img src="./media/25.gif?ref_type=heads" width="49%"/>
-  <img src="./media/50.gif?ref_type=heads" width="49%"/>
+  <img src="./media/25.gif" width="49%"/>
+  <img src="./media/50.gif" width="49%"/>
 </p>
+
+### Caging irregular objects
+<p align="center">
+  <img src="./media/clover.png" width="32%"/>
+  <img src="./media/club.png" width="32.5%"/>
+  <img src="./media/irregular_object_2.png" width="32.5%"/>
+</p>
+
 
 ### Hardware GIF's 
 
 <p align="center">
-  <img src="./media/hardware.gif?ref_type=heads" width="49%"/>
+  <img src="./media/hardware.gif" width="49%"/>
 </p>
 
 ## 📜 Citation
