@@ -127,9 +127,9 @@ This Ants video is taken from the paper:
 
 **"Ant groups optimally amplify the effect
 of transiently informed individuals"**  
-*Aviram Gelblum1, Itai Pinkoviezky2, Ehud Fonio1, Abhijit Ghosh2, Nir Gov2 & Ofer Feinerman* 
+*Aviram Gelblum, Itai Pinkoviezky, Ehud Fonio, Abhijit Ghosh, Nir Gov & Ofer Feinerman* 
 Nature Communications, 2015
- 
+
 [📄 Read the Paper](https://www.nature.com/articles/ncomms8729)
 
 
